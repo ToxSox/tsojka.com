@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html class="h-100" lang="de-DE">
+	{{ partial "head" . }}
+	<body class="flex-column h-100">
+		{{ partial "header" . }}
+		{{ block "main" . }}{{ end }}
+		{{ partial "footer" . }}
+	</body>
+</html>

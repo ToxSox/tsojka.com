@@ -1,0 +1,6 @@
+  <div class="col-md-{{ .Get "md" }}{{ if .Get "sm" }} col-sm-{{ .Get "sm" }}{{ end }}{{ if .Get "mt-md" }} mt-md-{{ .Get "mt-md" }}{{ end }}{{ if .Get "mt" }} mt-{{ .Get "mt" }}{{ end }}">
+    {{ if .Get "title" }}<h4><i class="green-color fas fa-{{ .Get "icon" }}"></i> {{ .Get "title" }}</h4>{{ end }}
+    {{.Inner}}
+  </div>
+  
+  

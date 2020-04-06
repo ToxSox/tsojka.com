@@ -1,0 +1,7 @@
+baseURL = "http://tsojka.com"
+languageCode = "de-DE"
+title = "My New Hugo Site"
+
+assetDir = "src"
+
+sectionPagesMenu = "main"
