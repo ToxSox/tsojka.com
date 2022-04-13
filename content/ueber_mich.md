@@ -65,7 +65,7 @@ Sowohl Zuhause als auch im Auto habe ich einen hohen Anspruch auf eine gut kling
     {{% /col %}}
 
     {{% col md="3" title="Vereinsleben" icon="users" %}}
-Schon lange bin dem Verein [AYA Deutschland e.V.](https://ayasound.org) aktiv.  
+Schon lange bin ich in dem Verein [AYA Deutschland e.V.](https://ayasound.org) aktiv.  
 Aktuell stelle ich den Posten des 1. Vorsitzenden und koordiniere mit den Kollegen des Vorstands den kompletten Ablauf.
     {{% /col %}}
     
