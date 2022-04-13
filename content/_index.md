@@ -11,7 +11,7 @@ Egal ob Web, WLAN, Infrastruktur, Cloud oder Telefonie. Hier erhalten Sie Unters
 	{{< /col >}}
 
 	{{< col md="4" title="Weiterbildung" icon="chalkboard-teacher" mt="3" mt-md="0" >}}
-		Sowohl Einzelcoachings als auch ganze Klassen habe ich bereits geschult. Vom Einsteiger-Excel Kurs über die Schulung von <abbr title="Enterprise-Resource-Planning">ERP</abbr>-Systemen s Markt-Anpassungen bis zu Workshops für Programmiersprachen können von mir vermittelt werden.
+		Sowohl Einzelcoachings als auch ganze Klassen habe ich bereits geschult. Vom Einsteiger-Excel Kurs über die Schulung von <abbr title="Enterprise-Resource-Planning">ERP</abbr>-Systemen Markt-Anpassungen bis zu Workshops für Programmiersprachen können von mir vermittelt werden.
 	{{< /col >}}
 
 	{{< col md="4" title="Sicherheit" icon="shield-alt" mt="3" mt-md="0" >}}
