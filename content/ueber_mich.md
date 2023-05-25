@@ -48,7 +48,7 @@ Da mir Qualität sehr wichtig ist, bildete ich mich beim TÜV Süd zuerst zur Qu
     {{% /col %}}
 	
     {{% col md="6" title="Energiewirtschaft" icon="bolt" %}}
-In den Jahren 2012 bis 2019 habe ich aus eignem Interesse  einige Fortbildung im Energiebereich abgeschlossen wie (Tarifkalkulation, Erneuerbare Energie Gesetze, Marktkommunikation efifact, etc).
+In den Jahren 2012 bis 2019 habe ich aus eignem Interesse  einige Fortbildung im Energiebereich abgeschlossen wie (Tarifkalkulation, Erneuerbare Energie Gesetze, Marktkommunikation EDIFACT, etc).
     {{% /col %}}	
 {{< /row >}}
 
