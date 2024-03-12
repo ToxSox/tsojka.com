@@ -1,5 +1,6 @@
 ---
 linkTitle: "Über mich"
+draft: true
 menu: "main"
 menu:
   main:
