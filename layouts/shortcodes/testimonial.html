@@ -1,0 +1,10 @@
+<!-- layouts/shortcodes/testimonial.html -->
+<section class="testimonials">
+    <h2>Was Zuschauer sagen</h2>
+    {{ range .Inner }}
+      <blockquote>
+        "{{ .Get "quote" }}"
+        <cite>– {{ .Get "author" }}</cite>
+      </blockquote>
+    {{ end }}
+  </section>

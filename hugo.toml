@@ -1,7 +1,0 @@
-baseURL = "http://tsojka.com"
-languageCode = "de-DE"
-title = "tsojka // soundquality carhifi"
-
-assetDir = "src"
-
-sectionPagesMenu = "main"

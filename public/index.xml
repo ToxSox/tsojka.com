@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Startseite on tsojka.com – Car-HiFi-Kanal</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Startseite on tsojka.com – Car-HiFi-Kanal</description>
+    <generator>Hugo -- 0.140.0</generator>
+    <language>de-de</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Impressum</title>
+      <link>http://localhost:1313/impressum/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/impressum/</guid>
+      <description>Rechtliche Angaben gemäß § 5 TMG</description>
+    </item>
+    <item>
+      <title>Kontakt</title>
+      <link>http://localhost:1313/kontakt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/kontakt/</guid>
+      <description>Für Kooperationen, Testanfragen oder neue Videoideen</description>
+    </item>
+    <item>
+      <title>Testlabor</title>
+      <link>http://localhost:1313/testlabor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/testlabor/</guid>
+      <description>Präzise Messungen und Analysen für Endstufen, DSPs und Radios</description>
+    </item>
+    <item>
+      <title>Testseite</title>
+      <link>http://localhost:1313/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/test/</guid>
+      <description>Eine Testseite, um die Darstellung zu überprüfen.</description>
+    </item>
+    <item>
+      <title>Über mich</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>Leidenschaft für Car-HiFi und Technik</description>
+    </item>
+    <item>
+      <title>Videos</title>
+      <link>http://localhost:1313/videos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/videos/</guid>
+      <description>Wissen, Inspiration und Unterhaltung für Car-HiFi-Fans</description>
+    </item>
+  </channel>
+</rss>

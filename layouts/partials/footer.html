@@ -1,43 +1,12 @@
-</div>
-<div class="position-relative mt-auto">
-      <div class="shape-bottom">
-        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,48h1437.5H2880V0.2L0,48z" fill="currentColor"/>
-        </svg>
-      </div>
-    </div>
-<footer class="footer py-3">
-	<div class="container">
-
-		<div class="row">
-			<div class="col-12 col-md-10">
-				<h5>Notwendiges</h5>
-				<ul class="list-unstyled text-small">
-          
-          {{ $currentPage := . }}
-            {{ range .Site.Menus.footer }}
-            <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-              <a class="text-white" href="{{ .URL }}">{{ .Pre }} {{ .Name }}{{ if $currentPage.IsMenuCurrent "main" . }} <span class="sr-only">(current)</span>{{ end }}</a>
-            </li>
-          {{end}}
-				</ul>
-			</div>
-
-			<div class="col-12 col-md-2 social-icons">
-				<ul class="list-unstyled">
-					<li>
-						<a href="{{ .Site.Home.RelPermalink }}"><img class="mb-2" src="/img/logo_short_2020_white.svg" alt="" height="24"></a>
-						</li>
-						<li>
-							<a class="text-white" href="https://www.facebook.com/toxsox"><i class="fab fa-facebook-square"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</main>
+<footer>
+	<p>&copy; {{ now.Format "2006" }} Thomas Sojka. Alle Rechte vorbehalten.</p>
+	<div class="social-links">
+		<a href="https://www.youtube.com/@tsojka" target="_blank">YouTube</a>
+		<!-- Weitere Social-Media-Links hier -->
+	</div>
+</footer>
+<!-- Lightbox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+</body>
+</html>

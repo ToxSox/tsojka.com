@@ -1,22 +1,27 @@
 ---
+title: "Startseite"
+description: "Willkommen auf tsojka.com – deinem Car-HiFi-Kanal!"
 ---
-{{< starter title="Willkommen" img="starter.svg" size="6" >}}
-Egal ob Web, WLAN, Infrastruktur, Cloud oder Telefonie. Hier erhalten Sie Unterstützung in jeder Lebenslage von mir!
-{{< /starter >}}
 
-{{< row class="mt-5" >}}
+# Willkommen auf tsojka.com – deinem Car-HiFi-Kanal!
 
-	{{< col md="4" title="Entwicklung" icon="code" >}}
-		Ich entwickle für mein Leben gerne Software mit sehr hohen Qualitäts-Anforderungen. Dafür habe ich mir die wichtigsten Sprachen und Paradigmen angeeignet und kann diese nun optimal für die perfekte Software anwenden.
-	{{< /col >}}
+**Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community.**
 
-	{{< col md="4" title="Weiterbildung" icon="chalkboard-teacher" mt="3" mt-md="0" >}}
-		Sowohl Einzelcoachings als auch ganze Klassen habe ich bereits geschult. Vom Einsteiger-Excel Kurs über die Schulung von <abbr title="Enterprise-Resource-Planning">ERP</abbr>-Systemen Markt-Anpassungen bis zu Workshops für Programmiersprachen können von mir vermittelt werden.
-	{{< /col >}}
+Hallo und herzlich willkommen auf meiner Webseite! Ich bin **Thomas Sojka**, Car-HiFi-Enthusiast und Betreiber des YouTube-Kanals **@tsojka**.
 
-	{{< col md="4" title="Sicherheit" icon="shield-alt" mt="3" mt-md="0" >}}
-		Die Festplatte ist defekt oder ein Trojaner hat alles verschlüsselt?<br />
-		Mit einem Backup wäre das alles kein Problem. Ob lokal, im Netzwerk oder in der Cloud, ich berate Sie gerne.
-	{{< /col >}}
+Hier findest du alles, was du brauchst, um mehr über Car-HiFi zu erfahren: **Produktreviews**, **hilfreiche Tutorials**, **Berichte von Wettbewerben** und **praktische Tipps & Tricks**.
 
-{{< /row >}}
+### Neu: Testlabor
+Teste deine Endstufen, DSPs und Radios auf Herz und Nieren! Mehr Infos findest du [hier](/testlabor).
+
+### Neueste Videos
+{{< youtube id="DEIN_VIDEO_ID_1" >}}
+{{< youtube id="DEIN_VIDEO_ID_2" >}}
+{{< youtube id="DEIN_VIDEO_ID_3" >}}
+
+### Call-to-Action
+<section class="cta">
+  <h2>Teste deine Elektronik</h2>
+  <p>Nutze mein Labor für präzise Tests deiner Car-HiFi-Komponenten.</p>
+  <a href="/testlabor" class="btn">Mehr erfahren</a>
+</section>

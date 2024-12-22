@@ -1,12 +1,12 @@
 ---
-title: Impressum
-menu: "footer"
-menu:
-  footer:
-    weight: 50
-    pre: 
-
+title: "Impressum"
+description: "Rechtliche Angaben gemäß § 5 TMG"
 ---
+
+# Impressum
+
+**Rechtliche Angaben gemäß § 5 TMG**
+
 #### Angaben gemäß § 5 TMG:
 
 Thomas Sojka  
@@ -15,21 +15,6 @@ Cuxhavener Str. 36
 ##### Kontakt
 Telefon: 	015158546178  
 E-Mail: 	me@tsojka.com  
-
----
-
-##### Verwendete Ressourcen
-
-###### Bilder
-[Technology vector created by freepik - www.freepik.com](https://www.freepik.com/free-photos-vectors/technology)  
-[Business vector created by makyzz - www.freepik.com](https://www.freepik.com/free-photos-vectors/business)  
-[Technologie Vektor erstellt von stories - de.freepik.com](https://de.freepik.com/fotos-vektoren-kostenlos/technologie)  
-[Infographic vector created by studiogstock - www.freepik.com](https://www.freepik.com/free-photos-vectors/infographic)  
-[Business vector created by freepik - www.freepik.com](https://www.freepik.com/free-photos-vectors/business)  
-
-###### Software und Frameworks
-[gohugo.io](https://guhugo.io)  
-[bootstrap framework](https://getbootstrap.com)
 
 ---
 
