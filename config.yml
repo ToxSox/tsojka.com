@@ -13,39 +13,25 @@ params:
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
-  ShowReadingTime: false
-  ShowShareButtons: false
-  ShowPostNavLinks: false
-  ShowBreadCrumbs: false
-  ShowCodeCopyButtons: false
-  ShowWordCount: false
-  ShowRssButtonInSectionTermList: false
-  UseHugoToc: false
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
+  profileMode:
+    enabled: true
+    title: "👋 Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!" # optional default will be site title
+    subtitle: "Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community."
+    imageUrl: "<image link>" # optional
+    imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Über mich
+        url: "/about"
+      - name: Videos
+        url: "/videos"
+      - name: Testlabor
+        url: "/testlabor"
 
-  socialIcons:
-      - name: youtube
-        title: View Source on Github
-        url: "https://github.com/adityatelange/hugo-PaperMod"
-
-
-  homeInfoParams:
-    Title: "PaperMod's Demo"
-    Content: >
-      👋 Welcome to demo page of Hugo's theme PaperMod!
-
-      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
-
-      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
-
-      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
-
+  socialIcons: # optional
+    - name: "youtube"
+      url: "https://www.youtube.com/@tsojka"
       
 menu:
   main:

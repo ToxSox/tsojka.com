@@ -3,7 +3,7 @@ title: "Startseite"
 description: "Willkommen auf tsojka.com – deinem Car-HiFi-Kanal!"
 ---
 
-# Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!
+# 👋 Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!
 
 **Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community.**
 
