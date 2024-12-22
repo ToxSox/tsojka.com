@@ -11,8 +11,8 @@ Hallo und herzlich willkommen auf meiner Webseite! Ich bin **Thomas Sojka**, Car
 
 Hier findest du alles, was du brauchst, um mehr über Car-HiFi zu erfahren: **Produktreviews**, **hilfreiche Tutorials**, **Berichte von Wettbewerben** und **praktische Tipps & Tricks**.
 
-### Neustes Videos
-{{< youtube id="DEIN_VIDEO_ID_1" >}}
+### Neustes Video
+{{< latest-video >}}
 
 ### Call-to-Action
 <section class="cta">
