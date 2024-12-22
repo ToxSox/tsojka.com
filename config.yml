@@ -17,7 +17,7 @@ params:
     enabled: true
     title: "👋 Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!" # optional default will be site title
     subtitle: "Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community."
-    imageUrl: "<image link>" # optional
+    imageUrl: "/images/profil.jpg" # optional
     imageTitle: "<title of image as alt>" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
