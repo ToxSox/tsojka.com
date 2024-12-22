@@ -1,6 +1,8 @@
 ---
 title: "Kontakt"
 description: "Für Kooperationen, Testanfragen oder neue Videoideen"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 # Kontakt aufnehmen

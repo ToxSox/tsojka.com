@@ -1,6 +1,8 @@
 ---
 title: "Testlabor"
 description: "Präzise Messungen und Analysen für Endstufen, DSPs und Radios"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 # Dein Testlabor für Car-HiFi

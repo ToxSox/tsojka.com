@@ -1,6 +1,8 @@
 ---
 title: "Videos"
 description: "Wissen, Inspiration und Unterhaltung für Car-HiFi-Fans"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 # Videos von @tsojka
@@ -15,10 +17,7 @@ Auf meinem YouTube-Kanal findest du eine breite Palette von Inhalten, die alle A
 - **Wettbewerbsberichte**: Einblicke in die aufregende Welt der Car-HiFi-Events.
 - **Tipps & Tricks**: Praktische Ratschläge zur Optimierung deines Soundsystems.
 
-### Aktuelle Videos ansehen
-{{< youtube id="DEIN_VIDEO_ID_1" >}}
-{{< youtube id="DEIN_VIDEO_ID_2" >}}
-{{< youtube id="DEIN_VIDEO_ID_3" >}}
+{{< youtube-videos >}}
 
 ### Call-to-Action
 <section class="cta">

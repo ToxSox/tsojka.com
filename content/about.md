@@ -1,6 +1,8 @@
 ---
 title: "Über mich"
 description: "Leidenschaft für Car-HiFi und Technik"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 # Über Thomas Sojka

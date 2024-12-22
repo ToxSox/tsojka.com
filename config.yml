@@ -1,0 +1,69 @@
+baseURL: https://tsojka.com/
+languageCode: de-de
+title: TSojka Audio
+theme: PaperMod
+ignoreLogs:
+  - warning-goldmark-raw-html
+params:
+  author: Thomas Sojka
+  description: Willkommen der Seite zu meinem Car-HiFi-Kanal! Tutorials, Reviews
+    und Tipps aus der Community, für die Community.
+
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: false
+  ShowShareButtons: false
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: false
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: false
+  UseHugoToc: false
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  socialIcons:
+      - name: youtube
+        title: View Source on Github
+        url: "https://github.com/adityatelange/hugo-PaperMod"
+
+
+  homeInfoParams:
+    Title: "PaperMod's Demo"
+    Content: >
+      👋 Welcome to demo page of Hugo's theme PaperMod!
+
+      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
+
+      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
+
+      - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3).
+
+      
+menu:
+  main:
+    - name: Startseite
+      url: /
+      weight: 1
+    - name: Über mich
+      url: /about
+      weight: 2
+    - name: Videos
+      url: /videos
+      weight: 3
+    - name: Testlabor
+      url: /testlabor
+      weight: 4
+    - name: Kontakt
+      url: /kontakt
+      weight: 5
+    - name: Impressum
+      url: /impressum
+      weight: 6

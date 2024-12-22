@@ -1,6 +1,8 @@
 ---
 title: "Impressum"
 description: "Rechtliche Angaben gemäß § 5 TMG"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 # Impressum
