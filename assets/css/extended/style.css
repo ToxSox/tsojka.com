@@ -22,7 +22,7 @@ body.dark div.logo img {
     border: 1px solid var(--border);
 }
 
-.cta .btn, button {
+.cta .btn, form button {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 4px;
