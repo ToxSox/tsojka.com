@@ -13,6 +13,11 @@ params:
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
+  label:
+    text: "TSojka Audio"
+    icon: "images/tsa.svg"
+    iconHeight: 18
+
   profileMode:
     enabled: true
     title: "👋 Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!" # optional default will be site title
