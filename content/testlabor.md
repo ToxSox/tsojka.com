@@ -27,7 +27,6 @@ Du möchtest wissen, wie deine Komponenten abschneiden? Schick mir eine Nachrich
 ## Hinweis
 Dieses Labor betreibe ich ausschließlich in meiner **Freizeit**. Ich biete keine Reparatur- oder Serviceleistungen an.
 
-### Call-to-Action
 <section class="cta">
   <h2>Teste deine Elektronik</h2>
   <p>Erhalte präzise Ergebnisse und wertvolle Einblicke in die Leistung deiner Komponenten.</p>
