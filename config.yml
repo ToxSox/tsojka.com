@@ -55,3 +55,8 @@ menu:
     - name: Kontakt
       url: /kontakt
       weight: 5
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

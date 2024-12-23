@@ -64,7 +64,6 @@ Du hast Ideen oder Themen, die ich in einem Video aufgreifen könnte? Nutze den 
 ## Hinweis
 Bitte beachte, dass ich meine Aktivitäten ausschließlich in meiner **Freizeit** betreibe. Ich bin nicht telefonisch erreichbar, verkaufe keine Komponenten und biete keine Einbaudienstleistungen an.
 
-### Call-to-Action
 <section class="cta">
   <h2>Hast du eine Videoidee?</h2>
   <p>Schick mir deine Vorschläge über den Kontaktbereich.</p>

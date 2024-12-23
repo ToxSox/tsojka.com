@@ -16,12 +16,12 @@ Ich freue mich, von dir zu hören! Egal, ob du eine Frage hast, eine Zusammenarb
 
 ## Kontaktformular
 
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form action="https://formspree.io/f/mnnnqqpw" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
   
   <label for="email">E-Mail:</label>
-  <input type="email" id="email" name="email" required>
+  <input type="email" id="email" name="_replyto" required>
   
   <label for="subject">Betreff:</label>
   <input type="text" id="subject" name="subject" required>
