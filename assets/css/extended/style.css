@@ -1,0 +1,7 @@
+body {
+    background-color: var(--code-bg);
+}
+
+.thumbnail-container img {
+    margin: 0;
+}

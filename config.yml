@@ -50,6 +50,3 @@ menu:
     - name: Kontakt
       url: /kontakt
       weight: 5
-    - name: Impressum
-      url: /impressum
-      weight: 6
