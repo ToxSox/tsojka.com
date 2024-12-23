@@ -18,10 +18,3 @@ Auf meinem YouTube-Kanal findest du eine breite Palette von Inhalten, die alle A
 - **Tipps & Tricks**: Praktische Ratschläge zur Optimierung deines Soundsystems.
 
 {{< youtube-videos >}}
-
-### Call-to-Action
-<section class="cta">
-  <h2>Abonniere meinen YouTube-Kanal</h2>
-  <p>Bleib immer auf dem Laufenden und verpasse keine neuen Inhalte.</p>
-  <a href="https://www.youtube.com/@tsojka" target="_blank" class="btn">Jetzt abonnieren</a>
-</section>

@@ -34,9 +34,3 @@ Ich freue mich, von dir zu hören! Egal, ob du eine Frage hast, eine Zusammenarb
 
 ### Wichtiger Hinweis
 Ich bin nicht telefonisch erreichbar und biete keinen Verkauf von Komponenten, keinen Einbauservice und keine individuelle technische Beratung an. Bitte wende dich mit solchen Anfragen direkt an einen Händler oder eine Fachwerkstatt.
-
-### Call-to-Action
-<section class="cta">
-  <h2>Vielen Dank für dein Interesse!</h2>
-  <p>Ich melde mich so schnell wie möglich bei dir.</p>
-</section>
