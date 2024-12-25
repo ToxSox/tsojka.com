@@ -26,13 +26,30 @@ Mit meinem **Bambulabs P1S-Drucker** arbeite ich ausschließlich mit **ASA** und
 ### Meine Projekte
 
 <div class="gallery">
-  <a href="/images/project1.jpg" data-lightbox="gallery">
-    <img src="/images/project1_thumb.jpg" alt="Adapter für Türlautsprecher">
+  <a href="/images/3dprint/001.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/001.jpeg" alt="Adapter für Türlautsprecher">
   </a>
-  <a href="/images/project2.jpg" data-lightbox="gallery">
-    <img src="/images/project2_thumb.jpg" alt="Gehäuse für Hochtöner">
+  <a href="/images/3dprint/002.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/002.jpeg" alt="Gehäuse für Hochtöner">
   </a>
-  <!-- Weitere Bilder hier -->
+    <a href="/images/3dprint/003.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/003.jpeg" alt="Gehäuse für Hochtöner">
+  </a>
+    <a href="/images/3dprint/004.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/004.jpeg" alt="Gehäuse für Hochtöner">
+  </a>
+  <a href="/images/3dprint/005.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/005.jpeg" alt="Adapter für Türlautsprecher">
+  </a>
+  <a href="/images/3dprint/006.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/006.jpeg" alt="Gehäuse für Hochtöner">
+  </a>
+    <a href="/images/3dprint/007.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/007.jpeg" alt="Gehäuse für Hochtöner">
+  </a>
+  <a href="/images/3dprint/008.jpeg" data-lightbox="gallery">
+    <img src="/images/3dprint/008.jpeg" alt="Gehäuse für Hochtöner">
+  </a>
 </div>
 
 ## Testlabor für Car-HiFi-Elektronik
