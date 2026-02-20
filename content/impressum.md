@@ -1,6 +1,7 @@
 ---
 title: "Impressum"
-description: "Rechtliche Angaben gemäß § 5 TMG"
+description: "Impressum und rechtliche Angaben gemäß § 5 TMG von Thomas Sojka (tsojka.com)."
+keywords: ["Impressum", "Kontakt", "Thomas Sojka", "Rechtliche Angaben"]
 ShowToc: false
 ShowBreadCrumbs: false
 ---

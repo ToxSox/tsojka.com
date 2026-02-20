@@ -1,15 +1,17 @@
 ---
-title: "Workshops & Trainings"
+title: "Car-HiFi Workshops & Trainings"
+description: "Praxisnahe und maßgeschneiderte Car-HiFi Workshops. Lerne alles über moderne Stromversorgung, DSP-Einmessen, Verkabelung, OEM-Integration und Dämmung."
+keywords: ["Car-HiFi Workshops", "DSP Training", "Auto Einmessen lernen", "Fahrzeug Dämmung", "OEM-Integration", "Stromversorgung Car-Audio", "LiFePO4", "Schulungen"]
 draft: false
 ---
 
-# Workshops & Trainings
+# Car-HiFi Workshops & Trainings
 
-Car-HiFi ist mehr als nur der Einbau von Hardware – das richtige Know-how entscheidet am Ende über das perfekte Klangerlebnis. Ich biete praxisnahe und maßgeschneiderte Workshops an, in denen ich meine jahrelange Erfahrung aus der Praxis direkt an dich weitergebe.
+Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware – das richtige Know-how bei der Installation und Abstimmung entscheidet am Ende über das perfekte Klangerlebnis im Fahrzeug. Ich biete praxisnahe und maßgeschneiderte Workshops an, in denen ich meine jahrelange Erfahrung als Soundjuror und Akustik-Experte direkt an dich weitergebe.
 
 ### Was wir thematisieren können
 
-Von den absoluten Grundlagen bis zum Expertenwissen – die Inhalte richten sich komplett nach dem Wissensstand der Teilnehmer. Hier ein Auszug aus möglichen Themenbereichen:
+Von den absoluten Car-Audio Grundlagen bis hin zum Expertenwissen im Bereich Sound-Tuning – die Schulungsinhalte richten sich komplett nach dem Wissensstand der Teilnehmer. Hier ein Auszug aus möglichen Themenbereichen:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose">
   <!-- Topic 1 -->

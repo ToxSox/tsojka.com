@@ -11,6 +11,7 @@
             const videoList = document.getElementById('video-list');
 
             videos.forEach(video => {
+                if (!video.thumbnail) return;
                 const videoDiv = document.createElement('div');
                 videoDiv.className = 'bg-slate-800 rounded-xl shadow-sm border border-slate-700 overflow-hidden hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 group';
 

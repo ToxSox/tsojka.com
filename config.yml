@@ -19,14 +19,14 @@ params:
   profileMode:
     enabled: true
     title: "👋 Willkommen der Seite zu meinem Car-HiFi-Kanal auf YouTube!" # optional default will be site title
-    subtitle: "Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community."
+    subtitle: "Entdecke hochwertige Tutorials, ehrliche Audio-Reviews und smarte Einbautipps aus der Community, für die Community. Dein Hub für DSP-Tuning und Fachwissen."
     imageUrl: "/images/profil.jpg" # optional
     imageTitle: "<title of image as alt>" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: Über mich
-        url: "/about"
+      - name: Workshops
+        url: "/workshops"
       - name: Videos
         url: "/videos"
       - name: Testlabor

@@ -1,20 +1,21 @@
 ---
-title: "Über mich"
-description: "Leidenschaft für Car-HiFi und Technik"
+title: "Über Thomas Sojka"
+description: "Erfahre mehr über Thomas Sojka: Leidenschaft für Car-HiFi, 3D-Druck und fundiertes Technik-Know-how. Juror bei der AYA und Experte für Akustik."
+keywords: ["Thomas Sojka", "Über mich", "Car-HiFi", "Vorstand AYA Deutschland", "Soundjuror", "3D-Druck Car-HiFi", "Bambulabs", "REW Tutorials"]
 ShowToc: false
 ShowBreadCrumbs: false
 ---
 
-# Über Thomas Sojka
+# Über Thomas Sojka: Car-HiFi Experte & Soundjuror
 
-**Leidenschaft für Car-HiFi und Technik**
+**Leidenschaft für perfektes Car-HiFi, Akustik und Technik**
 
-Ich bin **Thomas Sojka**, und Car-HiFi ist mehr als nur ein Hobby für mich – es ist eine Leidenschaft, die mich seit vielen Jahren begleitet. Ergänzend dazu habe ich den **3D-Druck** für mich entdeckt, der meine Arbeit im Car-HiFi-Bereich noch vielfältiger macht.
+Ich bin **Thomas Sojka**, und Car-HiFi (Car-Audio) ist mehr als nur ein Hobby für mich – es ist eine Leidenschaft für das bestmögliche Klangerlebnis im Auto, die mich seit vielen Jahren begleitet. Ergänzend zur klassischen Elektrotechnik und Akustik habe ich den **3D-Druck** für mich entdeckt, der meine Arbeit bei der Installation von Fahrzeugen noch professioneller und vielfältiger macht.
 
-## Meine Expertise im Car-HiFi
-- **Erfahrung und Community:** Ich bin ehemaliger **Vorstandsvorsitzender der AYA Deutschland e.V.**, einem der führenden Car-HiFi-Wettbewerbsformate in Deutschland.
-- **Bewertung und Technik:** Als **Soundjuror** und früherer **Einbaujuror** bewerte ich Fahrzeuge nach klanglichen und technischen Kriterien.
-- **Technisches Know-how:** Die Grundlagen der Elektrotechnik habe ich während meiner Ausbildung gelernt und in der Praxis weiterentwickelt.
+## Meine Expertise im Car-HiFi Bereich
+- **Wettbewerb und Community:** Ich bin ehemaliger **Vorstandsvorsitzender der AYA Deutschland e.V.** (Are You Authentic), einem der führenden und renommiertesten Car-HiFi-Wettbewerbsformate in Deutschland.
+- **Klangbewertung und Sound-Tuning:** Als erfahrener **Soundjuror** und früherer **Einbaujuror** bewerte ich Autos streng nach klanglichen (Bühnenabbildung, Tonalität) und technischen Kriterien (Sicherheit, fachgerechte Verkabelung).
+- **Technisches Know-how:** Die fundierten Grundlagen der Elektrotechnik habe ich von der Pike auf gelernt und in hunderten Stunden Praxis beim Verdrahten und Einmessen von komplexen Audio-Systemen und digitalen Signalprozessoren (DSP) stetig verfeinert.
 
 ## 3D-Druck für Car-HiFi
 Neben meiner Tätigkeit als Soundjuror nutze ich den **3D-Druck**, um maßgeschneiderte Lösungen für Car-HiFi-Systeme zu entwickeln:

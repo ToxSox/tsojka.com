@@ -1,15 +1,16 @@
 ---
-title: "Kontakt"
-description: "Für Kooperationen, Testanfragen oder neue Videoideen"
+title: "Kontakt aufnehmen"
+description: "Kontaktiere Thomas Sojka für Car-HiFi Kooperationen, Testanfragen von Elektronik oder reiche neue Videoideen für den YouTube Kanal ein."
+keywords: ["Kontakt", "Testanfragen Car-HiFi", "YouTube Kooperationen", "Videoideen", "Thomas Sojka"]
 ShowToc: false
 ShowBreadCrumbs: false
 ---
 
-# Kontakt aufnehmen
+# Kontakt zu TSojka Audio aufnehmen
 
-**Für Kooperationen, Testanfragen oder neue Videoideen**
+**Dein direkter Draht für Car-HiFi Kooperationen, Hardware-Testanfragen oder neue Videoideen**
 
-Ich freue mich, von dir zu hören! Egal, ob du eine Frage hast, eine Zusammenarbeit planst oder eine Idee für ein Video einbringen möchtest – nutze das Kontaktformular oder schreib mir eine E-Mail.
+Ich freue mich darauf, von dir zu hören! Egal, ob du eine spannende geschäftliche Zusammenarbeit planst, einen bestimmten Verstärker in meinem Labor durchmessen lassen möchtest oder einfach eine geniale Idee für mein nächstes YouTube-Tutorial hast – nutze bequem das untenstehende Kontaktformular oder schreib mir direkt eine E-Mail.
 
 ## Kontaktmöglichkeiten
 - **E-Mail-Adresse:** [youtube@tsojka.com](mailto:youtube@tsojka.com)
