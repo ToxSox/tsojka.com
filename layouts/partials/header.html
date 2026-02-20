@@ -24,7 +24,8 @@
 
         <div class="flex items-center gap-4">
             <!-- Mobile Menu Button -->
-            <button class="md:hidden p-2 text-slate-400 hover:text-cyan-400 transition-colors">
+            <button id="menu-btn" class="md:hidden p-2 text-slate-400 hover:text-cyan-400 transition-colors"
+                aria-label="Menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>
@@ -32,4 +33,59 @@
             </button>
         </div>
     </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-lg md:hidden transition-all duration-300 opacity-0 pointer-events-none">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between px-6 h-16 border-b border-slate-800">
+                <span class="text-cyan-500 font-bold uppercase tracking-wider">Navigation</span>
+                <button id="menu-close" class="p-2 text-slate-400 hover:text-cyan-400 transition-colors"
+                    aria-label="Close menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center justify-center flex-grow gap-8">
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}"
+                    class="text-2xl font-semibold text-slate-200 hover:text-cyan-400 transition-colors">
+                    {{ .Name }}
+                </a>
+                {{ end }}
+            </nav>
+        </div>
+    </div>
 </header>
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+
+    function toggleMenu(show) {
+        if (show) {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            body.style.overflow = '';
+        }
+    }
+
+    menuBtn?.addEventListener('click', () => toggleMenu(true));
+    menuClose?.addEventListener('click', () => toggleMenu(false));
+
+    // Close on link click
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleMenu(false);
+    });
+</script>
