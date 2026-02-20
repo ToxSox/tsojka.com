@@ -34,31 +34,35 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu"
-        class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-lg md:hidden transition-all duration-300 opacity-0 pointer-events-none">
-        <div class="flex flex-col h-full">
-            <div class="flex items-center justify-between px-6 h-16 border-b border-slate-800">
-                <span class="text-cyan-500 font-bold uppercase tracking-wider">Navigation</span>
-                <button id="menu-close" class="p-2 text-slate-400 hover:text-cyan-400 transition-colors"
-                    aria-label="Close menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-            <nav class="flex flex-col items-center justify-center flex-grow gap-8">
-                {{ range .Site.Menus.main }}
-                <a href="{{ .URL }}"
-                    class="text-2xl font-semibold text-slate-200 hover:text-cyan-400 transition-colors">
-                    {{ .Name }}
-                </a>
-                {{ end }}
-            </nav>
-        </div>
-    </div>
 </header>
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu"
+    class="fixed inset-0 z-[100] bg-slate-900 md:hidden transition-all duration-300 opacity-0 pointer-events-none">
+    <div class="flex flex-col h-full">
+        <div class="flex items-center justify-between px-6 h-16 border-b border-slate-800">
+            <span class="text-cyan-500 font-bold uppercase tracking-wider">Navigation</span>
+            <button id="menu-close" class="p-2 text-slate-400 hover:text-cyan-400 transition-colors"
+                aria-label="Close menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center justify-center flex-grow gap-10">
+            {{ range .Site.Menus.main }}
+            {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+            {{ if not $isActive }}
+            {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
+            {{ end }}
+            <a href="{{ .URL }}"
+                class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
+                {{ .Name }}
+            </a>
+            {{ end }}
+        </nav>
+    </div>
+</div>
 
 <script>
     const menuBtn = document.getElementById('menu-btn');
