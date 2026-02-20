@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="max-w-4xl mx-auto px-6 py-12 md:py-20">
+    <header class="mb-12">
+        <h1 class="text-4xl font-bold tracking-tight text-white mb-4">{{ .Title }}</h1>
+        {{ if .Description }}
+        <p class="text-xl text-slate-300">{{ .Description }}</p>
+        {{ end }}
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {{ range .Pages }}
+        <article
+            class="group relative flex flex-col items-start justify-between rounded-2xl p-6 bg-slate-800 border border-slate-700 shadow-sm hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-1 transition-all duration-300">
+            {{ if .Params.cover.image }}
+            <div class="mb-6 w-full overflow-hidden rounded-xl bg-slate-700">
+                <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Title }}"
+                    class="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            {{ end }}
+            <div class="flex items-center gap-x-4 text-xs mb-4">
+                <time datetime="{{ .Date.Format " 2006-01-02" }}" class="text-slate-400">
+                    {{ .Date.Format (.Site.Params.DateFormat | default "January 2, 2006") }}
+                </time>
+                {{ with .Params.tags }}
+                <div
+                    class="relative z-10 rounded-full bg-slate-700/50 px-3 py-1.5 font-medium text-slate-300 border border-slate-600">
+                    {{ index . 0 }}
+                </div>
+                {{ end }}
+            </div>
+            <div class="group relative">
+                <h3
+                    class="mt-3 text-lg font-semibold leading-6 text-slate-100 group-hover:text-cyan-400 transition-colors">
+                    <a href="{{ .Permalink }}">
+                        <span class="absolute inset-0"></span>
+                        {{ .Title }}
+                    </a>
+                </h3>
+                <p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">
+                    {{ .Summary }}
+                </p>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

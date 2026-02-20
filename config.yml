@@ -1,7 +1,7 @@
 baseURL: https://tsojka.com/
 languageCode: de-de
 title: TSojka Audio
-theme: PaperMod
+# theme: PaperMod is removed
 ignoreLogs:
   - warning-goldmark-raw-html
 params:
@@ -10,8 +10,6 @@ params:
     und Tipps aus der Community, für die Community.
 
   DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
-  disableThemeToggle: false
 
   label:
     text: "TSojka Audio"
@@ -52,9 +50,12 @@ menu:
     - name: Testlabor
       url: /testlabor
       weight: 4
+    - name: Workshops
+      url: /workshops
+      weight: 5
     - name: Kontakt
       url: /kontakt
-      weight: 5
+      weight: 6
 
 markup:
   goldmark:

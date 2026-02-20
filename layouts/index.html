@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
+    <!-- Hero Section -->
+    <section class="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+        <div class="flex-1 space-y-8 text-center md:text-left">
+            <h1
+                class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight drop-shadow-sm">
+                👋 Willkommen der Seite zu meinem Car-HiFi-Kanal!
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto md:mx-0">
+                Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community.
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+                {{ range .Site.Params.profileMode.buttons }}
+                <a href="{{ .url }}"
+                    class="inline-flex justify-center items-center px-8 py-3 rounded-lg text-base font-semibold transition-all duration-300 shadow-sm hover:shadow-cyan-500/20 hover:-translate-y-1 bg-slate-800/80 backdrop-blur border border-slate-700 text-slate-200 hover:border-cyan-500 hover:text-cyan-400">
+                    {{ .name }}
+                </a>
+                {{ end }}
+            </div>
+        </div>
+        {{ if .Site.Params.profileMode.imageUrl }}
+        <div class="flex-shrink-0 mt-8 md:mt-0">
+            <div class="relative group inline-block">
+                <!-- Subtle background circle for depth -->
+                <div
+                    class="absolute inset-0 bg-slate-800 rounded-full translate-x-2 translate-y-2 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-500">
+                </div>
+                <!-- Pulsing glow for dark mode effect -->
+                <div
+                    class="absolute inset-0 bg-cyan-500/20 rounded-full blur-xl animate-pulse group-hover:bg-cyan-500/30 transition-colors duration-500">
+                </div>
+                <img src="{{ .Site.Params.profileMode.imageUrl }}" alt="{{ .Site.Params.profileMode.imageTitle }}"
+                    class="relative w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-slate-900 ring-1 ring-slate-700 group-hover:ring-cyan-500 transition-all duration-500 shadow-xl"
+                    width="{{ .Site.Params.profileMode.imageWidth }}"
+                    height="{{ .Site.Params.profileMode.imageHeight }}">
+            </div>
+            {{ end }}
+    </section>
+
+</div>
+{{ end }}

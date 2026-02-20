@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    /* Legacy PaperMod components to Tailwind translation */
+    .cta {
+        @apply mt-16 p-8 bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-2xl text-center shadow-lg;
+    }
+
+    .cta h2 {
+        @apply text-2xl font-bold text-slate-100 mb-3 mt-0;
+    }
+
+    .cta p {
+        @apply text-slate-300 mb-8;
+    }
+
+    .btn {
+        @apply inline-flex justify-center items-center px-8 py-3 rounded-lg text-base font-medium transition-all duration-300 shadow-sm hover:shadow-cyan-500/20 hover:-translate-y-1 bg-slate-800 border border-slate-700 text-slate-200 hover:border-cyan-500 hover:text-cyan-400 no-underline;
+    }
+
+    .gallery {
+        @apply grid grid-cols-2 md:grid-cols-4 gap-4 my-8;
+    }
+
+    .gallery a {
+        @apply block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border-2 border-transparent hover:border-cyan-400;
+    }
+
+    .gallery img {
+        @apply w-full h-48 object-cover m-0 hover:scale-105 transition-transform duration-500;
+    }
+}
