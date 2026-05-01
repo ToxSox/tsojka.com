@@ -28,28 +28,28 @@ Mit meinem **Bambulabs P1S-Drucker** arbeite ich ausschließlich mit **ASA** und
 
 <div class="gallery">
   <a href="/images/3dprint/001.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/001.jpeg" alt="Adapter für Türlautsprecher">
+    <img src="/images/3dprint/001.jpeg" alt="3D-gedruckter Adapter aus ASA für 16cm-Tieftöner in der Fahrzeugtür" loading="lazy" decoding="async" width="400" height="400">
   </a>
   <a href="/images/3dprint/002.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/002.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/002.jpeg" alt="Hochtönergehäuse aus ABS für die A-Säule" loading="lazy" decoding="async" width="400" height="400">
   </a>
     <a href="/images/3dprint/003.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/003.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/003.jpeg" alt="Hochtönergehäuse mit integriertem Schallführungstrichter" loading="lazy" decoding="async" width="400" height="400">
   </a>
     <a href="/images/3dprint/004.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/004.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/004.jpeg" alt="Hochtönergehäuse mit Montageflansch für das Armaturenbrett" loading="lazy" decoding="async" width="400" height="400">
   </a>
   <a href="/images/3dprint/005.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/005.jpeg" alt="Adapter für Türlautsprecher">
+    <img src="/images/3dprint/005.jpeg" alt="Türlautsprecher-Adapter mit Dichtring für luftdichte Montage" loading="lazy" decoding="async" width="400" height="400">
   </a>
   <a href="/images/3dprint/006.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/006.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/006.jpeg" alt="Mitteltönergehäuse aus ASA mit Bambulabs P1S gedruckt" loading="lazy" decoding="async" width="400" height="400">
   </a>
     <a href="/images/3dprint/007.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/007.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/007.jpeg" alt="Hochtönergehäuse fahrzeugspezifisch angepasst" loading="lazy" decoding="async" width="400" height="400">
   </a>
   <a href="/images/3dprint/008.jpeg" data-lightbox="gallery">
-    <img src="/images/3dprint/008.jpeg" alt="Gehäuse für Hochtöner">
+    <img src="/images/3dprint/008.jpeg" alt="Hochtönergehäuse-Set für die linke und rechte A-Säule" loading="lazy" decoding="async" width="400" height="400">
   </a>
 </div>
 

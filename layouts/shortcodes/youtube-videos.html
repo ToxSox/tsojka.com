@@ -1,3 +1,54 @@
+{{- $featured := index site.Data.featured_videos "videos" -}}
+
+{{- if $featured -}}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 not-prose">
+    {{- range $featured }}
+    <div class="bg-slate-800 rounded-xl shadow-sm border border-slate-700 overflow-hidden hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 group">
+        <a href="{{ .videoUrl }}" target="_blank" rel="noopener" class="block no-underline">
+            <div class="relative w-full pt-[56.25%] overflow-hidden bg-slate-900">
+                <img src="{{ .thumbnail }}" alt="{{ .title }}" loading="lazy" decoding="async" width="480" height="270"
+                    class="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-black/60 rounded-full flex items-center justify-center group-hover:bg-cyan-500/90 transition-colors duration-300 backdrop-blur-sm">
+                        <svg class="w-8 h-8 text-white ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="p-5">
+                <h3 class="text-lg font-semibold text-slate-100 leading-snug group-hover:text-cyan-400 transition-colors m-0 line-clamp-2">{{ .title }}</h3>
+                {{- with .description }}
+                <p class="mt-3 text-sm text-slate-400 m-0 leading-relaxed line-clamp-3">{{ . }}</p>
+                {{- end }}
+            </div>
+        </a>
+    </div>
+    {{- end }}
+</div>
+
+{{- range $featured }}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "VideoObject"
+  "name" .title
+  "description" .description
+  "thumbnailUrl" .thumbnail
+  "uploadDate" .uploadDate
+  "duration" .duration
+  "contentUrl" .videoUrl
+  "embedUrl" .videoUrl
+  | jsonify (dict "indent" "  ") -}}
+</script>
+{{- end }}
+{{- end }}
+
+<noscript>
+    <p class="mt-8 text-slate-300">
+        Die vollstaendige Videoliste laedt mit aktiviertem JavaScript. Alle Videos findest du auch direkt auf meinem
+        <a href="https://www.youtube.com/@tsojka" target="_blank" rel="noopener" class="text-cyan-400 hover:text-cyan-300">YouTube-Kanal</a>.
+    </p>
+</noscript>
+
 <div id="video-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 not-prose">
     <!-- Videos will be inserted here -->
 </div>
@@ -16,9 +67,9 @@
                 videoDiv.className = 'bg-slate-800 rounded-xl shadow-sm border border-slate-700 overflow-hidden hover:shadow-cyan-500/20 hover:border-cyan-500 transition-all duration-300 group';
 
                 videoDiv.innerHTML = `
-                <a href="${video.videoUrl}" target="_blank" class="block no-underline">
+                <a href="${video.videoUrl}" target="_blank" rel="noopener" class="block no-underline">
                     <div class="relative w-full pt-[56.25%] overflow-hidden bg-slate-900">
-                        <img src="${video.thumbnail}" alt="${video.title}" class="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy" decoding="async" width="480" height="270" class="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="w-16 h-16 bg-black/60 rounded-full flex items-center justify-center group-hover:bg-cyan-500/90 transition-colors duration-300 backdrop-blur-sm">
                                 <svg class="w-8 h-8 text-white ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>

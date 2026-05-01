@@ -13,7 +13,8 @@
             class="group relative flex flex-col items-start justify-between rounded-2xl p-6 bg-slate-800 border border-slate-700 shadow-sm hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-1 transition-all duration-300">
             {{ if .Params.cover.image }}
             <div class="mb-6 w-full overflow-hidden rounded-xl bg-slate-700">
-                <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Title }}"
+                <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Title }}" loading="lazy" decoding="async"
+                    width="800" height="448"
                     class="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105">
             </div>
             {{ end }}

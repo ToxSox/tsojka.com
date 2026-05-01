@@ -22,8 +22,8 @@ params:
     subtitle: "Entdecke hochwertige Tutorials, ehrliche Audio-Reviews und smarte Einbautipps aus der Community, für die Community. Dein Hub für DSP-Tuning und Fachwissen."
     imageUrl: "/images/profil.jpg" # optional
     imageTitle: "<title of image as alt>" # optional
-    imageWidth: 120 # custom size
-    imageHeight: 120 # custom size
+    imageWidth: 800 # intrinsic image dimensions for correct aspect-ratio reservation
+    imageHeight: 800
     buttons:
       - name: Workshops
         url: "/workshops"

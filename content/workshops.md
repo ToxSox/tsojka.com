@@ -7,7 +7,7 @@ draft: false
 
 # Car-HiFi Workshops & Trainings
 
-Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware – das richtige Know-how bei der Installation und Abstimmung entscheidet am Ende über das perfekte Klangerlebnis im Fahrzeug. Ich biete praxisnahe und maßgeschneiderte Workshops an, in denen ich meine jahrelange Erfahrung als Soundjuror und Akustik-Experte direkt an dich weitergebe.
+Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware – das richtige Know-how bei der Installation und Abstimmung entscheidet am Ende über das perfekte Klangerlebnis im Fahrzeug. Ich biete praxisnahe und maßgeschneiderte Workshops an, in denen ich meine jahrelange Erfahrung als Soundjuror und Akustik-Experte direkt an dich weitergebe. Ergänzend dazu kannst du Komponenten in meinem [Testlabor](/testlabor/) messen lassen oder dir vorab einen Eindruck in den [REW- und DSP-Tutorials auf YouTube](/videos/) verschaffen.
 
 ### Was wir thematisieren können
 

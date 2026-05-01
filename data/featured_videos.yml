@@ -1,0 +1,13 @@
+# Hand-picked featured videos rendered statically into /videos/ (independent of
+# the runtime fetch from yt.tsojka.com). Each entry produces a VideoObject
+# schema for SEO and a static card visible to crawlers and JS-disabled users.
+#
+# Example entry (uncomment and replace):
+# - title: "REW Tutorial - Erste Messung im Auto"
+#   description: "Schritt-fuer-Schritt Anleitung fuer die erste Frequenzgang-Messung im Auto mit Room EQ Wizard."
+#   videoUrl: "https://www.youtube.com/watch?v=VIDEO_ID"
+#   thumbnail: "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg"
+#   uploadDate: "2024-01-15"
+#   duration: "PT12M30S"
+
+videos: []
