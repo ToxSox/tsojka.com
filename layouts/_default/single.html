@@ -19,7 +19,8 @@
     </div>
     {{ if .Params.cover.image }}
     <div class="w-full overflow-hidden rounded-2xl shadow-lg border border-slate-700">
-      <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Title }}" class="w-full h-auto object-cover">
+      <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Title }}" loading="eager" decoding="async"
+      width="1200" height="675" class="w-full h-auto object-cover">
     </div>
     {{ end }}
   </header>

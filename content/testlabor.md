@@ -10,7 +10,7 @@ ShowBreadCrumbs: false
 
 **Präzise messtechnische Analysen für Endstufen (Verstärker), DSPs und Autoradios**
 
-Vertraust du blind den Datenblättern der Hersteller? In meinem eigens eingerichteten, spezialisierten Car-HiFi Messlabor kannst du deine Verstärker und Audio-Komponenten auf Herz und Nieren, komplett unabhängig, testen lassen. Ich liefere dir schwarz auf weiß harte Fakten:
+Vertraust du blind den Datenblättern der Hersteller? In meinem eigens eingerichteten, spezialisierten Car-HiFi Messlabor kannst du deine Verstärker und Audio-Komponenten auf Herz und Nieren, komplett unabhängig, testen lassen. Mehr zu meinem [fachlichen Hintergrund](/about/) und zu den darauf aufbauenden [Workshops & Trainings](/workshops/) findest du hier auf der Seite. Ich liefere dir schwarz auf weiß harte Fakten:
 
 - **Zertifizierte Leistungsmessung:** Echte RMS-Leistung (Watt) an verschiedenen Impedanzen.
 - **Verzerrungen und Rauschen (THD+N):** Total Harmonic Distortion + Noise – Wie sauber spielt der Verstärker am Limit wirklich?

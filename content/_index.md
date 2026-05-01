@@ -1,6 +1,6 @@
 ---
 title: "Startseite"
-description: "Willkommen auf tsojka.com – deinem Car-HiFi-Kanal! Entdecke Tutorials, Reviews und Tipps aus der Community, für die Community. Lerne alles über Car-HiFi und Raumakustik."
+description: "Car-HiFi-Kanal mit Tutorials, Reviews und DSP-Tipps aus der Community. Lerne Einmessen, Raumakustik und Car-Audio – aus der Community, für die Community."
 keywords: ["Car-HiFi", "Car-Audio", "Tutorials", "Reviews", "DSP Einmessen", "Digitaler Signalprozessor", "Thomas Sojka", "TSojka Audio"]
 ---
 
@@ -11,8 +11,8 @@ Auf **tsojka.com** dreht sich alles um die Faszination des perfekten Klangs im A
 Begleite mich auf meiner Reise für besseren Sound, direkt aus der Community, für die Community.
 
 ### Was dich hier erwartet:
-- 📊 **Messtechnische Analysen:** Unabhängige Leistungstests und Frequenzgang-Analysen von Endstufen und DSPs in meinem spezialisierten Labor.
-- 🎓 **Workshops & Trainings:** Lerne in praxisnahen Seminaren alles über moderne Stromversorgung (LiFePO4), fachgerechte Dämmung (Alubutyl) und OEM-Integration.
-- 🎥 **YouTube Tutorials:** Profitiere von meinem Wissen aus hunderten Einbauten – aufbereitet in leicht verständlichen Video-Anleitungen.
+- 📊 **Messtechnische Analysen:** Unabhängige Leistungstests und Frequenzgang-Analysen von Endstufen und DSPs in meinem [spezialisierten Testlabor](/testlabor/).
+- 🎓 **Workshops & Trainings:** Lerne in [praxisnahen Seminaren](/workshops/) alles über moderne Stromversorgung (LiFePO4), fachgerechte Dämmung (Alubutyl) und OEM-Integration.
+- 🎥 **YouTube Tutorials:** Profitiere von meinem Wissen aus hunderten Einbauten – aufbereitet in leicht verständlichen [Video-Anleitungen](/videos/).
 
 Das Ziel? Den langweiligen Werksklang deines Fahrzeugs in eine rollende Konzerthalle zu verwandeln. Lass uns gemeinsam das volle Potenzial deines Audiosystems entfesseln!

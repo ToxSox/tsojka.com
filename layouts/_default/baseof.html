@@ -35,15 +35,7 @@
     <meta name="twitter:image"
         content="{{ if .Params.cover.image }}{{ .Params.cover.image | absURL }}{{ else }}{{ .Site.Params.profileMode.imageUrl | absURL }}{{ end }}">
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "{{ .Site.BaseURL }}",
-      "name": "{{ .Site.Title }}",
-      "description": "{{ .Site.Params.description }}"
-    }
-    </script>
+    {{ partial "schema.html" . }}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

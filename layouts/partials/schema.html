@@ -1,0 +1,91 @@
+{{- /* JSON-LD structured data: WebSite (home), Person (home + about), Service (workshops + testlabor), BreadcrumbList (all non-home). */ -}}
+
+{{- $author := .Site.Params.author | default "Thomas Sojka" -}}
+{{- $sameAs := slice -}}
+{{- range .Site.Params.socialIcons -}}
+  {{- $sameAs = $sameAs | append .url -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "url" .Site.BaseURL
+  "name" .Site.Title
+  "description" .Site.Params.description
+  "inLanguage" "de-DE"
+  | jsonify (dict "indent" "  ") -}}
+</script>
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" $author
+  "url" .Site.BaseURL
+  "image" (.Site.Params.profileMode.imageUrl | absURL)
+  "jobTitle" "Car-HiFi Soundjuror & Akustik-Experte"
+  "sameAs" $sameAs
+  | jsonify (dict "indent" "  ") -}}
+</script>
+{{- end -}}
+
+{{- with .File -}}
+  {{- if eq .LogicalName "about.md" -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" $author
+  "url" $.Permalink
+  "image" ($.Site.Params.profileMode.imageUrl | absURL)
+  "jobTitle" "Car-HiFi Soundjuror & Akustik-Experte"
+  "description" $.Description
+  "sameAs" $sameAs
+  | jsonify (dict "indent" "  ") -}}
+</script>
+  {{- end -}}
+
+  {{- if eq .LogicalName "workshops.md" -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "name" "Car-HiFi Workshops & Trainings"
+  "url" $.Permalink
+  "serviceType" "Car-HiFi Schulung"
+  "areaServed" "DE"
+  "description" $.Description
+  "provider" (dict "@type" "Person" "name" $author "url" $.Site.BaseURL)
+  | jsonify (dict "indent" "  ") -}}
+</script>
+  {{- end -}}
+
+  {{- if eq .LogicalName "testlabor.md" -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "name" "Car-HiFi Testlabor"
+  "url" $.Permalink
+  "serviceType" "Messtechnische Analyse von Car-Audio Komponenten"
+  "areaServed" "DE"
+  "description" $.Description
+  "provider" (dict "@type" "Person" "name" $author "url" $.Site.BaseURL)
+  | jsonify (dict "indent" "  ") -}}
+</script>
+  {{- end -}}
+{{- end -}}
+
+{{- if not .IsHome -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "BreadcrumbList"
+  "itemListElement" (slice
+    (dict "@type" "ListItem" "position" 1 "name" "Startseite" "item" .Site.BaseURL)
+    (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)
+  )
+  | jsonify (dict "indent" "  ") -}}
+</script>
+{{- end -}}
