@@ -24,7 +24,7 @@ Neben meiner Tätigkeit als Soundjuror nutze ich den **3D-Druck**, um maßgeschn
 
 Mit meinem **Bambulabs P1S-Drucker** arbeite ich ausschließlich mit **ASA** und **ABS**, um langlebige und robuste Ergebnisse zu erzielen.
 
-### Meine Projekte
+### Meine 3D-Druck-Projekte
 
 <div class="gallery">
   <a href="/images/3dprint/001.jpeg" data-lightbox="gallery">
