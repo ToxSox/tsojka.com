@@ -49,17 +49,19 @@
                 </svg>
             </button>
         </div>
-        <nav class="flex flex-col items-center justify-center flex-grow gap-10">
-            {{ range .Site.Menus.main }}
-            {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
-            {{ if not $isActive }}
-            {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
-            {{ end }}
-            <a href="{{ .URL }}"
-                class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
-                {{ .Name }}
-            </a>
-            {{ end }}
+        <nav class="flex flex-col flex-grow overflow-y-auto">
+            <div class="m-auto flex flex-col items-center gap-10 py-8">
+                {{ range .Site.Menus.main }}
+                {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+                {{ if not $isActive }}
+                {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
+                {{ end }}
+                <a href="{{ .URL }}"
+                    class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
+                    {{ .Name }}
+                </a>
+                {{ end }}
+            </div>
         </nav>
     </div>
 </div>
