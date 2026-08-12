@@ -56,6 +56,9 @@ menu:
     - name: Kontakt
       url: /kontakt
       weight: 6
+    - name: "Apps & Tools"
+      url: /apps
+      weight: 7
 
 markup:
   goldmark:

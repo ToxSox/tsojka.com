@@ -8,7 +8,7 @@
             {{ end }}
         </a>
 
-        <nav class="hidden md:flex items-center gap-8">
+        <nav class="hidden md:flex items-center gap-4 lg:gap-8">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
             {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
@@ -16,7 +16,7 @@
             {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
             {{ end }}
             <a href="{{ .URL }}"
-                class="text-base font-medium transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2 decoration-cyan-500{{ else }}text-slate-200 hover:text-cyan-400 hover:underline hover:underline-offset-8 hover:decoration-cyan-400/50{{ end }}">
+                class="text-sm lg:text-base font-medium whitespace-nowrap transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2 decoration-cyan-500{{ else }}text-slate-200 hover:text-cyan-400 hover:underline hover:underline-offset-8 hover:decoration-cyan-400/50{{ end }}">
                 {{ .Name }}
             </a>
             {{ end }}
@@ -49,17 +49,19 @@
                 </svg>
             </button>
         </div>
-        <nav class="flex flex-col items-center justify-center flex-grow gap-10">
-            {{ range .Site.Menus.main }}
-            {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
-            {{ if not $isActive }}
-            {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
-            {{ end }}
-            <a href="{{ .URL }}"
-                class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
-                {{ .Name }}
-            </a>
-            {{ end }}
+        <nav class="flex flex-col flex-grow overflow-y-auto">
+            <div class="m-auto flex flex-col items-center gap-10 py-8">
+                {{ range .Site.Menus.main }}
+                {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+                {{ if not $isActive }}
+                {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
+                {{ end }}
+                <a href="{{ .URL }}"
+                    class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
+                    {{ .Name }}
+                </a>
+                {{ end }}
+            </div>
         </nav>
     </div>
 </div>
