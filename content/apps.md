@@ -62,14 +62,15 @@ Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenscha
     </div>
     <h3 class="text-xl font-bold text-white mt-0 mb-2">TuneHelper</h3>
     <div class="flex flex-wrap gap-2 mb-3">
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">Web-App</span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">iOS</span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">Android</span>
     </div>
     <p class="text-sm text-slate-300 leading-relaxed mb-0">
-      Messsignale fürs Car-Audio-DSP-Tuning: 14 Signalgeneratoren von Rosa und Weißem Rauschen über Sweeps bis zu Impulsen, Stereo-Korrelationsmodi und Time-Alignment-Regler mit ±20 ms. Die Signale streamst du in Echtzeit per Bluetooth, USB-C oder Klinke ins Auto – ideal für die Kalibrierung mit REW.
+      Messsignale in Instrumentenqualität fürs Car-Audio-DSP-Tuning: 14 Generatoren von Rosa Rauschen über Log- und Sub-Sweeps bis zu Impulsen und Multitone, dazu Stereo-Korrelationsmodi und ein Time-Alignment-Regler mit ±20 ms. Alles wird in Echtzeit synthetisiert und per Bluetooth, USB-C oder Klinke ins Auto gestreamt – der Stepped-Sine läuft für freihändiges Messen mit REW alle 32 ISO-Mittenfrequenzen selbstständig ab.
     </p>
     <div class="mt-auto pt-5">
-      <a href="https://tunehelper.tsojka.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
-        Zur Web-App
+      <a href="https://tunehelper.apps.tsojka.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+        Zur Website
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
       </a>
     </div>
@@ -88,8 +89,8 @@ Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenscha
       Deine Fahrzeuge digital im Griff: Die iOS-App erinnert an HU und Kfz-Steuer, verwaltet Dokumente wie den Fahrzeugschein und führt Wartungshistorie, Tankbuch und Kostenauswertung. Ohne Datenerhebung, mit iCloud-Sync – kostenlos für bis zu zwei Autos.
     </p>
     <div class="mt-auto pt-5">
-      <a href="https://autoakte.app.carquiz.de" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
-        Zur App
+      <a href="https://autoakte.apps.tsojka.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+        Zur Website
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
       </a>
     </div>
@@ -142,10 +143,11 @@ Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenscha
     </div>
     <h3 class="text-xl font-bold text-white mt-0 mb-2">Anydsp</h3>
     <div class="flex flex-wrap gap-2 mb-3">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">Desktop</span>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">In Entwicklung</span>
     </div>
     <p class="text-sm text-slate-300 leading-relaxed mb-0">
-      Steuerungssoftware für DSPs im Car-Audio-Bereich – aktuell in aktiver Entwicklung. Sobald es Neuigkeiten gibt, erfährst du sie hier und auf meinem YouTube-Kanal.
+      Herstellerunabhängige Steuerung für Car-Audio-DSPs: Geräte verschiedener Hersteller werden über ein gemeinsames Bedienmodell angesprochen, Presets lassen sich zwischen Geräten übertragen. Vor jedem Schreibvorgang zeigt dir die Software ehrlich, was dabei nicht eins zu eins passt. Die Desktop-Version entsteht zuerst, mobile Versionen folgen später.
     </p>
     <div class="mt-auto pt-5">
       <span class="inline-flex items-center gap-1.5 text-sm text-slate-500">
@@ -162,10 +164,12 @@ Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenscha
     </div>
     <h3 class="text-xl font-bold text-white mt-0 mb-2">Drandenker</h3>
     <div class="flex flex-wrap gap-2 mb-3">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">iOS</span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/60 border border-slate-600 text-slate-300">Android</span>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">In Entwicklung</span>
     </div>
     <p class="text-sm text-slate-300 leading-relaxed mb-0">
-      Eine App, die dich zuverlässig an die wichtigen Dinge erinnert – aktuell in aktiver Entwicklung. Mehr Details folgen in Kürze.
+      Kein Geburtstag geht mehr unter: Aus den Geburtstagen in deinem Adressbuch – auf Wunsch auch aus dem Kalender – werden Erinnerungen, die sich über den Tag steigern. Mit drei Intensitätsstufen, eigenem Zeitfenster, Nachhol-Erinnerung am Folgetag und Gratulieren per WhatsApp, Anruf oder SMS. Alles bleibt lokal auf dem Gerät – ohne Konto, ohne Server.
     </p>
     <div class="mt-auto pt-5">
       <span class="inline-flex items-center gap-1.5 text-sm text-slate-500">
