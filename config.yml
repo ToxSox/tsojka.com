@@ -27,10 +27,26 @@ params:
     buttons:
       - name: Workshops
         url: "/workshops"
+        emoji: "🎓"
       - name: Videos
         url: "/videos"
+        emoji: "🎬"
       - name: Testlabor
         url: "/testlabor"
+        emoji: "🧪"
+
+  # Laufband auf der Startseite
+  ticker:
+    - "🔊 Car-HiFi"
+    - "🎛️ DSP-Tuning"
+    - "📈 REW-Messungen"
+    - "🧪 Messlabor"
+    - "🔋 LiFePO4"
+    - "🚪 Dämmung"
+    - "🖨️ 3D-Druck"
+    - "🏆 Soundjuror"
+    - "🎓 Workshops"
+    - "📱 Apps & Tools"
 
   socialIcons: # optional
     - name: "youtube"

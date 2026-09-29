@@ -2,31 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------------------------------------------
+   Farbpalette „Sound Spectrum“ – Cyan → Violett → Pink → Amber
+------------------------------------------------------------------- */
+:root {
+    --c-cyan: #22d3ee;
+    --c-violet: #a78bfa;
+    --c-pink: #f472b6;
+    --c-amber: #fbbf24;
+    --c-lime: #a3e635;
+    --grad-spectrum: linear-gradient(90deg, var(--c-cyan), var(--c-violet), var(--c-pink), var(--c-amber), var(--c-cyan));
+    --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+    --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
 @layer base {
+    /* Wabernde Aurora-Lichter im Hintergrund */
     body::before {
+        content: "";
+        position: fixed;
+        inset: -20vmax;
+        z-index: -1;
+        background-image:
+            radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.20) 0%, transparent 32%),
+            radial-gradient(circle at 85% 30%, rgba(167, 139, 250, 0.18) 0%, transparent 30%),
+            radial-gradient(circle at 70% 85%, rgba(244, 114, 182, 0.14) 0%, transparent 30%),
+            radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 28%);
+        pointer-events: none;
+        animation: aurora 24s ease-in-out infinite alternate;
+        will-change: transform;
+    }
+
+    /* Feines Punktraster wie eine Lautsprecher-Abdeckung */
+    body::after {
         content: "";
         position: fixed;
         inset: 0;
         z-index: -1;
-        background-image: 
-            radial-gradient(circle at 0% 0%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
-            radial-gradient(circle at 100% 100%, rgba(20, 184, 166, 0.12) 0%, transparent 50%);
+        background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+        background-size: 22px 22px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+        mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
         pointer-events: none;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
+    }
+
+    ::selection {
+        background: var(--c-pink);
+        color: #fff;
     }
 }
 
+@keyframes aurora {
+    0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    50% { transform: translate3d(4vmax, -3vmax, 0) rotate(8deg) scale(1.08); }
+    100% { transform: translate3d(-3vmax, 3vmax, 0) rotate(-6deg) scale(1.02); }
+}
 
 @layer components {
 
     /* Legacy PaperMod components to Tailwind translation */
     .cta {
-        @apply mt-16 p-8 bg-slate-800/50 backdrop-blur border border-slate-700/50 rounded-2xl text-center shadow-lg;
+        @apply relative mt-16 p-8 md:p-10 rounded-3xl text-center shadow-lg overflow-hidden;
+        border: 2px solid transparent;
+        background:
+            linear-gradient(rgba(30, 41, 59, .92), rgba(30, 41, 59, .92)) padding-box,
+            var(--grad-spectrum) border-box;
+        background-size: 100% 100%, 300% 100%;
+        animation: gradient-slide 8s linear infinite;
+    }
+
+    /* Schwebende Noten in der CTA-Box */
+    .cta::before,
+    .cta::after {
+        position: absolute;
+        font-size: 2.5rem;
+        opacity: .25;
+        pointer-events: none;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .cta::before {
+        content: "♪";
+        top: 1rem;
+        left: 1.5rem;
+        color: var(--c-cyan);
+    }
+
+    .cta::after {
+        content: "♫";
+        bottom: 1rem;
+        right: 1.5rem;
+        color: var(--c-pink);
+        animation-delay: -3s;
     }
 
     .cta h2 {
-        @apply text-2xl font-bold text-slate-100 mb-3 mt-0;
+        @apply text-2xl md:text-3xl font-bold text-slate-100 mb-3 mt-0;
     }
 
     .cta p {
@@ -34,18 +105,479 @@
     }
 
     .btn {
-        @apply inline-flex justify-center items-center px-8 py-3 rounded-lg text-base font-medium transition-all duration-300 shadow-sm hover:shadow-cyan-500/20 hover:-translate-y-1 bg-slate-800 border border-slate-700 text-slate-200 hover:border-cyan-500 hover:text-cyan-400 no-underline;
+        @apply relative inline-flex justify-center items-center gap-2 px-8 py-3 rounded-full text-base font-semibold text-slate-900 no-underline overflow-hidden;
+        background: var(--grad-spectrum);
+        background-size: 250% 100%;
+        box-shadow: 0 10px 30px -10px rgba(167, 139, 250, .6);
+        transition: transform .35s var(--ease-bounce), box-shadow .35s, background-position .8s var(--ease-out);
     }
 
+    .btn:hover {
+        color: #0f172a;
+        transform: translateY(-3px) scale(1.04) rotate(-1deg);
+        background-position: 100% 0;
+        box-shadow: 0 16px 40px -10px rgba(244, 114, 182, .7);
+    }
+
+    .btn:active {
+        transform: translateY(0) scale(.97);
+    }
+
+    /* Glanz-Streifen beim Hover */
+    .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%);
+        transform: translateX(-120%);
+        transition: transform .7s var(--ease-out);
+    }
+
+    .btn:hover::after {
+        transform: translateX(120%);
+    }
+
+    .btn-ghost {
+        @apply relative inline-flex justify-center items-center gap-2 px-7 py-3 rounded-full text-base font-semibold text-slate-100 bg-slate-800/70 backdrop-blur border border-slate-700;
+        transition: transform .35s var(--ease-bounce), border-color .3s, box-shadow .3s, color .3s;
+    }
+
+    .btn-ghost:hover {
+        color: var(--accent, var(--c-cyan));
+        border-color: var(--accent, var(--c-cyan));
+        transform: translateY(-3px) rotate(1.5deg);
+        box-shadow: 0 12px 30px -12px var(--accent, var(--c-cyan));
+    }
+
+    .btn .emoji,
+    .btn-ghost .emoji {
+        display: inline-block;
+        transition: transform .4s var(--ease-bounce);
+    }
+
+    .btn:hover .emoji,
+    .btn-ghost:hover .emoji {
+        transform: scale(1.3) rotate(-12deg);
+    }
+
+    /* Polaroid-Galerie mit leicht schiefen Bildern */
     .gallery {
-        @apply grid grid-cols-2 md:grid-cols-4 gap-4 my-8;
+        @apply grid grid-cols-2 md:grid-cols-4 gap-5 my-10;
     }
 
     .gallery a {
-        @apply block rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border-2 border-transparent hover:border-cyan-400;
+        @apply relative block rounded-xl overflow-hidden border-4 border-slate-800 bg-slate-800 shadow-lg;
+        transform: rotate(-2.5deg);
+        transition: opacity .7s ease var(--reveal-delay, 0s), translate .7s var(--ease-out) var(--reveal-delay, 0s), transform .4s var(--ease-bounce), box-shadow .4s, border-color .4s;
+    }
+
+    .gallery a:nth-child(even) {
+        transform: rotate(2deg);
+    }
+
+    .gallery a:nth-child(3n) {
+        transform: rotate(-1deg);
+    }
+
+    .gallery a:hover {
+        z-index: 2;
+        transform: rotate(0deg) scale(1.08);
+        border-color: var(--c-pink);
+        box-shadow: 0 20px 40px -12px rgba(244, 114, 182, .5);
     }
 
     .gallery img {
-        @apply w-full h-48 object-cover m-0 hover:scale-105 transition-transform duration-500;
+        @apply w-full h-48 object-cover m-0;
+    }
+
+    /* Verlaufstext */
+    .text-gradient {
+        background: var(--grad-spectrum);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradient-slide 10s linear infinite;
+    }
+
+    /* Mini-Equalizer */
+    .eq {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: var(--eq-h, 1rem);
+    }
+
+    .eq span {
+        width: var(--eq-w, 3px);
+        height: 100%;
+        border-radius: 999px;
+        background: var(--c-cyan);
+        transform-origin: bottom;
+        animation: eq-bounce 1s ease-in-out infinite;
+    }
+
+    .eq span:nth-child(2) { background: var(--c-violet); animation-duration: .8s; animation-delay: -.3s; }
+    .eq span:nth-child(3) { background: var(--c-pink); animation-duration: 1.15s; animation-delay: -.6s; }
+    .eq span:nth-child(4) { background: var(--c-amber); animation-duration: .9s; animation-delay: -.2s; }
+    .eq span:nth-child(5) { background: var(--c-lime); animation-duration: 1.05s; animation-delay: -.5s; }
+
+    /* Sticker-Badges rund ums Profilbild */
+    .sticker {
+        @apply absolute z-10 whitespace-nowrap rounded-full px-3 py-1.5 text-xs md:text-sm font-bold text-slate-900 shadow-lg;
+        animation: float 5s ease-in-out infinite;
+    }
+
+    /* Laufband */
+    .ticker {
+        --ticker-gap: 2.5rem;
+        display: flex;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .ticker-track {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        gap: var(--ticker-gap);
+        padding-right: var(--ticker-gap);
+        animation: ticker 40s linear infinite;
+    }
+
+    .ticker:hover .ticker-track {
+        animation-play-state: paused;
+    }
+
+    /* Navigation */
+    .nav-pill {
+        @apply relative rounded-full px-2.5 lg:px-3 py-1.5 text-sm lg:text-base font-medium whitespace-nowrap text-slate-200;
+        transition: color .3s, background-color .3s, transform .35s var(--ease-bounce);
+    }
+
+    .nav-pill:hover {
+        @apply bg-white/5 text-white;
+        transform: translateY(-2px);
+    }
+
+    .nav-pill.is-active {
+        @apply text-white;
+        background: linear-gradient(90deg, rgba(34, 211, 238, .22), rgba(167, 139, 250, .22));
+        box-shadow: inset 0 0 0 1px rgba(167, 139, 250, .35);
+    }
+}
+
+/* ------------------------------------------------------------------
+   Karten in den Inhalten (Workshops, Apps, Videos …):
+   jede Karte bekommt ihre eigene Akzentfarbe
+------------------------------------------------------------------- */
+.not-prose.grid > * {
+    --accent: var(--c-cyan);
+    position: relative;
+    transition: opacity .7s ease var(--reveal-delay, 0s), translate .7s var(--ease-out) var(--reveal-delay, 0s), transform .4s var(--ease-bounce), box-shadow .4s, border-color .4s;
+}
+
+.not-prose.grid > *:nth-child(5n+2) { --accent: var(--c-violet); }
+.not-prose.grid > *:nth-child(5n+3) { --accent: var(--c-pink); }
+.not-prose.grid > *:nth-child(5n+4) { --accent: var(--c-amber); }
+.not-prose.grid > *:nth-child(5n+5) { --accent: var(--c-lime); }
+
+/* Farbiger Streifen oben an jeder Karte */
+.not-prose.grid > *::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 3px;
+    border-radius: 0 0 999px 999px;
+    background: var(--accent);
+    opacity: .7;
+    z-index: 1;
+    transition: left .4s var(--ease-out), right .4s var(--ease-out), opacity .4s;
+}
+
+.not-prose.grid > *:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px) rotate(-.6deg);
+    box-shadow: 0 22px 45px -18px var(--accent);
+}
+
+.not-prose.grid > *:nth-child(even):hover {
+    transform: translateY(-6px) rotate(.6deg);
+}
+
+.not-prose.grid > *:hover::before {
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+.not-prose.grid > * .text-cyan-400 {
+    color: var(--accent);
+}
+
+.not-prose.grid > * .bg-cyan-500\/20 {
+    @apply w-12 h-12 rounded-2xl;
+    background-color: color-mix(in srgb, var(--accent) 18%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+    transition: transform .5s var(--ease-bounce);
+}
+
+.not-prose.grid > * .bg-cyan-500\/20 svg {
+    @apply w-6 h-6;
+}
+
+.not-prose.grid > *:hover .bg-cyan-500\/20 {
+    transform: rotate(-10deg) scale(1.15);
+}
+
+.not-prose.grid > * .bg-cyan-500\/10 {
+    background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* Kontaktformular-Button */
+form.not-prose button[type="submit"] {
+    @apply rounded-full font-semibold text-slate-900 border-0;
+    background: var(--grad-spectrum);
+    background-size: 250% 100%;
+    transition: transform .35s var(--ease-bounce), background-position .8s var(--ease-out), box-shadow .35s;
+}
+
+form.not-prose button[type="submit"]:hover {
+    background-position: 100% 0;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 14px 34px -12px rgba(244, 114, 182, .7);
+}
+
+form.not-prose input:focus,
+form.not-prose textarea:focus {
+    border-color: var(--c-violet);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, .25);
+}
+
+/* ------------------------------------------------------------------
+   Fließtext
+------------------------------------------------------------------- */
+.prose h1 {
+    background: linear-gradient(90deg, #fff 0%, #fff 40%, var(--c-cyan) 65%, var(--c-violet) 85%, var(--c-pink) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.prose h2 {
+    position: relative;
+    padding-bottom: .6rem;
+}
+
+.prose h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 4rem;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--grad-spectrum);
+    background-size: 300% 100%;
+    animation: gradient-slide 6s linear infinite;
+}
+
+.cta h2::after {
+    content: none;
+}
+
+/* Buttons im Fließtext behalten ihre dunkle Schrift */
+.prose a.btn,
+.prose a.btn:hover {
+    color: #0f172a;
+    text-decoration: none;
+}
+
+.prose ul > li::marker {
+    color: var(--c-pink);
+}
+
+.prose a:not(.btn):hover {
+    text-decoration-style: wavy;
+    text-decoration-color: var(--c-pink);
+    text-underline-offset: 5px;
+}
+
+.prose hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--c-cyan), var(--c-violet), var(--c-pink), transparent);
+    opacity: .5;
+}
+
+/* ------------------------------------------------------------------
+   Kopfzeile: VU-Meter-Leiste, die beim Scrollen „ausschlägt“
+------------------------------------------------------------------- */
+.vu-meter {
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-lime), var(--c-cyan) 30%, var(--c-violet) 60%, var(--c-pink) 85%, #ef4444);
+}
+
+@supports (animation-timeline: scroll()) {
+    .vu-meter {
+        transform-origin: left;
+        animation: vu-fill linear both;
+        animation-timeline: scroll(root);
+    }
+}
+
+@keyframes vu-fill {
+    from { transform: scaleX(.12); }
+    to { transform: scaleX(1); }
+}
+
+.logo-link:hover img {
+    animation: wiggle .6s ease-in-out;
+}
+
+/* Mobiles Menü: Links purzeln nacheinander herein */
+#mobile-menu nav a {
+    opacity: 0;
+    transform: translateY(16px) scale(.95);
+    transition: opacity .4s ease, transform .5s var(--ease-bounce), color .3s;
+}
+
+#mobile-menu.is-open nav a {
+    opacity: 1;
+    transform: none;
+}
+
+#mobile-menu.is-open nav a:nth-child(2) { transition-delay: .05s; }
+#mobile-menu.is-open nav a:nth-child(3) { transition-delay: .1s; }
+#mobile-menu.is-open nav a:nth-child(4) { transition-delay: .15s; }
+#mobile-menu.is-open nav a:nth-child(5) { transition-delay: .2s; }
+#mobile-menu.is-open nav a:nth-child(6) { transition-delay: .25s; }
+#mobile-menu.is-open nav a:nth-child(7) { transition-delay: .3s; }
+
+/* ------------------------------------------------------------------
+   Profilbild mit rotierendem Farbring & Bass-Drop-Easteregg
+------------------------------------------------------------------- */
+.spin-ring {
+    background: conic-gradient(from 0deg, var(--c-cyan), var(--c-violet), var(--c-pink), var(--c-amber), var(--c-lime), var(--c-cyan));
+    animation: spin 8s linear infinite;
+}
+
+.bass-btn.is-thumping img {
+    animation: thump .5s var(--ease-bounce);
+}
+
+.bass-btn.is-thumping .pulse-ring {
+    animation: pulse-ring .8s ease-out;
+}
+
+.pulse-ring {
+    opacity: 0;
+}
+
+.note {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    pointer-events: none;
+    font-size: 1.75rem;
+    font-weight: 700;
+    animation: note-fly 1.4s var(--ease-out) forwards;
+}
+
+.wave-hand {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: wave 2.4s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   Einblenden beim Scrollen (nur wenn JS aktiv ist)
+------------------------------------------------------------------- */
+.js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+    translate: 0 28px;
+}
+
+/* ------------------------------------------------------------------
+   Keyframes
+------------------------------------------------------------------- */
+@keyframes gradient-slide {
+    from { background-position: 0% 50%; }
+    to { background-position: 300% 50%; }
+}
+
+@keyframes eq-bounce {
+    0%, 100% { transform: scaleY(.25); }
+    50% { transform: scaleY(1); }
+}
+
+@keyframes float {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+}
+
+@keyframes ticker {
+    to { transform: translateX(-100%); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-6deg) scale(1.05); }
+    50% { transform: rotate(5deg) scale(1.05); }
+    75% { transform: rotate(-3deg); }
+}
+
+@keyframes thump {
+    0% { transform: scale(1); }
+    30% { transform: scale(.92); }
+    60% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+    from { opacity: .9; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.45); }
+}
+
+@keyframes note-fly {
+    0% { opacity: 0; transform: translate(-50%, 0) scale(.5) rotate(0deg); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), -170px) scale(1.2) rotate(var(--rot)); }
+}
+
+/* Wer weniger Bewegung möchte, bekommt eine ruhige Seite */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .js [data-reveal]:not(.is-visible) {
+        opacity: 1;
+        translate: none;
+    }
+
+    .vu-meter {
+        animation: none !important;
     }
 }

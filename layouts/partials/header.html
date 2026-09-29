@@ -1,22 +1,23 @@
 <header
-    class="sticky top-0 z-50 w-full backdrop-blur-md bg-slate-900/80 border-b border-slate-800 border-t-4 border-t-cyan-500 shadow-sm transition-colors duration-200">
-    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="{{ .Site.BaseURL }}" class="flex items-center gap-3 group">
+    class="sticky top-0 z-50 w-full backdrop-blur-md bg-slate-900/80 border-b border-slate-800 shadow-sm transition-colors duration-200">
+    <div class="vu-meter" aria-hidden="true"></div>
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+        <a href="{{ .Site.BaseURL }}" class="logo-link flex items-center gap-3 group">
             {{ if .Site.Params.label.icon }}
             <img src="{{ .Site.Params.label.icon | absURL }}" alt="Logo" width="137" height="48"
-                class="h-12 w-auto transition-transform group-hover:scale-105 translate-y-1.5 brightness-0 invert">
+                class="h-12 w-auto translate-y-1.5 brightness-0 invert">
             {{ end }}
+            <span class="eq translate-y-1 md:hidden xl:inline-flex" style="--eq-h: 1.1rem" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
         </a>
 
-        <nav class="hidden md:flex items-center gap-4 lg:gap-8">
+        <nav class="hidden md:flex items-center gap-0.5 lg:gap-1">
             {{ $currentPage := . }}
             {{ range .Site.Menus.main }}
             {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
             {{ if not $isActive }}
             {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
             {{ end }}
-            <a href="{{ .URL }}"
-                class="text-sm lg:text-base font-medium whitespace-nowrap transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2 decoration-cyan-500{{ else }}text-slate-200 hover:text-cyan-400 hover:underline hover:underline-offset-8 hover:decoration-cyan-400/50{{ end }}">
+            <a href="{{ .URL }}" class="nav-pill{{ if $isActive }} is-active{{ end }}"{{ if $isActive }} aria-current="page"{{ end }}>
                 {{ .Name }}
             </a>
             {{ end }}
@@ -40,7 +41,10 @@
     class="fixed inset-0 z-[100] bg-slate-900 md:hidden transition-all duration-300 opacity-0 pointer-events-none">
     <div class="flex flex-col h-full">
         <div class="flex items-center justify-between px-6 h-16 border-b border-slate-800">
-            <span class="text-cyan-500 font-bold uppercase tracking-wider">Navigation</span>
+            <span class="flex items-center gap-3 font-bold uppercase tracking-wider text-gradient">
+                <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+                Navigation
+            </span>
             <button id="menu-close" class="p-2 text-slate-400 hover:text-cyan-400 transition-colors"
                 aria-label="Close menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +61,7 @@
                 {{ $isActive = eq (strings.TrimSuffix "/" $currentPage.RelPermalink) (strings.TrimSuffix "/" .URL) }}
                 {{ end }}
                 <a href="{{ .URL }}"
-                    class="text-2xl font-bold transition-all duration-300 {{ if $isActive }}text-cyan-500 underline underline-offset-8 decoration-2{{ else }}text-slate-200 hover:text-cyan-400{{ end }}">
+                    class="text-2xl font-bold {{ if $isActive }}text-gradient{{ else }}text-slate-200 hover:text-pink-300{{ end }}">
                     {{ .Name }}
                 </a>
                 {{ end }}
@@ -75,9 +79,11 @@
     function toggleMenu(show) {
         if (show) {
             mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            mobileMenu.classList.add('is-open');
             body.style.overflow = 'hidden';
         } else {
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            mobileMenu.classList.remove('is-open');
             body.style.overflow = '';
         }
     }
