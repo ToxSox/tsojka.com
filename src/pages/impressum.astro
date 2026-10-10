@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Impressum" description="Impressum und rechtliche Angaben gemäß § 5 TMG von Thomas Sojka (tsojka.com).">
+  <article class="legal wrap">
+    <p class="mono chapter-tag">
+      <span>Rechtliches</span><span class="line"></span>
+    </p>
+    <h1 class="chapter-title">Impressum</h1>
+    <p class="mono muted">Rechtliche Angaben gemäß § 5 TMG</p>
+
+    <div class="legal-grid">
+      <section>
+        <h2 class="mono">Angaben gemäß § 5 TMG</h2>
+        <address>
+          Thomas Sojka<br />
+          Cuxhavener Str. 36<br />
+          46145 Oberhausen
+        </address>
+      </section>
+      <section>
+        <h2 class="mono">Kontakt</h2>
+        <p>
+          Telefon: 015158546178<br />
+          E-Mail: <a href="mailto:me@tsojka.com">me@tsojka.com</a>
+        </p>
+      </section>
+    </div>
+
+    <div class="legal-text">
+      <p class="mono muted">Quelle: http://www.e-recht24.de</p>
+      <h2>Haftungsausschluss (Disclaimer)</h2>
+
+      <h3>Haftung für Inhalte</h3>
+      <p>
+        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+        verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
+        gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
+        hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen
+        bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
+        Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
+        entfernen.
+      </p>
+
+      <h3>Haftung für Links</h3>
+      <p>
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können
+        wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der
+        jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung
+        auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine
+        permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung
+        nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+      </p>
+
+      <h3>Urheberrecht</h3>
+      <p>
+        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+        Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
+        bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur
+        für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber
+        erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche
+        gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen
+        entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+      </p>
+
+      <p class="mono muted">Quellverweis: eRecht24, eRecht24</p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .legal {
+    display: grid;
+    gap: 1.5rem;
+    padding-block: 9rem 6rem;
+  }
+
+  .legal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .legal-grid section {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--bg-2);
+  }
+
+  .legal-grid h2 {
+    color: var(--signal);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  address {
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+
+  .legal-grid p {
+    font-size: 1.2rem;
+  }
+
+  .legal a {
+    color: var(--signal);
+  }
+
+  .legal-text {
+    display: grid;
+    gap: 1rem;
+    max-width: 52rem;
+    margin-top: 3rem;
+  }
+
+  .legal-text h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    margin-top: 1rem;
+  }
+
+  .legal-text h3 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+  }
+
+  .legal-text p:not(.mono) {
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

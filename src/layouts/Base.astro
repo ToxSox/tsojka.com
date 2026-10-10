@@ -1,0 +1,165 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Cursor from '../components/Cursor.astro';
+import profil from '../assets/profil.jpg';
+import { getImage } from 'astro:assets';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  home?: boolean;
+}
+
+const { title, description = site.description, home = false } = Astro.props;
+const fullTitle = title ? `${title} – ${site.title}` : `${site.title} – Car-HiFi, DSP-Tuning & Messtechnik`;
+const og = await getImage({ src: profil, width: 800, format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+    <meta name="theme-color" content="#09090a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={site.title} />
+    <script is:inline>
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+    </script>
+    {
+      home && (
+        <script is:inline>
+          try {
+            if (
+              !sessionStorage.getItem('tsa-boot') &&
+              !matchMedia('(prefers-reduced-motion: reduce)').matches
+            ) {
+              document.documentElement.classList.add('boot');
+              sessionStorage.setItem('tsa-boot', '1');
+            }
+          } catch (e) {}
+        </script>
+      )
+    }
+  </head>
+  <body class:list={[home && 'is-home']}>
+    <a class="skip mono" href="#main">Zum Inhalt springen</a>
+    {home && <div class="loader" aria-hidden="true">
+      <div class="loader-inner">
+        <span class="mono loader-label">Kalibriere Messkette</span>
+        <div class="loader-axis">
+          <span class="loader-sweep"></span>
+          <span class="mono">20 Hz</span><span class="mono">200 Hz</span><span class="mono">2 kHz</span><span class="mono">20 kHz</span>
+        </div>
+        <span class="loader-name">TSOJKA AUDIO</span>
+      </div>
+    </div>}
+    <Header home={home} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <Cursor />
+    <script>
+      import '../scripts/core';
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1rem;
+    background: var(--signal);
+    color: #000;
+    border-radius: 8px;
+    transform: translateY(-200%);
+  }
+
+  .skip:focus {
+    transform: none;
+  }
+
+  .loader {
+    display: none;
+  }
+
+  :global(html.boot) .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    animation: loader-out 0.9s var(--ease-in-out) 1.5s forwards;
+  }
+
+  .loader-inner {
+    display: grid;
+    gap: 1.25rem;
+    width: min(560px, 80vw);
+  }
+
+  .loader-label {
+    color: var(--muted);
+  }
+
+  .loader-axis {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-2);
+    color: var(--dim);
+  }
+
+  .loader-sweep {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--signal);
+    box-shadow: 0 0 16px var(--signal);
+    transform-origin: left;
+    animation: sweep 1.3s var(--ease-in-out) forwards;
+  }
+
+  .loader-name {
+    font-size: clamp(2.5rem, 9vw, 5rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.9;
+    animation: name-in 0.8s var(--ease-out) 0.2s both;
+  }
+
+  @keyframes sweep {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes name-in {
+    from { opacity: 0; transform: translateY(30%); letter-spacing: 0.2em; }
+    to { opacity: 1; transform: none; letter-spacing: -0.02em; }
+  }
+
+  @keyframes loader-out {
+    to { clip-path: inset(0 0 100% 0); visibility: hidden; }
+  }
+</style>

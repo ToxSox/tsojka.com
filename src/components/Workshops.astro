@@ -1,0 +1,302 @@
+---
+import ChapterHead from './ChapterHead.astro';
+import Marquee from './Marquee.astro';
+import { audiences, workshopTopics } from '../data/site';
+
+const icons: Record<string, string> = {
+  bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
+  dsp: 'M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3',
+  link: 'M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1',
+  layers: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+};
+---
+
+<section class="chapter workshops" id="workshops">
+  <div class="wrap">
+    <ChapterHead ch="03" label="Workshops & Trainings" lines={['Wissen,', 'das *klingt*.']}>
+      <p>
+        Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware – das richtige Know-how bei der
+        Installation und Abstimmung entscheidet am Ende über das perfekte Klangerlebnis im Fahrzeug. Ich biete{' '}
+        <strong>praxisnahe und maßgeschneiderte Workshops</strong> an, in denen ich meine jahrelange Erfahrung als Soundjuror
+        und Akustik-Experte direkt an dich weitergebe.
+      </p>
+    </ChapterHead>
+
+    <div class="topics-head" data-reveal>
+      <h3>Was wir thematisieren können</h3>
+      <p class="muted">
+        Von den absoluten Car-Audio Grundlagen bis hin zum Expertenwissen im Bereich Sound-Tuning – die Schulungsinhalte
+        richten sich komplett nach dem Wissensstand der Teilnehmer. Hier ein Auszug aus möglichen Themenbereichen:
+      </p>
+    </div>
+
+    <div class="topics">
+      {
+        workshopTopics.map((t, i) => (
+          <article class="topic" data-spotlight data-reveal style={`--d:${i}`}>
+            <div class="topic-top">
+              <span class="topic-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d={icons[t.icon]} />
+                </svg>
+              </span>
+              <span class="mono">W.{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h4>{t.title}</h4>
+            <p set:html={t.html} />
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="ws-marquee">
+    <Marquee items={['Für Händler & Profis', 'Für private Enthusiasten', 'Individuell angepasst', 'Praxisnah']} reverse />
+  </div>
+
+  <div class="wrap">
+    <h3 class="mono aud-q" data-reveal>Für wen sind die Workshops geeignet?</h3>
+    <p class="aud-intro" data-reveal>
+      Egal, mit welchem Vorwissen du startest, die Workshops lassen sich individuell auf die Bedürfnisse anpassen.
+    </p>
+    <div class="audiences">
+      {
+        audiences.map((a, i) => (
+          <div class="aud" data-reveal style={`--d:${i}`}>
+            <span class="mono signal">Zielgruppe {String.fromCharCode(65 + i)}</span>
+            <h4>{a.title}</h4>
+            <p>{a.text}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="ws-cta" data-reveal="scale">
+      <h3>Lass uns dein nächstes Training planen!</h3>
+      <p class="muted">
+        Schreib mir einfach eine unverbindliche Nachricht mit deinen konkreten inhaltlichen Wünschen und wir schnüren
+        gemeinsam das passende Schulungspaket.
+      </p>
+      <a class="btn btn--solid" href="#kontakt" data-magnetic>Jetzt Workshop anfragen <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .workshops {
+    overflow-x: clip;
+  }
+
+  .topics-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 1rem clamp(2rem, 5vw, 5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  .topics-head h3 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .topics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .topic {
+    --mx: 50%;
+    --my: 0%;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 1.25rem;
+    min-height: 22rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--bg-2);
+    overflow: hidden;
+    transition:
+      border-color 0.4s,
+      transform 0.6s var(--ease-out);
+  }
+
+  .topic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255, 90, 31, 0.16), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .topic:hover {
+    border-color: rgba(255, 90, 31, 0.5);
+    transform: translateY(-6px);
+  }
+
+  .topic:hover::before {
+    opacity: 1;
+  }
+
+  .topic-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    color: var(--dim);
+  }
+
+  .topic-icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    transition:
+      background 0.4s,
+      border-color 0.4s,
+      transform 0.6s var(--ease-out);
+  }
+
+  .topic-icon svg {
+    width: 1.4rem;
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.4s;
+  }
+
+  .topic:hover .topic-icon {
+    background: var(--signal);
+    border-color: var(--signal);
+    transform: rotate(-12deg) scale(1.08);
+  }
+
+  .topic:hover .topic-icon svg {
+    stroke: #0b0b0b;
+  }
+
+  .topic h4 {
+    align-self: end;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .topic p {
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  .ws-marquee {
+    margin-block: clamp(4rem, 8vw, 7rem);
+    transform: rotate(-2deg);
+  }
+
+  .aud-q {
+    margin-bottom: 1rem;
+    color: var(--signal);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .aud-intro {
+    max-width: 40rem;
+    margin-bottom: 2.5rem;
+    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.75rem);
+    line-height: 1.3;
+  }
+
+  .audiences {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .aud {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-2);
+  }
+
+  .aud h4 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-stretch: 80%;
+    text-transform: uppercase;
+  }
+
+  .aud p {
+    color: var(--muted);
+  }
+
+  .ws-cta {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+    margin-top: clamp(5rem, 10vw, 8rem);
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    border-radius: 28px;
+    background:
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 80px),
+      var(--signal);
+    color: #0b0b0b;
+    text-align: center;
+  }
+
+  .ws-cta h3 {
+    max-width: 18ch;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    font-stretch: 75%;
+    text-transform: uppercase;
+  }
+
+  .ws-cta p {
+    max-width: 40rem;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .ws-cta .btn--solid {
+    background: #0b0b0b;
+    border-color: #0b0b0b;
+    color: var(--text);
+  }
+
+  .ws-cta .btn--solid::before {
+    background: var(--text);
+  }
+
+  .ws-cta .btn--solid:hover {
+    color: #0b0b0b;
+  }
+
+  @media (max-width: 1080px) {
+    .topics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .topics-head,
+    .audiences {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .topics {
+      grid-template-columns: 1fr;
+    }
+
+    .topic {
+      min-height: 0;
+    }
+  }
+</style>

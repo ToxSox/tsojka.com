@@ -1,0 +1,222 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import '../styles/videos.css';
+---
+
+<Base
+  title="Video-Archiv"
+  description="Alle Car-HiFi Videos & Tutorials von TSojka Audio: Produktreviews, Labor-Tests, REW-Tutorials, Wettbewerbsberichte und Tipps."
+>
+  <section class="archive wrap">
+    <header class="chapter-head">
+      <p class="chapter-tag mono">
+        <span>Archiv</span><span>/</span><span>YouTube</span><span class="line"></span>
+      </p>
+      <h1 class="chapter-title" data-split aria-label="Alle Videos">
+        <span class="split-line" aria-hidden="true"><span style="--i:0">Alle</span></span>
+        <span class="split-line" aria-hidden="true"><span style="--i:1"><em>Videos</em></span></span>
+      </h1>
+      <p class="lede">
+        Wissen, Inspiration und Unterhaltung für Car-HiFi-Fans: Produktreviews, Schritt-für-Schritt-Tutorials,
+        Wettbewerbsberichte und nützliche Tipps – direkt von meinem{' '}
+        <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube-Kanal</a>.
+      </p>
+    </header>
+
+    <div class="toolbar">
+      <label class="search">
+        <span class="sr-only">Videos durchsuchen</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+        <input type="search" placeholder="Suchen: REW, LTO, Kenwood, Dämmung …" data-search autocomplete="off" />
+        <span class="mono count" data-count>—</span>
+      </label>
+      <div class="years mono" data-years role="group" aria-label="Nach Jahr filtern"></div>
+    </div>
+
+    <div class="vgrid" data-archive aria-live="polite">
+      {Array.from({ length: 6 }).map(() => <div class="vskeleton" />)}
+    </div>
+    <div class="sentinel" data-sentinel></div>
+    <p class="empty muted" data-empty hidden>Keine Videos gefunden. Versuch einen anderen Suchbegriff.</p>
+  </section>
+</Base>
+
+<style>
+  .archive {
+    padding-block: 9rem 6rem;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 5.25rem;
+    z-index: 5;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(17, 17, 19, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .search svg {
+    width: 1.25rem;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .search input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+
+  .search input:focus {
+    outline: none;
+  }
+
+  .count {
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .years {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .years::-webkit-scrollbar {
+    display: none;
+  }
+
+  .years :global(button) {
+    flex-shrink: 0;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      color 0.3s,
+      border-color 0.3s;
+  }
+
+  .years :global(button:hover) {
+    border-color: var(--signal);
+    color: var(--text);
+  }
+
+  .years :global(button[aria-pressed='true']) {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: #0b0b0b;
+  }
+
+  .sentinel {
+    height: 1px;
+  }
+
+  .empty {
+    padding-block: 3rem;
+    font-size: 1.25rem;
+  }
+</style>
+
+<script>
+  import { loadVideos, videoCard, type Video } from '../scripts/videos';
+
+  const grid = document.querySelector<HTMLElement>('[data-archive]')!;
+  const search = document.querySelector<HTMLInputElement>('[data-search]')!;
+  const yearsEl = document.querySelector<HTMLElement>('[data-years]')!;
+  const countEl = document.querySelector<HTMLElement>('[data-count]')!;
+  const sentinel = document.querySelector<HTMLElement>('[data-sentinel]')!;
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+
+  const BATCH = 24;
+  let all: Video[] = [];
+  let filtered: Video[] = [];
+  let shown = 0;
+  let year = 'alle';
+
+  const norm = (s: string) => s.toLocaleLowerCase('de-DE').normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  function apply() {
+    const q = norm(search.value.trim());
+    const terms = q.split(/\s+/).filter(Boolean);
+    filtered = all.filter((v) => {
+      if (year !== 'alle' && !v.publishedAt.startsWith(year)) return false;
+      const t = norm(v.title);
+      return terms.every((term) => t.includes(term));
+    });
+    countEl.textContent = `${filtered.length} / ${all.length}`;
+    empty.hidden = filtered.length > 0;
+    grid.innerHTML = '';
+    shown = 0;
+    more();
+  }
+
+  function more() {
+    if (shown >= filtered.length) return;
+    const next = filtered.slice(shown, shown + BATCH);
+    grid.insertAdjacentHTML('beforeend', next.map((v, i) => videoCard(v, i)).join(''));
+    shown += next.length;
+  }
+
+  function buildYears() {
+    const years = Array.from(new Set(all.map((v) => v.publishedAt.slice(0, 4)))).sort().reverse();
+    yearsEl.innerHTML = ['alle', ...years]
+      .map((y) => `<button type="button" data-year="${y}" aria-pressed="${y === year}">${y === 'alle' ? 'Alle Jahre' : y}</button>`)
+      .join('');
+  }
+
+  yearsEl.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLButtonElement>('button[data-year]');
+    if (!b) return;
+    year = b.dataset.year!;
+    yearsEl.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    apply();
+  });
+
+  let timer = 0;
+  search.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = window.setTimeout(apply, 120);
+  });
+
+  new IntersectionObserver(([e]) => e.isIntersecting && more(), { rootMargin: '800px 0px' }).observe(sentinel);
+
+  loadVideos()
+    .then((v) => {
+      all = v;
+      buildYears();
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) search.value = q;
+      apply();
+    })
+    .catch(() => {
+      grid.innerHTML = '<p class="muted">Videos konnten gerade nicht geladen werden – schau direkt auf YouTube vorbei.</p>';
+      countEl.textContent = '';
+    });
+</script>

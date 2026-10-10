@@ -1,0 +1,92 @@
+<div class="cursor" aria-hidden="true" data-cursor>
+  <span class="cursor-dot"></span>
+  <span class="cursor-ring"><span class="cursor-label mono" data-cursor-label></span></span>
+</div>
+
+<style>
+  .cursor {
+    display: none;
+  }
+
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :global(html.js) .cursor {
+      display: block;
+    }
+
+    :global(html.js.has-cursor),
+    :global(html.js.has-cursor) :global(a),
+    :global(html.js.has-cursor) :global(button) {
+      cursor: none;
+    }
+
+    :global(html.js.has-cursor) :global(input),
+    :global(html.js.has-cursor) :global(textarea) {
+      cursor: text;
+    }
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    pointer-events: none;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--signal);
+  }
+
+  .cursor-ring {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 1px solid rgba(236, 233, 224, 0.35);
+    transition:
+      width 0.4s var(--ease-out),
+      height 0.4s var(--ease-out),
+      margin 0.4s var(--ease-out),
+      background 0.4s,
+      border-color 0.4s;
+  }
+
+  .cursor.is-hover .cursor-ring {
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    border-color: var(--signal);
+    background: var(--signal-soft);
+  }
+
+  .cursor.has-label .cursor-ring {
+    width: 96px;
+    height: 96px;
+    margin: -48px 0 0 -48px;
+    border-color: var(--signal);
+    background: var(--signal);
+  }
+
+  .cursor-label {
+    color: #0b0b0b;
+    font-size: 0.65rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .cursor.has-label .cursor-label {
+    opacity: 1;
+  }
+
+  .cursor.is-hidden .cursor-dot,
+  .cursor.is-hidden .cursor-ring {
+    opacity: 0;
+  }
+</style>
