@@ -1,0 +1,639 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ChapterHead from './ChapterHead.astro';
+import profil from '../assets/profil.jpg';
+import { expertise, gallery, rewReasons, site } from '../data/site';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/3dprint/*.jpeg', { eager: true });
+const shots = await Promise.all(
+  gallery.map(async (g) => {
+    const src = files[`../assets/3dprint/${g.file}`].default;
+    const full = await getImage({ src, width: 1600, format: 'webp' });
+    return { ...g, src, full: full.src };
+  }),
+);
+
+const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck ✦ ';
+---
+
+<section class="chapter about" id="about">
+  <div class="wrap">
+    <ChapterHead ch="04" label="Über mich" lines={['Thomas', '*Sojka*']} />
+
+    <div class="bio">
+      <div class="portrait" data-reveal="scale">
+        <div class="portrait-img">
+          <Image src={profil} alt="Thomas Sojka" width={640} height={640} format="webp" loading="lazy" />
+        </div>
+        <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+          </defs>
+          <circle cx="100" cy="100" r="98" />
+          <text textLength="486" lengthAdjust="spacing"><textPath href="#badge-circle" textLength="486" lengthAdjust="spacing">{badge}</textPath></text>
+          <g class="badge-wave"><path d="M70 100 q7.5 -22 15 0 t15 0 t15 0 t15 0" /></g>
+        </svg>
+      </div>
+
+      <div class="bio-text">
+        <p class="bio-claim" data-reveal>Leidenschaft für perfektes Car-HiFi, Akustik und Technik.</p>
+        <p class="bio-body" data-reveal style="--d:1">
+          Ich bin <strong>Thomas Sojka</strong>, und Car-HiFi (Car-Audio) ist mehr als nur ein Hobby für mich – es ist eine
+          Leidenschaft für das bestmögliche Klangerlebnis im Auto, die mich seit vielen Jahren begleitet. Ergänzend zur
+          klassischen Elektrotechnik und Akustik habe ich den <strong>3D-Druck</strong> für mich entdeckt, der meine Arbeit bei
+          der Installation von Fahrzeugen noch professioneller und vielfältiger macht.
+        </p>
+
+        <h3 class="mono sub-label" data-reveal>Meine Expertise im Car-HiFi Bereich</h3>
+        <ul class="expertise">
+          {
+            expertise.map((e, i) => (
+              <li data-reveal style={`--d:${i}`}>
+                <h4>{e.title}</h4>
+                <p set:html={e.html} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- REW -->
+    <div class="rew">
+      <div class="rew-title" aria-hidden="true" data-reveal>
+        <span>R</span><span>E</span><span>W</span>
+      </div>
+      <div class="rew-content">
+        <h3 data-reveal>REW Tutorials</h3>
+        <p data-reveal>
+          Neben meinen Aktivitäten im Car-HiFi-Bereich arbeite ich intensiv mit <strong>REW (Room EQ Wizard)</strong>. REW
+          ist ein leistungsstarkes Tool, das sowohl für Heimanwendungen als auch im professionellen Car-HiFi-Bereich eingesetzt
+          wird. Viele Händler und Profis nutzen REW, um optimale Klangergebnisse zu erzielen.
+        </p>
+        <h4 class="mono sub-label" data-reveal>Warum REW?</h4>
+        <dl class="rew-list">
+          {
+            rewReasons.map((r, i) => (
+              <div data-reveal style={`--d:${i}`}>
+                <dt>{r.title}</dt>
+                <dd>{r.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <h4 class="mono sub-label" data-reveal>Meine Erfahrungen und Tutorials</h4>
+        <p data-reveal>
+          Ich habe bereits mehrere REW-Tutorials erstellt und plane, weitere Videos zu produzieren, um dir und der Community zu
+          zeigen, wie du REW effektiv einsetzen kannst. Diese Tutorials decken sowohl grundlegende als auch fortgeschrittene
+          Techniken ab und bieten praktische Anleitungen zur Optimierung deines Audio-Systems. Bleibe dran und folge meinem{' '}
+          <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube-Kanal</a> für die neuesten REW-Tutorials und
+          spannende Einblicke in die Welt des Car-HiFi!
+        </p>
+      </div>
+    </div>
+
+    <!-- 3D-Druck -->
+    <div class="print">
+      <div class="print-head">
+        <h3 data-reveal>3D-Druck<br /><span class="signal">für Car-HiFi</span></h3>
+        <div class="print-text">
+          <p data-reveal>
+            Neben meiner Tätigkeit als Soundjuror nutze ich den <strong>3D-Druck</strong>, um maßgeschneiderte Lösungen für
+            Car-HiFi-Systeme zu entwickeln:
+          </p>
+          <ul data-reveal>
+            <li><strong>Individuelle Adapter für Türlautsprecher</strong> für optimalen Halt und Klang.</li>
+            <li><strong>Gehäuse für Mittel- und Hochtöner</strong>, die Funktionalität und Ästhetik vereinen.</li>
+          </ul>
+          <p data-reveal>
+            Mit meinem <strong>Bambulabs P1S-Drucker</strong> arbeite ich ausschließlich mit <strong>ASA</strong> und{' '}
+            <strong>ABS</strong>, um langlebige und robuste Ergebnisse zu erzielen.
+          </p>
+          <div class="chips mono" data-reveal>
+            <span>Bambulabs P1S</span><span>ASA</span><span>ABS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hgal" data-hgal>
+    <div class="hgal-sticky">
+      <p class="mono hgal-label wrap">Meine 3D-Druck-Projekte <span class="muted">— {shots.length} Bilder</span></p>
+      <div class="hgal-track" data-hgal-track>
+        {
+          shots.map((s, i) => (
+            <figure class="shot">
+              <button type="button" data-lightbox={i} data-full={s.full} data-cursor-text="Zoom" aria-label={`Bild vergrößern: ${s.alt}`}>
+                <Image src={s.src} alt={s.alt} widths={[480, 800]} sizes="(max-width: 760px) 80vw, 40vw" format="webp" loading="lazy" />
+              </button>
+              <figcaption class="mono">
+                <span class="signal">3D.{String(i + 1).padStart(2, '0')}</span> {s.alt}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="idea" data-reveal="scale">
+      <div>
+        <p class="mono signal">Mitmachen und Ideen einbringen</p>
+        <h3>Hast du eine Videoidee?</h3>
+        <p class="muted">
+          Du hast Ideen oder Themen, die ich in einem Video aufgreifen könnte? Schick mir deine Vorschläge! Ich freue mich,
+          spannende Themen aus der Community aufzugreifen.
+        </p>
+      </div>
+      <a class="btn btn--solid" href="#kontakt" data-magnetic>Videoidee einreichen <span class="arrow">→</span></a>
+    </div>
+
+    <p class="notice">
+      <span class="mono">Hinweis</span>
+      <span>
+        Bitte beachte, dass ich meine Aktivitäten ausschließlich in meiner <strong>Freizeit</strong> betreibe. Ich bin nicht
+        telefonisch erreichbar, verkaufe keine Komponenten und biete keine Einbaudienstleistungen an.
+      </span>
+    </p>
+  </div>
+
+  <dialog class="lightbox" data-lb>
+    <img data-lb-img alt="" />
+    <p class="mono lb-cap" data-lb-cap></p>
+    <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Schließen">✕</button>
+    <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Vorheriges Bild">←</button>
+    <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Nächstes Bild">→</button>
+  </dialog>
+</section>
+
+<style>
+  .bio {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .portrait {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .portrait-img {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 24px;
+    background: var(--signal);
+  }
+
+  .portrait-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    filter: grayscale(1) contrast(1.15) brightness(0.95);
+    mix-blend-mode: multiply;
+    transform: scale(1.04);
+    transition:
+      filter 0.8s,
+      mix-blend-mode 0.8s,
+      transform 1.2s var(--ease-out);
+  }
+
+  .portrait:hover .portrait-img img {
+    filter: none;
+    mix-blend-mode: normal;
+    transform: scale(1);
+  }
+
+  .badge {
+    position: absolute;
+    right: -2rem;
+    bottom: -2rem;
+    width: clamp(8rem, 13vw, 11rem);
+    animation: spin 18s linear infinite;
+  }
+
+  .badge circle {
+    fill: var(--bg);
+    stroke: var(--line-2);
+  }
+
+  .badge text {
+    fill: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .badge-wave {
+    transform-origin: 100px 100px;
+    animation: spin 18s linear infinite reverse;
+  }
+
+  .badge-wave path {
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .bio-text {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .bio-claim {
+    font-size: clamp(1.75rem, 3.2vw, 3rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  .bio-body {
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .sub-label {
+    margin-top: 1.5rem;
+    color: var(--signal);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .expertise {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .expertise li {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .expertise h4 {
+    font-size: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .expertise p {
+    color: var(--muted);
+  }
+
+  /* REW */
+  .rew {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(6rem, 12vw, 10rem);
+  }
+
+  .rew-title {
+    display: flex;
+    align-self: start;
+    position: sticky;
+    top: 7rem;
+    font-size: clamp(6rem, 18vw, 16rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.8;
+    letter-spacing: 0.01em;
+    color: var(--bg-3);
+  }
+
+  .rew-title span {
+    display: inline-block;
+    animation: rew-pulse 3.2s var(--ease-in-out) infinite;
+  }
+
+  .rew-title span:nth-child(2) { animation-delay: 0.2s; }
+  .rew-title span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes rew-pulse {
+    0%, 70%, 100% { color: var(--bg-3); transform: none; }
+    35% { color: var(--signal); transform: translateY(-4%); }
+  }
+
+  .rew-content {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+
+  .rew-content > h3 {
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    font-stretch: 80%;
+    text-transform: uppercase;
+  }
+
+  .rew-content > p {
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .rew-content a {
+    color: var(--signal);
+    text-underline-offset: 4px;
+  }
+
+  .rew-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+  }
+
+  .rew-list div {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 1rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .rew-list dt {
+    font-weight: 650;
+  }
+
+  .rew-list dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  /* 3D-Druck */
+  .print {
+    margin-top: clamp(6rem, 12vw, 10rem);
+  }
+
+  .print-head {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .print-head h3 {
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    font-stretch: 75%;
+    text-transform: uppercase;
+    line-height: 0.85;
+  }
+
+  .print-text {
+    display: grid;
+    gap: 1.25rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .print-text ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .print-text li::marker {
+    color: var(--signal);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chips span {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    color: var(--text);
+  }
+
+  /* Horizontale Galerie */
+  .hgal {
+    position: relative;
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .hgal-sticky {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hgal-label {
+    color: var(--muted);
+  }
+
+  .hgal-track {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2rem);
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+
+  .hgal-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shot {
+    flex: 0 0 auto;
+    width: min(80vw, 34rem);
+    margin: 0;
+    scroll-snap-align: center;
+  }
+
+  .shot:nth-child(even) {
+    margin-top: clamp(0rem, 6vh, 4rem);
+  }
+
+  .shot button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--bg-3);
+    cursor: zoom-in;
+  }
+
+  .shot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+
+  .shot button:hover img {
+    transform: scale(1.05);
+  }
+
+  .shot figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* Pinning nur auf großen Screens, per JS aktiviert */
+  .hgal.is-pinned .hgal-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    align-content: center;
+    overflow: hidden;
+  }
+
+  .hgal.is-pinned .hgal-track {
+    justify-self: start;
+    width: max-content;
+    overflow: visible;
+    will-change: transform;
+  }
+
+  /* Idee-CTA */
+  .idea {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: clamp(5rem, 10vw, 8rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-2);
+  }
+
+  .idea > div {
+    display: grid;
+    gap: 1rem;
+    max-width: 44rem;
+  }
+
+  .idea h3 {
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    font-stretch: 80%;
+    text-transform: uppercase;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: clamp(1rem, 4vw, 4rem);
+    border: 0;
+    background: rgba(9, 9, 10, 0.94);
+    color: var(--text);
+  }
+
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1rem;
+    animation: lb-in 0.5s var(--ease-out);
+  }
+
+  .lightbox::backdrop {
+    background: transparent;
+  }
+
+  @keyframes lb-in {
+    from { opacity: 0; }
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: calc(100dvh - 8rem);
+    border-radius: 14px;
+    object-fit: contain;
+  }
+
+  .lb-cap {
+    color: var(--muted);
+  }
+
+  .lb-btn {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    background: var(--bg-2);
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .lb-btn:hover {
+    background: var(--signal);
+    color: #0b0b0b;
+  }
+
+  .lb-close { top: 1.25rem; right: 1.25rem; }
+  .lb-prev { left: 1.25rem; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 1.25rem; top: 50%; transform: translateY(-50%); }
+
+  @media (max-width: 900px) {
+    .bio,
+    .rew,
+    .print-head {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait,
+    .rew-title {
+      position: relative;
+      top: 0;
+    }
+
+    .portrait {
+      max-width: 26rem;
+    }
+
+    .badge {
+      right: -1rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .rew-list div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .lb-prev,
+    .lb-next {
+      top: auto;
+      bottom: 1.25rem;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  import { initGallery } from '../scripts/gallery';
+  initGallery();
+</script>

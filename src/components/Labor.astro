@@ -1,0 +1,339 @@
+---
+import ChapterHead from './ChapterHead.astro';
+import { labGear, labTests } from '../data/site';
+
+const icons: Record<string, string> = {
+  power: 'M2 30 h8 v-8 h6 v-6 h6 v-10 h6 v-4 h6',
+  thd: 'M4 30 V4 M12 30 V18 M20 30 V23 M28 30 V26 M36 30 V28',
+  damping: 'M2 17 C6 -6 9 -6 12 17 S17 34 21 17 S25 8 28 17 S32 22 34 17 L40 17',
+  response: 'M2 30 C6 14 8 12 12 12 L30 12 C34 12 36 16 40 28',
+};
+---
+
+<section class="chapter labor" id="labor">
+  <div class="wrap">
+    <ChapterHead ch="02" label="Testlabor" lines={['Das *unabhängige*', 'Testlabor']}>
+      <p>
+        Vertraust du blind den Datenblättern der Hersteller? In meinem eigens eingerichteten, spezialisierten Car-HiFi
+        Messlabor kannst du deine Verstärker und Audio-Komponenten auf Herz und Nieren, komplett unabhängig, testen lassen.{' '}
+        <strong>Präzise messtechnische Analysen für Endstufen, DSPs und Autoradios</strong> – schwarz auf weiß, harte Fakten.
+      </p>
+    </ChapterHead>
+
+    <div class="lab-grid">
+      <div class="scope-wrap">
+        <div class="scope" data-reveal="scale">
+          <div class="scope-head mono">
+            <span><i class="rec"></i> Messung</span>
+            <span data-scope-mode>Leistung</span>
+            <span>CH A</span>
+          </div>
+          <canvas data-scope aria-hidden="true"></canvas>
+          <div class="scope-foot mono">
+            <span data-scope-a>Last 4 Ω</span>
+            <span data-scope-b>Sinus 1 kHz</span>
+          </div>
+        </div>
+      </div>
+
+      <ol class="tests">
+        {
+          labTests.map((t, i) => (
+            <li class="test" data-test={t.key} data-reveal>
+              <svg class="test-icon" viewBox="0 0 42 34" aria-hidden="true">
+                <path d={icons[t.key]} />
+              </svg>
+              <span class="mono test-n">T.{String(i + 1).padStart(2, '0')}</span>
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="gear">
+      <h3 class="gear-title" data-reveal>Moderne Labor-Ausstattung</h3>
+      <p class="muted gear-intro" data-reveal>
+        Um belastbare und reproduzierbare Ergebnisse zu liefern, arbeite ich mit professionellem Test-Equipment:
+      </p>
+      <ul>
+        {
+          labGear.map((g, i) => (
+            <li data-reveal style={`--d:${i}`}>
+              <span class="mono">EQ.{String(i + 1).padStart(2, '0')}</span>
+              <span>{g}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="request" data-reveal="scale" data-spotlight>
+      <div>
+        <p class="mono signal">Elektronik-Test anfragen</p>
+        <h3>Teste deine Elektronik</h3>
+        <p class="muted">
+          Du hast ein spannendes Stück Car-Audio Hardware gekauft und möchtest wissen, wie es technisch wirklich abschneidet?
+          Schick mir unverbindlich eine Nachricht. Bei interessanten Endstufen oder Vorverstärkern stelle ich die detaillierten
+          Ergebnisse und Messdiagramme auch gerne in einem ausführlichen Video-Review auf meinem YouTube-Kanal vor!
+        </p>
+      </div>
+      <a class="btn btn--solid" href="#kontakt" data-magnetic>Test anfragen <span class="arrow">→</span></a>
+    </div>
+
+    <p class="notice">
+      <span class="mono">Hinweis</span>
+      <span>Dieses Labor betreibe ich ausschließlich in meiner <strong>Freizeit</strong>. Ich biete keine Reparatur- oder Serviceleistungen an.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .lab-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .scope-wrap {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .scope {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid var(--line-2);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(255, 90, 31, 0.07), transparent 70%),
+      var(--bg-2);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 40px 80px -40px rgba(0, 0, 0, 0.8);
+  }
+
+  .scope-head,
+  .scope-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-inline: 0.25rem;
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
+
+  .scope-head span:nth-child(2) {
+    color: var(--signal);
+  }
+
+  .rec {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.35rem;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px var(--signal);
+    animation: blink 1.2s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .scope canvas {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    background: #0b0b0c;
+  }
+
+  .tests {
+    display: grid;
+    gap: clamp(2rem, 8vh, 5rem);
+    margin: 0;
+    padding: 0 0 10vh;
+    list-style: none;
+  }
+
+  .test {
+    position: relative;
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.75rem 0 0;
+    border-top: 1px solid var(--line);
+    transition: border-color 0.5s;
+  }
+
+  .test::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease-out);
+  }
+
+  .test.is-active::before {
+    transform: scaleX(1);
+  }
+
+  .test-icon {
+    width: 3rem;
+    fill: none;
+    stroke: var(--dim);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 140;
+    stroke-dashoffset: 140;
+    transition:
+      stroke-dashoffset 1.6s var(--ease-out),
+      stroke 0.5s;
+  }
+
+  .test.is-in .test-icon {
+    stroke-dashoffset: 0;
+  }
+
+  .test.is-active .test-icon {
+    stroke: var(--signal);
+  }
+
+  .test-n {
+    color: var(--dim);
+  }
+
+  .test h3 {
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--muted);
+    transition: color 0.5s;
+  }
+
+  .test.is-active h3 {
+    color: var(--text);
+  }
+
+  .test p {
+    color: var(--muted);
+  }
+
+  .gear {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-rows: auto 1fr;
+    gap: 1.5rem clamp(2rem, 5vw, 5rem);
+    margin-top: clamp(5rem, 10vw, 8rem);
+  }
+
+  .gear-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-stretch: 80%;
+    text-transform: uppercase;
+  }
+
+  .gear-intro {
+    grid-column: 1;
+    align-self: start;
+  }
+
+  .gear ul {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gear li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.1rem;
+  }
+
+  .gear li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .gear li .mono {
+    color: var(--signal);
+    padding-top: 0.3rem;
+  }
+
+  .request {
+    --mx: 50%;
+    --my: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: clamp(4rem, 8vw, 6rem);
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+    border: 1px solid var(--line-2);
+    border-radius: 24px;
+    background:
+      radial-gradient(500px circle at var(--mx) var(--my), rgba(255, 90, 31, 0.12), transparent 60%),
+      var(--bg-2);
+  }
+
+  .request > div {
+    display: grid;
+    gap: 1rem;
+    max-width: 44rem;
+  }
+
+  .request h3 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-stretch: 80%;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .lab-grid,
+    .gear {
+      grid-template-columns: 1fr;
+    }
+
+    .scope-wrap {
+      top: 4.5rem;
+      z-index: 2;
+    }
+
+    .scope {
+      padding: 0.6rem;
+      background: var(--bg-2);
+    }
+
+    .scope canvas {
+      aspect-ratio: 16 / 7;
+    }
+
+    .tests {
+      padding-bottom: 0;
+    }
+
+    .gear ul {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
+</style>
+
+<script>
+  import { initScope } from '../scripts/scope';
+  initScope();
+</script>

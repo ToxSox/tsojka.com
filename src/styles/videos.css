@@ -1,0 +1,182 @@
+/* Karten für YouTube-Videos (werden per JS gerendert, daher global) */
+.vgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.vcard {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: vcard-in 0.9s var(--ease-out) forwards;
+  animation-delay: calc(var(--d, 0) * 70ms);
+}
+
+@keyframes vcard-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.vcard-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--bg-3);
+}
+
+.vcard-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) brightness(0.9);
+  transition:
+    transform 0.9s var(--ease-out),
+    filter 0.6s;
+}
+
+.vcard-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  border-radius: inherit;
+  transition: border-color 0.4s;
+}
+
+.vcard:hover .vcard-media img,
+.vcard:focus-visible .vcard-media img {
+  transform: scale(1.06);
+  filter: saturate(1.1) brightness(1);
+}
+
+.vcard:hover .vcard-media::after {
+  border-color: var(--signal);
+}
+
+.vcard-play {
+  position: absolute;
+  right: 0.85rem;
+  top: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(9, 9, 10, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text);
+  transition:
+    background 0.4s,
+    color 0.4s,
+    transform 0.6s var(--ease-out);
+}
+
+.vcard-play svg {
+  width: 1.2rem;
+  margin-left: 2px;
+}
+
+.vcard:hover .vcard-play {
+  background: var(--signal);
+  color: #0b0b0b;
+  transform: scale(1.12);
+}
+
+.vcard-body {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.vcard-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--dim);
+  font-size: 0.65rem;
+}
+
+.vcard-new {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--signal);
+  color: #0b0b0b;
+}
+
+.vcard-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.vcard:hover .vcard-title {
+  color: var(--signal);
+}
+
+.vcard--featured {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  align-items: end;
+}
+
+.vcard--featured .vcard-media {
+  border-radius: 20px;
+}
+
+.vcard--featured .vcard-play {
+  width: 4.5rem;
+  height: 4.5rem;
+  right: 1.25rem;
+  top: 1.25rem;
+}
+
+.vcard--featured .vcard-title {
+  font-size: clamp(1.75rem, 3.2vw, 3.25rem);
+  font-weight: 700;
+  font-stretch: 85%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  -webkit-line-clamp: 4;
+}
+
+@media (max-width: 760px) {
+  .vcard--featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vskeleton {
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: linear-gradient(100deg, var(--bg-2) 30%, var(--bg-3) 50%, var(--bg-2) 70%);
+  background-size: 300% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vcard {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

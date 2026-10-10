@@ -1,0 +1,105 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <p class="ftr-claim">
+        Aus der Community,<br /><span class="signal">für die Community.</span>
+      </p>
+      <div class="ftr-links mono">
+        <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href="/videos">Video-Archiv</a>
+        <a href="/impressum">Impressum</a>
+        <a href="#main" data-top>Nach oben ↑</a>
+      </div>
+    </div>
+
+    <a class="ftr-giant" href="/" aria-label="Zur Startseite">
+      {'TSOJKA'.split('').map((c, i) => <span style={`--i:${i}`}>{c}</span>)}
+    </a>
+
+    <div class="ftr-bottom mono">
+      <span>© {year} {site.title} · {site.author}</span>
+      <span>Built with Astro · 20 Hz – 20 kHz</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    position: relative;
+    padding-top: clamp(4rem, 10vw, 8rem);
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .ftr-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .ftr-claim {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .ftr-links {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    color: var(--muted);
+  }
+
+  .ftr-links a {
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .ftr-links a:hover {
+    color: var(--signal);
+  }
+
+  .ftr-giant {
+    display: flex;
+    justify-content: space-between;
+    margin-top: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(4rem, 23.5vw, 21rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.78;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+    color: var(--bg-3);
+  }
+
+  .ftr-giant span {
+    display: inline-block;
+    transition:
+      color 0.5s var(--ease-out),
+      transform 0.7s var(--ease-out);
+    transition-delay: calc(var(--i) * 40ms);
+  }
+
+  .ftr-giant:hover span {
+    color: var(--signal);
+    transform: translateY(-6%);
+  }
+
+  .ftr-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-block: 1.5rem 2rem;
+    color: var(--dim);
+    font-size: 0.65rem;
+  }
+</style>

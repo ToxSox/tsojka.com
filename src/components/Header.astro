@@ -1,0 +1,416 @@
+---
+import { chapters, site } from '../data/site';
+
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+---
+
+<header class="hdr" data-header>
+  <div class="hdr-bar">
+    <a href="/" class="logo" aria-label="TSojka Audio – Startseite">
+      <img src="/tsa.svg" alt="" width="110" height="38" />
+    </a>
+
+    <nav class="nav" aria-label="Hauptnavigation">
+      {
+        chapters.map((c) => (
+          <a href={`/#${c.id}`} data-nav={c.id}>
+            <span class="mono">{c.ch}</span>
+            {c.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a class="sub mono" href={site.youtube} target="_blank" rel="noopener noreferrer">
+      <span class="rec"></span>YouTube
+    </a>
+
+    <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu" data-menu-btn>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true">
+  <nav class="menu-nav" aria-label="Mobile Navigation">
+    {
+      chapters.map((c, i) => (
+        <a href={`/#${c.id}`} style={`--i:${i}`}>
+          <span class="mono">CH.{c.ch}</span>
+          {c.label}
+        </a>
+      ))
+    }
+    <a href="/videos" style={`--i:${chapters.length}`}>
+      <span class="mono">ARCHIV</span>
+      Alle Videos
+    </a>
+  </nav>
+  <div class="menu-foot mono">
+    <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+</div>
+
+{
+  home && (
+    <aside class="meter" aria-hidden="true" data-meter>
+      {chapters.map((c) => (
+        <a href={`/#${c.id}`} class="meter-ch" data-meter-ch={c.id} tabindex="-1">
+          <span class="meter-leds">
+            {Array.from({ length: 6 }).map(() => (
+              <i />
+            ))}
+          </span>
+          <span class="mono meter-label">{c.label}</span>
+        </a>
+      ))}
+      <span class="meter-progress">
+        <span data-meter-fill />
+      </span>
+    </aside>
+  )
+}
+
+<style>
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    padding: 1rem var(--gutter);
+    pointer-events: none;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .hdr.is-hidden {
+    transform: translateY(-120%);
+  }
+
+  .hdr-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding: 0.6rem 0.6rem 0.6rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    pointer-events: auto;
+    transition:
+      background 0.5s,
+      border-color 0.5s,
+      backdrop-filter 0.5s;
+  }
+
+  .hdr.is-scrolled .hdr-bar {
+    background: rgba(12, 12, 13, 0.72);
+    border-color: var(--line);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .logo img {
+    width: auto;
+    height: 30px;
+    filter: brightness(0) invert(0.93);
+    transition: filter 0.3s;
+  }
+
+  .logo:hover img {
+    filter: brightness(0) invert(0.93) drop-shadow(0 0 10px rgba(255, 90, 31, 0.7));
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: auto;
+  }
+
+  .nav a {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s, background 0.3s;
+  }
+
+  .nav a .mono {
+    font-size: 0.6rem;
+    color: var(--dim);
+    transition: color 0.3s;
+  }
+
+  .nav a:hover,
+  .nav a.is-active {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav a.is-active .mono {
+    color: var(--signal);
+  }
+
+  .sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: #0b0b0b;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .sub:hover {
+    background: var(--signal);
+  }
+
+  .rec {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e3261b;
+    animation: rec 1.6s ease-in-out infinite;
+  }
+
+  .sub:hover .rec {
+    background: #000;
+  }
+
+  @keyframes rec {
+    50% { opacity: 0.25; }
+  }
+
+  .burger {
+    display: none;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    background: var(--bg-2);
+    cursor: pointer;
+  }
+
+  .burger span {
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.5s var(--ease-out), top 0.5s var(--ease-out);
+  }
+
+  .burger span:first-child { top: 17px; }
+  .burger span:last-child { top: 25px; }
+
+  :global(.menu-open) .burger span:first-child {
+    top: 21px;
+    transform: rotate(45deg);
+  }
+
+  :global(.menu-open) .burger span:last-child {
+    top: 21px;
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 1080px) {
+    .nav { display: none; }
+    .sub { margin-left: auto; }
+    .burger { display: block; }
+  }
+
+  @media (max-width: 420px) {
+    .sub { display: none; }
+    .burger { margin-left: auto; }
+  }
+
+  /* ---------- Mobile-Menü ---------- */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6.5rem var(--gutter) 2rem;
+    background: var(--bg);
+    clip-path: circle(0% at calc(100% - var(--gutter) - 22px) 2.4rem);
+    visibility: hidden;
+    overflow-y: auto;
+    transition:
+      clip-path 0.8s var(--ease-in-out),
+      visibility 0s 0.8s;
+  }
+
+  :global(.menu-open) .menu {
+    clip-path: circle(150% at calc(100% - var(--gutter) - 22px) 2.4rem);
+    visibility: visible;
+    transition:
+      clip-path 0.8s var(--ease-in-out),
+      visibility 0s;
+  }
+
+  .menu-nav {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .menu-nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 0.35rem;
+    border-bottom: 1px solid var(--line);
+    font-size: clamp(2rem, 9vw, 3.5rem);
+    font-weight: 800;
+    font-stretch: 75%;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.8s var(--ease-out),
+      color 0.3s;
+  }
+
+  .menu-nav a .mono {
+    min-width: 4.5rem;
+    color: var(--signal);
+    font-size: 0.65rem;
+  }
+
+  .menu-nav a:hover {
+    color: var(--signal);
+  }
+
+  :global(.menu-open) .menu-nav a {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.25s + var(--i) * 60ms);
+  }
+
+  .menu-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    padding-top: 2rem;
+    color: var(--muted);
+  }
+
+  .menu-foot a {
+    text-decoration: none;
+  }
+
+  /* ---------- Pegel-Navigation ---------- */
+  .meter {
+    position: fixed;
+    right: 1.25rem;
+    top: 50%;
+    z-index: 50;
+    display: grid;
+    gap: 0.6rem;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+
+  .meter.is-visible {
+    opacity: 1;
+  }
+
+  .meter-ch {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .meter-leds {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+  }
+
+  .meter-leds i {
+    width: 14px;
+    height: 3px;
+    border-radius: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    transition: background 0.25s, box-shadow 0.25s;
+  }
+
+  .meter-ch.is-active .meter-leds i {
+    background: var(--led-live);
+    box-shadow: 0 0 6px var(--led-live);
+    animation: level 0.9s steps(1) infinite;
+    animation-delay: calc(var(--n, 0) * -0.13s);
+  }
+
+  .meter-ch.is-active .meter-leds i:nth-child(5) { background: var(--led-dev); box-shadow: 0 0 6px var(--led-dev); }
+  .meter-ch.is-active .meter-leds i:nth-child(6) { background: var(--signal); box-shadow: 0 0 6px var(--signal); }
+
+  .meter-ch.is-active .meter-leds i:nth-child(2) { animation-duration: 0.7s; }
+  .meter-ch.is-active .meter-leds i:nth-child(3) { animation-duration: 0.55s; }
+  .meter-ch.is-active .meter-leds i:nth-child(4) { animation-duration: 0.43s; }
+  .meter-ch.is-active .meter-leds i:nth-child(5) { animation-duration: 0.37s; }
+  .meter-ch.is-active .meter-leds i:nth-child(6) { animation-duration: 0.61s; }
+
+  @keyframes level {
+    50% { opacity: 0.15; }
+  }
+
+  .meter-label {
+    position: absolute;
+    right: 1.6rem;
+    font-size: 0.6rem;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+
+  .meter:hover .meter-label {
+    opacity: 1;
+    transform: none;
+  }
+
+  .meter-ch.is-active .meter-label {
+    color: var(--text);
+  }
+
+  .meter-progress {
+    justify-self: end;
+    width: 14px;
+    height: 2px;
+    background: var(--line-2);
+    overflow: hidden;
+  }
+
+  .meter-progress span {
+    display: block;
+    height: 100%;
+    background: var(--signal);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  @media (max-width: 1080px) {
+    .meter { display: none; }
+  }
+</style>
