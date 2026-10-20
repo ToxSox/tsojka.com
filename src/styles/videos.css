@@ -175,8 +175,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vcard {
-    opacity: 1;
     transform: none;
-    animation: none;
+    animation-name: vcard-fade;
+  }
+}
+
+@keyframes vcard-fade {
+  to {
+    opacity: 1;
   }
 }

@@ -233,7 +233,7 @@ export function initEq() {
     last = now;
     t += dt;
 
-    if (!userActive) {
+    if (!userActive && !reduced()) {
       // Automatische Demo: Band wandert über das Spektrum
       band.tlf = Math.log10(1000) + Math.sin(t * 0.23) * 1.1;
       band.tg = Math.sin(t * 0.61) * 9;
@@ -247,7 +247,7 @@ export function initEq() {
   }
 
   function start() {
-    if (raf || reduced()) return;
+    if (raf) return;
     last = performance.now();
     raf = requestAnimationFrame(tick);
   }
@@ -266,11 +266,6 @@ export function initEq() {
       userActive = false;
       if (hint) hint.textContent = 'Maus bewegen';
     }, 3500);
-    if (reduced()) {
-      band.lf = band.tlf;
-      band.g = band.tg;
-      draw();
-    }
   }
 
   hero.addEventListener('pointermove', setFromPointer);

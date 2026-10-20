@@ -374,21 +374,40 @@ p {
   transform: none;
 }
 
+/*
+ * Bewegung reduzieren: keine Wege mehr (Hereinfliegen, Smooth Scroll, Pinning),
+ * Einblenden, Hover-Effekte und die Mess-Animationen bleiben erhalten.
+ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-    scroll-behavior: auto !important;
+  html:not(.lenis) {
+    scroll-behavior: auto;
   }
 
   [data-reveal],
-  .split-line > span {
-    opacity: 1;
+  [data-reveal='left'],
+  [data-reveal='scale'] {
     transform: none;
+  }
+
+  [data-reveal='line'] {
+    transform: scaleX(0);
+  }
+
+  [data-reveal='line'].is-in {
+    transform: none;
+  }
+
+  .split-line > span {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+
+  .is-in .split-line > span,
+  .split-line.is-in > span,
+  .no-js .split-line > span {
+    opacity: 1;
   }
 
   body::after {

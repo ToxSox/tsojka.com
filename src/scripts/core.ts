@@ -155,11 +155,8 @@ if (scrubs.length) {
       words[i].forEach((w, j) => w.classList.toggle('on', j < n));
     });
   };
-  if (reduced) words.flat().forEach((w) => w.classList.add('on'));
-  else {
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 }
 
 /* ---------- Spotlight-Karten ---------- */
@@ -172,7 +169,7 @@ document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((card) => {
 });
 
 /* ---------- Cursor & magnetische Buttons ---------- */
-if (finePointer && !reduced) {
+if (finePointer) {
   const cursor = document.querySelector<HTMLElement>('[data-cursor]');
   const dot = cursor?.querySelector<HTMLElement>('.cursor-dot');
   const ring = cursor?.querySelector<HTMLElement>('.cursor-ring');
