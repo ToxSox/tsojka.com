@@ -24,7 +24,6 @@ export function initScope() {
   const modeEl = document.querySelector<HTMLElement>('[data-scope-mode]');
   const aEl = document.querySelector<HTMLElement>('[data-scope-a]');
   const bEl = document.querySelector<HTMLElement>('[data-scope-b]');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let mode: Mode = 'power';
   let modeT = 0; // Zeit seit Moduswechsel
@@ -220,11 +219,6 @@ export function initScope() {
     if (modeEl) modeEl.textContent = a;
     if (aEl) aEl.textContent = b;
     if (bEl) bEl.textContent = cc;
-    if (reduced) {
-      t = 3;
-      modeT = 3;
-      draw();
-    }
   }
 
   function spy() {
@@ -239,11 +233,10 @@ export function initScope() {
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
-    if (visible && !raf && !reduced) {
+    if (visible && !raf) {
       last = performance.now();
       raf = requestAnimationFrame(tick);
     }
   }).observe(canvas);
-  if (reduced) t = modeT = 3;
   spy();
 }
