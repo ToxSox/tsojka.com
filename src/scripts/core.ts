@@ -168,49 +168,8 @@ document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach((card) => {
   });
 });
 
-/* ---------- Cursor & magnetische Buttons ---------- */
+/* ---------- Magnetische Buttons ---------- */
 if (finePointer) {
-  const cursor = document.querySelector<HTMLElement>('[data-cursor]');
-  const dot = cursor?.querySelector<HTMLElement>('.cursor-dot');
-  const ring = cursor?.querySelector<HTMLElement>('.cursor-ring');
-  const label = cursor?.querySelector<HTMLElement>('[data-cursor-label]');
-
-  if (cursor && dot && ring && label) {
-    root.classList.add('has-cursor');
-    let mx = -100;
-    let my = -100;
-    let rx = mx;
-    let ry = my;
-
-    window.addEventListener(
-      'pointermove',
-      (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
-        cursor.classList.remove('is-hidden');
-      },
-      { passive: true },
-    );
-    document.addEventListener('pointerleave', () => cursor.classList.add('is-hidden'));
-
-    const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      requestAnimationFrame(loop);
-    };
-    loop();
-
-    document.addEventListener('pointerover', (e) => {
-      const el = (e.target as Element).closest<HTMLElement>('a, button, [data-cursor-text], label, summary');
-      const text = el?.closest<HTMLElement>('[data-cursor-text]')?.dataset.cursorText;
-      cursor.classList.toggle('is-hover', !!el && !text);
-      cursor.classList.toggle('has-label', !!text);
-      label.textContent = text ?? '';
-    });
-  }
-
   document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach((el) => {
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();

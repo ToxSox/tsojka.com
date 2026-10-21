@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Cursor from '../components/Cursor.astro';
 import profil from '../assets/profil.jpg';
 import { getImage } from 'astro:assets';
 import { site } from '../data/site';
@@ -72,7 +71,6 @@ const ogUrl = new URL(og.src, Astro.site).href;
       <slot />
     </main>
     <Footer />
-    <Cursor />
     <script>
       import '../scripts/core';
     </script>

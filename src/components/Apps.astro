@@ -25,7 +25,7 @@ import { apps } from '../data/site';
               <li data-reveal="left" style={`--d:${i}`}>
                 <Tag
                   class:list={['unit', `is-${a.status}`]}
-                  {...(a.url ? { href: a.url, target: '_blank', rel: 'noopener noreferrer', 'data-cursor-text': 'Öffnen' } : {})}
+                  {...(a.url ? { href: a.url, target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
                   <span class="screw" aria-hidden="true" />
                   <span class="unit-id mono">U{String(i + 1).padStart(2, '0')}</span>

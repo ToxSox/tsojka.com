@@ -125,7 +125,7 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
         {
           shots.map((s, i) => (
             <figure class="shot">
-              <button type="button" data-lightbox={i} data-full={s.full} data-cursor-text="Zoom" aria-label={`Bild vergrößern: ${s.alt}`}>
+              <button type="button" data-lightbox={i} data-full={s.full} aria-label={`Bild vergrößern: ${s.alt}`}>
                 <Image src={s.src} alt={s.alt} widths={[480, 800]} sizes="(max-width: 760px) 80vw, 40vw" format="webp" loading="lazy" />
               </button>
               <figcaption class="mono">

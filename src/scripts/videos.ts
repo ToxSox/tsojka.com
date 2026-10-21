@@ -28,8 +28,7 @@ export function videoCard(v: Video, i = 0, featured = false): string {
   const src = featured ? thumb(v, 'maxres') : thumb(v);
   const fallback = esc(v.thumbnail);
   return `
-  <a class="vcard${featured ? ' vcard--featured' : ''}" href="${esc(v.videoUrl)}" target="_blank" rel="noopener noreferrer"
-     data-cursor-text="Play" style="--d:${i % 6}">
+  <a class="vcard${featured ? ' vcard--featured' : ''}" href="${esc(v.videoUrl)}" target="_blank" rel="noopener noreferrer" style="--d:${i % 6}">
     <span class="vcard-media">
       <img src="${esc(src)}" alt="" loading="lazy" decoding="async"
            ${featured ? `onerror="this.onerror=null;this.src='${fallback}'"` : ''} />
