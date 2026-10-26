@@ -28,6 +28,7 @@ Vercel deploys automatically: `master` goes to production, every PR branch gets 
   - `index.astro` — one-pager composed of chapter components: Hero, Marquee, Intro, Videos, Labor, Workshops, About, Apps, Contact
   - `videos.astro` — full video archive with search and year filter
   - `impressum.astro` — legal notice
+  - `datenschutz.astro` — privacy policy (lists every external service the site talks to: Vercel, Cloudflare, all-inkl for `yt.tsojka.com`, YouTube thumbnails via `i.ytimg.com`, Formspree). Update it whenever a new external service, script, font source or storage key is added.
 - **Layout:** `src/layouts/Base.astro` — HTML shell, meta/SEO tags, Header, Footer, custom cursor; loads `src/styles/global.css` and `src/scripts/core.ts`.
 - **Content/data:** `src/data/site.ts` holds all texts and lists (site meta, chapter nav, pillars, labor tests, workshop topics, expertise, gallery, apps, …). Edit copy here rather than in components.
 - **Components** (`src/components/`): one file per chapter, with scoped `<style>` blocks. `ChapterHead.astro` renders the shared chapter heading.

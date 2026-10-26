@@ -68,6 +68,11 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
           <label for="message">Nachricht</label>
         </div>
 
+        <p class="privacy-note">
+          Deine Angaben werden über den Dienst Formspree an mich übermittelt und nur zur Beantwortung deiner Anfrage genutzt.
+          Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
+        </p>
+
         <button class="btn btn--solid send" type="submit">
           <span data-send-label>Nachricht senden</span> <span class="arrow">→</span>
         </button>
@@ -270,6 +275,15 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
 
   .field:focus-within::after {
     transform: scaleX(1);
+  }
+
+  .privacy-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .privacy-note a {
+    color: var(--signal);
   }
 
   .send {
