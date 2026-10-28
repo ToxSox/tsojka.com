@@ -33,7 +33,7 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
         </div>
       </aside>
 
-      <form class="form" action={site.formAction} method="POST" data-form data-reveal="scale">
+      <form class="form" id="kontaktformular" action={site.formAction} method="POST" data-form data-reveal="scale">
         <div class="form-head mono">
           <span><i class="led"></i> Kontaktformular</span>
           <span data-form-state>Bereit</span>
@@ -211,6 +211,15 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
     color: #0b0b0b;
   }
 
+  .topics span.is-flash {
+    animation: chip-flash 1.6s var(--ease-out) 0.9s;
+  }
+
+  @keyframes chip-flash {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0); }
+    30% { box-shadow: 0 0 0 8px rgba(255, 90, 31, 0.35); }
+  }
+
   .topics input:focus-visible + span {
     outline: 2px solid var(--signal);
     outline-offset: 2px;
@@ -353,6 +362,20 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
   const form = document.querySelector<HTMLFormElement>('[data-form]');
   const state = document.querySelector<HTMLElement>('[data-form-state]');
   const label = document.querySelector<HTMLElement>('[data-send-label]');
+
+  // Buttons wie „Test anfragen“ wählen das passende Thema vor
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as Element).closest<HTMLElement>('[data-topic]');
+    const topic = trigger?.dataset.topic;
+    if (!form || !topic) return;
+    const radio = form.querySelector<HTMLInputElement>(`input[name="thema"][value="${topic}"]`);
+    if (!radio) return;
+    radio.checked = true;
+    const chip = radio.nextElementSibling;
+    chip?.classList.remove('is-flash');
+    void (chip as HTMLElement | null)?.offsetWidth;
+    chip?.classList.add('is-flash');
+  });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();

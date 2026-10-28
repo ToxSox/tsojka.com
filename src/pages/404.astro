@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import { chapters } from '../data/site';
+---
+
+<Base title="Kein Signal" description="Diese Seite gibt es nicht (mehr).">
+  <section class="nf wrap">
+    <div class="nf-scope" aria-hidden="true">
+      <div class="nf-head mono">
+        <span><i></i> Messung</span>
+        <span>Fehler 404</span>
+        <span>CH A</span>
+      </div>
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none">
+        <path class="nf-noise" d="M0 60 L400 60" />
+        <path class="nf-blip" d="M0 60 L170 60 L180 40 L190 82 L200 50 L210 66 L220 60 L400 60" />
+      </svg>
+      <div class="nf-head mono"><span>Pegel −∞ dB</span><span>Kein Eingangssignal</span></div>
+    </div>
+
+    <p class="chapter-tag mono"><span>404</span><span>/</span><span>Seite nicht gefunden</span><span class="line"></span></p>
+    <h1 class="chapter-title">Kein <em>Signal</em>.</h1>
+    <p class="lede">
+      Unter dieser Adresse kommt nichts an. Vielleicht hat sich der Link geändert, oder die Seite gab es nie. Hier geht's weiter:
+    </p>
+
+    <nav class="nf-links" aria-label="Weiter zu">
+      <a class="btn btn--solid" href="/" data-magnetic>Zur Startseite <span class="arrow">→</span></a>
+      <a class="btn" href="/videos" data-magnetic>Video-Archiv</a>
+    </nav>
+
+    <ul class="nf-chapters mono">
+      {
+        chapters.map((c) => (
+          <li>
+            <a href={`/#${c.id}`}>
+              <span class="signal">CH.{c.ch}</span> {c.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    gap: 1.75rem;
+    min-height: 100svh;
+    align-content: center;
+    padding-block: 8rem 5rem;
+  }
+
+  .nf-scope {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 34rem;
+    padding: 1rem;
+    border: 1px solid var(--line-2);
+    border-radius: 18px;
+    background: var(--bg-2);
+  }
+
+  .nf-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
+
+  .nf-head span:nth-child(2) {
+    color: var(--signal);
+  }
+
+  .nf-head i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.35rem;
+    border-radius: 50%;
+    background: var(--led-dev);
+    box-shadow: 0 0 8px var(--led-dev);
+    animation: nf-blink 1.2s steps(1) infinite;
+  }
+
+  .nf-scope svg {
+    width: 100%;
+    height: 7rem;
+    border-radius: 10px;
+    background:
+      linear-gradient(rgba(236, 233, 224, 0.05) 1px, transparent 1px) 0 0 / 100% 25%,
+      linear-gradient(90deg, rgba(236, 233, 224, 0.05) 1px, transparent 1px) 0 0 / 10% 100%,
+      #0b0b0c;
+  }
+
+  .nf-scope path {
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    filter: drop-shadow(0 0 6px rgba(255, 90, 31, 0.8));
+  }
+
+  .nf-noise {
+    opacity: 0.35;
+  }
+
+  .nf-blip {
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: nf-sweep 2.6s var(--ease-in-out) infinite;
+  }
+
+  @keyframes nf-sweep {
+    0% { stroke-dashoffset: 420; opacity: 1; }
+    70% { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+
+  @keyframes nf-blink {
+    50% { opacity: 0; }
+  }
+
+  .nf-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nf-chapters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 1rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+    color: var(--muted);
+  }
+
+  .nf-chapters a {
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nf-chapters a:hover {
+    color: var(--text);
+  }
+</style>
