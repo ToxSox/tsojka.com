@@ -48,5 +48,6 @@ Vercel deploys automatically: `master` goes to production, every PR branch gets 
 - Navigation is anchor-based: chapter IDs in `site.ts` (`videos`, `labor`, `workshops`, `about`, `apps`, `kontakt`) must match the section `id`s in the components.
 - Old Hugo URLs (`/about`, `/testlabor`, `/workshops`, `/kontakt`, `/apps`) redirect to the matching one-pager anchors via `redirects` in `astro.config.mjs`.
 - Buttons that lead to the contact form use `href="#kontaktformular"` plus `data-topic="…"`; `Contact.astro` preselects the matching topic radio. The value must match one of the `topics` in `Contact.astro`.
+- `site.email` (`youtube@tsojka.com`) is the only contact address on the site, including Impressum and Datenschutz. Always reference `site.email`, never hardcode an address.
 - The contact form posts to Formspree (`site.formAction`) and is submitted via `fetch` in `Contact.astro`.
 - The video feed URL exists twice: `site.videoFeed` in `site.ts` and the `FEED` constant in `src/scripts/videos.ts` (the one actually used).

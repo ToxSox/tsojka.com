@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 ---
 
 <Base
@@ -20,7 +21,7 @@ import Base from '../layouts/Base.astro';
           Thomas Sojka<br />
           Cuxhavener Str. 36<br />
           46145 Oberhausen<br />
-          E-Mail: <a href="mailto:me@tsojka.com">me@tsojka.com</a>
+          E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
         </address>
       </section>
       <section>
@@ -136,7 +137,7 @@ import Base from '../layouts/Base.astro';
         </li>
       </ul>
       <p>
-        Für die Ausübung Ihrer Rechte genügt eine E-Mail an <a href="mailto:me@tsojka.com">me@tsojka.com</a>.
+        Für die Ausübung Ihrer Rechte genügt eine E-Mail an <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
       <p>
         Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Für mich
