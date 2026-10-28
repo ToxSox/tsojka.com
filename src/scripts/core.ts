@@ -20,8 +20,12 @@ window.addEventListener('lenis:stop', () => lenis?.stop());
 window.addEventListener('lenis:start', () => lenis?.start());
 
 function scrollToTarget(target: Element | number) {
-  if (lenis) lenis.scrollTo(target as HTMLElement | number, { offset: typeof target === 'number' ? 0 : -72, duration: 1.4 });
-  else if (typeof target === 'number') window.scrollTo({ top: target });
+  if (lenis) {
+    // Nach einem Sprung ohne Lenis (Anker beim Laden, Browser) die Position abgleichen,
+    // sonst rechnet Lenis vom alten Stand aus und schießt übers Ziel hinaus.
+    if (Math.abs(lenis.animatedScroll - window.scrollY) > 2) lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+    lenis.scrollTo(target as HTMLElement | number, { offset: typeof target === 'number' ? 0 : -72, duration: 1.4 });
+  } else if (typeof target === 'number') window.scrollTo({ top: target });
   else target.scrollIntoView();
 }
 
@@ -73,9 +77,16 @@ document.addEventListener('keydown', (e) => e.key === 'Escape' && closeMenu());
 
 /* ---------- Header-Zustand ---------- */
 const header = document.querySelector<HTMLElement>('[data-header]');
+const toTop = document.querySelector<HTMLElement>('[data-to-top]');
 let lastY = window.scrollY;
 function onScrollHeader() {
   const y = window.scrollY;
+  // Nach-oben-Button: erscheint beim Hochscrollen, wenn man weit unten ist
+  if (toTop) {
+    if (y < window.innerHeight * 1.5) toTop.classList.remove('is-visible');
+    else if (y < lastY - 2) toTop.classList.add('is-visible');
+    else if (y > lastY + 2) toTop.classList.remove('is-visible');
+  }
   header?.classList.toggle('is-scrolled', y > 40);
   header?.classList.toggle('is-hidden', y > 400 && y > lastY + 2 && !root.classList.contains('menu-open'));
   if (y < lastY - 2) header?.classList.remove('is-hidden');
@@ -87,12 +98,29 @@ onScrollHeader();
 /* ---------- Boot & Hero ---------- */
 const hero = document.querySelector<HTMLElement>('[data-hero]');
 if (hero) {
-  const delay = root.classList.contains('boot') ? 1700 : 80;
-  setTimeout(() => {
+  const booting = root.classList.contains('boot');
+  let heroShown = false;
+  const showHero = () => {
+    if (heroShown) return;
+    heroShown = true;
     hero.classList.add('is-in');
     hero.querySelectorAll('.split-line').forEach((l) => l.classList.add('is-in'));
-  }, delay);
-  setTimeout(() => root.classList.remove('boot'), 2600);
+  };
+  const timers = [setTimeout(showHero, booting ? 1700 : 80), setTimeout(() => root.classList.remove('boot'), 2600)];
+
+  // Startanimation per Klick, Taste, Scrollen oder Tippen sofort beenden
+  if (booting) {
+    const events = ['pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
+    const skip = () => {
+      events.forEach((ev) => window.removeEventListener(ev, skip));
+      if (!root.classList.contains('boot')) return;
+      timers.forEach(clearTimeout);
+      root.classList.add('boot-skip');
+      showHero();
+      setTimeout(() => root.classList.remove('boot', 'boot-skip'), 500);
+    };
+    events.forEach((ev) => window.addEventListener(ev, skip, { passive: true }));
+  }
 }
 
 /* ---------- Reveal beim Scrollen ---------- */

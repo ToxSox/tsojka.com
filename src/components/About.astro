@@ -135,6 +135,11 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
           ))
         }
       </div>
+      <div class="hgal-hint wrap mono" aria-hidden="true">
+        <span class="hgal-swipe">Wischen <i>→</i></span>
+        <span class="hgal-bar"><i data-hgal-bar></i></span>
+        <span data-hgal-count>01 / {String(shots.length).padStart(2, '0')}</span>
+      </div>
     </div>
   </div>
 
@@ -148,7 +153,7 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
           spannende Themen aus der Community aufzugreifen.
         </p>
       </div>
-      <a class="btn btn--solid" href="#kontakt" data-magnetic>Videoidee einreichen <span class="arrow">→</span></a>
+      <a class="btn btn--solid" href="#kontaktformular" data-topic="Videoidee" data-magnetic>Videoidee einreichen <span class="arrow">→</span></a>
     </div>
 
     <p class="notice">
@@ -490,6 +495,47 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
   .shot figcaption {
     margin-top: 0.75rem;
     color: var(--muted);
+  }
+
+  /* Wisch-Hinweis, nur ohne Pinning (Handy, reduzierte Bewegung) */
+  .hgal-hint {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
+
+  .hgal-swipe i {
+    display: inline-block;
+    font-style: normal;
+    color: var(--signal);
+    animation: swipe-nudge 1.6s var(--ease-in-out) infinite;
+  }
+
+  @keyframes swipe-nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+
+  .hgal-bar {
+    flex: 1;
+    height: 2px;
+    background: var(--line-2);
+    overflow: hidden;
+  }
+
+  .hgal-bar i {
+    display: block;
+    height: 100%;
+    background: var(--signal);
+    transform-origin: left;
+    transform: scaleX(0.125);
+    transition: transform 0.2s linear;
+  }
+
+  .hgal.is-pinned .hgal-hint {
+    display: none;
   }
 
   /* Pinning nur auf großen Screens, per JS aktiviert */

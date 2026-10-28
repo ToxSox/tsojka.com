@@ -51,6 +51,9 @@ export function initEq() {
   const roF = document.querySelector<HTMLElement>('[data-ro-f]');
   const roG = document.querySelector<HTMLElement>('[data-ro-g]');
   const hint = document.querySelector<HTMLElement>('.readout-hint');
+  // Auf Touch-Geräten gibt es keine Maus
+  const idleHint = matchMedia('(any-hover: hover)').matches ? 'Maus bewegen' : 'Tippen';
+  if (hint) hint.textContent = idleHint;
 
   const rooms = [makeRoom(7), makeRoom(23), makeRoom(91)];
 
@@ -264,7 +267,7 @@ export function initEq() {
     clearTimeout(idleTimer);
     idleTimer = window.setTimeout(() => {
       userActive = false;
-      if (hint) hint.textContent = 'Maus bewegen';
+      if (hint) hint.textContent = idleHint;
     }, 3500);
   }
 

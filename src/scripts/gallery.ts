@@ -29,6 +29,26 @@ export function initGallery() {
     track!.style.transform = `translate3d(${-p * distance}px, 0, 0)`;
   }
 
+  // Fortschritt + Bildzähler für die wischbare Variante (ohne Pinning)
+  const bar = document.querySelector<HTMLElement>('[data-hgal-bar]');
+  const count = document.querySelector<HTMLElement>('[data-hgal-count]');
+  const shots = Array.from(track.querySelectorAll<HTMLElement>('.shot'));
+  const pad = (n: number) => String(n).padStart(2, '0');
+  function updateSwipe() {
+    if (pinned || !shots.length) return;
+    const max = track!.scrollWidth - track!.clientWidth;
+    const p = max > 0 ? track!.scrollLeft / max : 0;
+    if (bar) bar.style.transform = `scaleX(${Math.max(1 / shots.length, p)})`;
+    const center = track!.scrollLeft + track!.clientWidth / 2;
+    let current = 0;
+    shots.forEach((s, i) => {
+      if (s.offsetLeft <= center) current = i;
+    });
+    if (count) count.textContent = `${pad(current + 1)} / ${pad(shots.length)}`;
+  }
+  track.addEventListener('scroll', updateSwipe, { passive: true });
+  updateSwipe();
+
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', measure);
   pinQuery.addEventListener('change', measure);

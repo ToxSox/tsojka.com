@@ -122,25 +122,20 @@ import '../styles/videos.css';
   const grid = document.querySelector<HTMLElement>('[data-latest]');
   const count = document.querySelector<HTMLElement>('[data-video-count]');
 
+  // Sofort laden (nicht erst beim Vorbeiscrollen): sonst wächst die Seite oberhalb,
+  // während man per Navigation zu einem späteren Kapitel springt, und das Ziel verrutscht.
   if (grid) {
-    const io = new IntersectionObserver(
-      async ([entry]) => {
-        if (!entry.isIntersecting) return;
-        io.disconnect();
-        try {
-          const videos = await loadVideos();
-          grid.innerHTML = videos
-            .slice(0, 7)
-            .map((v, i) => videoCard(v, i, i === 0))
-            .join('');
-          if (count) count.textContent = String(videos.length);
-        } catch {
-          grid.innerHTML =
-            '<p class="muted">Videos konnten gerade nicht geladen werden – schau direkt auf YouTube vorbei.</p>';
-        }
-      },
-      { rootMargin: '600px 0px' },
-    );
-    io.observe(grid);
+    loadVideos()
+      .then((videos) => {
+        grid.innerHTML = videos
+          .slice(0, 7)
+          .map((v, i) => videoCard(v, i, i === 0))
+          .join('');
+        if (count) count.textContent = String(videos.length);
+      })
+      .catch(() => {
+        grid.innerHTML =
+          '<p class="muted">Videos konnten gerade nicht geladen werden – schau direkt auf YouTube vorbei.</p>';
+      });
   }
 </script>

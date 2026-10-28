@@ -28,6 +28,7 @@ Vercel deploys automatically: `master` goes to production, every PR branch gets 
   - `index.astro` — one-pager composed of chapter components: Hero, Marquee, Intro, Videos, Labor, Workshops, About, Apps, Contact
   - `videos.astro` — full video archive with search and year filter
   - `impressum.astro` — legal notice
+  - `404.astro` — „Kein Signal“ not-found page (Vercel serves `dist/404.html`)
   - `datenschutz.astro` — privacy policy (lists every external service the site talks to: Vercel, Cloudflare, all-inkl for `yt.tsojka.com`, YouTube thumbnails via `i.ytimg.com`, Formspree). Update it whenever a new external service, script, font source or storage key is added.
 - **Layout:** `src/layouts/Base.astro` — HTML shell, meta/SEO tags, Header, Footer, custom cursor; loads `src/styles/global.css` and `src/scripts/core.ts`.
 - **Content/data:** `src/data/site.ts` holds all texts and lists (site meta, chapter nav, pillars, labor tests, workshop topics, expertise, gallery, apps, …). Edit copy here rather than in components.
@@ -46,5 +47,6 @@ Vercel deploys automatically: `master` goes to production, every PR branch gets 
 
 - Navigation is anchor-based: chapter IDs in `site.ts` (`videos`, `labor`, `workshops`, `about`, `apps`, `kontakt`) must match the section `id`s in the components.
 - Old Hugo URLs (`/about`, `/testlabor`, `/workshops`, `/kontakt`, `/apps`) redirect to the matching one-pager anchors via `redirects` in `astro.config.mjs`.
+- Buttons that lead to the contact form use `href="#kontaktformular"` plus `data-topic="…"`; `Contact.astro` preselects the matching topic radio. The value must match one of the `topics` in `Contact.astro`.
 - The contact form posts to Formspree (`site.formAction`) and is submitted via `fetch` in `Contact.astro`.
 - The video feed URL exists twice: `site.videoFeed` in `site.ts` and the `FEED` constant in `src/scripts/videos.ts` (the one actually used).
