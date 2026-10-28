@@ -359,6 +359,8 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
 </style>
 
 <script>
+  import { site } from '../data/site';
+
   const form = document.querySelector<HTMLFormElement>('[data-form]');
   const state = document.querySelector<HTMLElement>('[data-form-state]');
   const label = document.querySelector<HTMLElement>('[data-send-label]');
@@ -403,7 +405,7 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
       form.classList.remove('is-sending');
       if (state) state.textContent = 'Fehler';
       if (label) label.textContent = 'Erneut versuchen';
-      alert(`Das hat leider nicht geklappt. Schreib mir gern direkt an youtube@tsojka.com.`);
+      alert(`Das hat leider nicht geklappt. Schreib mir gern direkt an ${site.email}.`);
     }
   });
 </script>

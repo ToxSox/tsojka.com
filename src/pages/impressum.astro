@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 ---
 
 <Base title="Impressum" description="Impressum und rechtliche Angaben gemäß § 5 DDG von Thomas Sojka (tsojka.com).">
@@ -23,7 +24,7 @@ import Base from '../layouts/Base.astro';
         <h2 class="mono">Kontakt</h2>
         <p>
           Telefon: 015158546178<br />
-          E-Mail: <a href="mailto:me@tsojka.com">me@tsojka.com</a>
+          E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
         </p>
       </section>
     </div>
