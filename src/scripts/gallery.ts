@@ -1,59 +1,20 @@
-/** Horizontal gepinnte 3D-Druck-Galerie + Lightbox. */
+/** 3D-Druck-Reihe: Fortschrittsbalken beim Wischen und Lightbox. */
 export function initGallery() {
-  const hgal = document.querySelector<HTMLElement>('[data-hgal]');
-  const track = document.querySelector<HTMLElement>('[data-hgal-track]');
-  if (!hgal || !track) return;
+  const rail = document.querySelector<HTMLElement>('[data-rail]');
+  const bar = document.querySelector<HTMLElement>('[data-rail-bar]');
 
-  const pinQuery = matchMedia('(min-width: 900px) and (prefers-reduced-motion: no-preference)');
-  let pinned = false;
-  let distance = 0;
-
-  function measure() {
-    pinned = pinQuery.matches;
-    hgal!.classList.toggle('is-pinned', pinned);
-    if (!pinned) {
-      hgal!.style.height = '';
-      track!.style.transform = '';
-      return;
-    }
-    distance = Math.max(0, track!.scrollWidth - window.innerWidth);
-    hgal!.style.height = `${window.innerHeight + distance}px`;
+  if (rail && bar) {
+    const update = () => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      const visible = rail.clientWidth / rail.scrollWidth;
+      const p = max > 0 ? rail.scrollLeft / max : 1;
+      // Balken zeigt den sichtbaren Ausschnitt, wandert mit dem Wischen
+      bar.style.transform = `scaleX(${Math.max(visible, p)})`;
+    };
+    rail.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(rail);
     update();
   }
-
-  function update() {
-    if (!pinned) return;
-    const r = hgal!.getBoundingClientRect();
-    const total = r.height - window.innerHeight;
-    const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-    track!.style.transform = `translate3d(${-p * distance}px, 0, 0)`;
-  }
-
-  // Fortschritt + Bildzähler für die wischbare Variante (ohne Pinning)
-  const bar = document.querySelector<HTMLElement>('[data-hgal-bar]');
-  const count = document.querySelector<HTMLElement>('[data-hgal-count]');
-  const shots = Array.from(track.querySelectorAll<HTMLElement>('.shot'));
-  const pad = (n: number) => String(n).padStart(2, '0');
-  function updateSwipe() {
-    if (pinned || !shots.length) return;
-    const max = track!.scrollWidth - track!.clientWidth;
-    const p = max > 0 ? track!.scrollLeft / max : 0;
-    if (bar) bar.style.transform = `scaleX(${Math.max(1 / shots.length, p)})`;
-    const center = track!.scrollLeft + track!.clientWidth / 2;
-    let current = 0;
-    shots.forEach((s, i) => {
-      if (s.offsetLeft <= center) current = i;
-    });
-    if (count) count.textContent = `${pad(current + 1)} / ${pad(shots.length)}`;
-  }
-  track.addEventListener('scroll', updateSwipe, { passive: true });
-  updateSwipe();
-
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', measure);
-  pinQuery.addEventListener('change', measure);
-  new ResizeObserver(measure).observe(track);
-  measure();
 
   /* ---------- Lightbox ---------- */
   const dialog = document.querySelector<HTMLDialogElement>('[data-lb]');
@@ -63,23 +24,24 @@ export function initGallery() {
   if (!dialog || !img || !cap || !buttons.length) return;
 
   let index = 0;
+  let opener: HTMLElement | null = null;
   const show = (i: number) => {
     index = (i + buttons.length) % buttons.length;
     const btn = buttons[index];
     const thumb = btn.querySelector('img');
     img.src = btn.dataset.full ?? thumb?.currentSrc ?? '';
     img.alt = thumb?.alt ?? '';
-    cap.textContent = `${String(index + 1).padStart(2, '0')} / ${String(buttons.length).padStart(2, '0')} — ${img.alt}`;
+    cap.textContent = img.alt;
   };
 
   buttons.forEach((b, i) =>
     b.addEventListener('click', () => {
+      opener = b;
       show(i);
       dialog.showModal();
-      window.dispatchEvent(new Event('lenis:stop'));
     }),
   );
-  dialog.addEventListener('close', () => window.dispatchEvent(new Event('lenis:start')));
+  dialog.addEventListener('close', () => opener?.focus());
   dialog.querySelector('[data-lb-close]')?.addEventListener('click', () => dialog.close());
   dialog.querySelector('[data-lb-prev]')?.addEventListener('click', () => show(index - 1));
   dialog.querySelector('[data-lb-next]')?.addEventListener('click', () => show(index + 1));
@@ -89,7 +51,6 @@ export function initGallery() {
     if (e.key === 'ArrowRight') show(index + 1);
   });
 
-  // Wischen auf Touch-Geräten
   let sx = 0;
   dialog.addEventListener('touchstart', (e) => (sx = e.touches[0].clientX), { passive: true });
   dialog.addEventListener('touchend', (e) => {

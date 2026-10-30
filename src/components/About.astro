@@ -1,7 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import ChapterHead from './ChapterHead.astro';
 import profil from '../assets/profil.jpg';
 import { expertise, gallery, rewReasons, site } from '../data/site';
 
@@ -13,77 +12,50 @@ const shots = await Promise.all(
     return { ...g, src, full: full.src };
   }),
 );
-
-const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck ✦ ';
 ---
 
-<section class="chapter about" id="about">
-  <div class="wrap">
-    <ChapterHead ch="04" label="Über mich" lines={['Thomas', '*Sojka*']} />
-
-    <div class="bio">
-      <div class="portrait" data-reveal="scale">
-        <div class="portrait-img">
-          <Image src={profil} alt="Thomas Sojka" width={640} height={640} format="webp" loading="lazy" />
-        </div>
-        <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
-          <defs>
-            <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-          </defs>
-          <circle cx="100" cy="100" r="98" />
-          <text textLength="486" lengthAdjust="spacing"><textPath href="#badge-circle" textLength="486" lengthAdjust="spacing">{badge}</textPath></text>
-          <g class="badge-wave"><path d="M70 100 q7.5 -22 15 0 t15 0 t15 0 t15 0" /></g>
-        </svg>
-      </div>
-
-      <div class="bio-text">
-        <p class="bio-claim" data-reveal>Leidenschaft für perfektes Car-HiFi, Akustik und Technik.</p>
-        <p class="bio-body" data-reveal style="--d:1">
-          Ich bin <strong>Thomas Sojka</strong>, und Car-HiFi (Car-Audio) ist mehr als nur ein Hobby für mich – es ist eine
+<!-- Akt 5 · Nähe. reveal: das Porträt wird aufgedeckt, dann Ruhe zum Lesen. -->
+<section id="about" class="ground ground--black about" data-sc-act="flow">
+  <div class="sc-wrap">
+    <div class="about-intro">
+      <figure class="portrait" data-sc-reveal="up" data-sc-reveal-at="0.04 0.22">
+        <Image src={profil} alt="Thomas Sojka" width={720} height={720} format="webp" loading="lazy" />
+      </figure>
+      <div class="about-text" data-sc-in data-sc-stagger="70">
+        <h2 class="statement">Thomas Sojka.</h2>
+        <p class="lead"><strong>Leidenschaft für perfektes Car-HiFi, Akustik und Technik.</strong></p>
+        <p class="body">
+          Ich bin <strong>Thomas Sojka</strong>, und Car-HiFi (Car-Audio) ist mehr als nur ein Hobby für mich: Es ist eine
           Leidenschaft für das bestmögliche Klangerlebnis im Auto, die mich seit vielen Jahren begleitet. Ergänzend zur
           klassischen Elektrotechnik und Akustik habe ich den <strong>3D-Druck</strong> für mich entdeckt, der meine Arbeit bei
           der Installation von Fahrzeugen noch professioneller und vielfältiger macht.
         </p>
-
-        <h3 class="mono sub-label" data-reveal>Meine Expertise im Car-HiFi Bereich</h3>
-        <ul class="expertise">
-          {
-            expertise.map((e, i) => (
-              <li data-reveal style={`--d:${i}`}>
-                <h4>{e.title}</h4>
-                <p set:html={e.html} />
-              </li>
-            ))
-          }
-        </ul>
       </div>
     </div>
 
-    <!-- REW -->
+    <div class="expertise">
+      <h3 class="title" data-sc-in>Meine Expertise im Car-HiFi Bereich</h3>
+      <dl data-sc-in data-sc-stagger="60">
+        {
+          expertise.map((e) => (
+            <div>
+              <dt>{e.title}</dt>
+              <dd set:html={e.html} />
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
     <div class="rew">
-      <div class="rew-title" aria-hidden="true" data-reveal>
-        <span>R</span><span>E</span><span>W</span>
-      </div>
-      <div class="rew-content">
-        <h3 data-reveal>REW Tutorials</h3>
-        <p data-reveal>
-          Neben meinen Aktivitäten im Car-HiFi-Bereich arbeite ich intensiv mit <strong>REW (Room EQ Wizard)</strong>. REW
-          ist ein leistungsstarkes Tool, das sowohl für Heimanwendungen als auch im professionellen Car-HiFi-Bereich eingesetzt
+      <div class="stack" data-sc-in data-sc-stagger="60">
+        <h3 class="headline">REW Tutorials</h3>
+        <p class="body">
+          Neben meinen Aktivitäten im Car-HiFi-Bereich arbeite ich intensiv mit <strong>REW (Room EQ Wizard)</strong>. REW ist
+          ein leistungsstarkes Tool, das sowohl für Heimanwendungen als auch im professionellen Car-HiFi-Bereich eingesetzt
           wird. Viele Händler und Profis nutzen REW, um optimale Klangergebnisse zu erzielen.
         </p>
-        <h4 class="mono sub-label" data-reveal>Warum REW?</h4>
-        <dl class="rew-list">
-          {
-            rewReasons.map((r, i) => (
-              <div data-reveal style={`--d:${i}`}>
-                <dt>{r.title}</dt>
-                <dd>{r.text}</dd>
-              </div>
-            ))
-          }
-        </dl>
-        <h4 class="mono sub-label" data-reveal>Meine Erfahrungen und Tutorials</h4>
-        <p data-reveal>
+        <p class="body">
           Ich habe bereits mehrere REW-Tutorials erstellt und plane, weitere Videos zu produzieren, um dir und der Community zu
           zeigen, wie du REW effektiv einsetzen kannst. Diese Tutorials decken sowohl grundlegende als auch fortgeschrittene
           Techniken ab und bieten praktische Anleitungen zur Optimierung deines Audio-Systems. Bleibe dran und folge meinem{' '}
@@ -91,73 +63,80 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
           spannende Einblicke in die Welt des Car-HiFi!
         </p>
       </div>
-    </div>
-
-    <!-- 3D-Druck -->
-    <div class="print">
-      <div class="print-head">
-        <h3 data-reveal>3D-Druck<br /><span class="signal">für Car-HiFi</span></h3>
-        <div class="print-text">
-          <p data-reveal>
-            Neben meiner Tätigkeit als Soundjuror nutze ich den <strong>3D-Druck</strong>, um maßgeschneiderte Lösungen für
-            Car-HiFi-Systeme zu entwickeln:
-          </p>
-          <ul data-reveal>
-            <li><strong>Individuelle Adapter für Türlautsprecher</strong> für optimalen Halt und Klang.</li>
-            <li><strong>Gehäuse für Mittel- und Hochtöner</strong>, die Funktionalität und Ästhetik vereinen.</li>
-          </ul>
-          <p data-reveal>
-            Mit meinem <strong>Bambulabs P1S-Drucker</strong> arbeite ich ausschließlich mit <strong>ASA</strong> und{' '}
-            <strong>ABS</strong>, um langlebige und robuste Ergebnisse zu erzielen.
-          </p>
-          <div class="chips mono" data-reveal>
-            <span>Bambulabs P1S</span><span>ASA</span><span>ABS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hgal" data-hgal>
-    <div class="hgal-sticky">
-      <p class="mono hgal-label wrap">Meine 3D-Druck-Projekte <span class="muted">— {shots.length} Bilder</span></p>
-      <div class="hgal-track" data-hgal-track>
-        {
-          shots.map((s, i) => (
-            <figure class="shot">
-              <button type="button" data-lightbox={i} data-full={s.full} data-cursor-text="Zoom" aria-label={`Bild vergrößern: ${s.alt}`}>
-                <Image src={s.src} alt={s.alt} widths={[480, 800]} sizes="(max-width: 760px) 80vw, 40vw" format="webp" loading="lazy" />
-              </button>
-              <figcaption class="mono">
-                <span class="signal">3D.{String(i + 1).padStart(2, '0')}</span> {s.alt}
-              </figcaption>
-            </figure>
-          ))
-        }
-      </div>
-      <div class="hgal-hint wrap mono" aria-hidden="true">
-        <span class="hgal-swipe">Wischen <i>→</i></span>
-        <span class="hgal-bar"><i data-hgal-bar></i></span>
-        <span data-hgal-count>01 / {String(shots.length).padStart(2, '0')}</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="idea" data-reveal="scale">
       <div>
-        <p class="mono signal">Mitmachen und Ideen einbringen</p>
-        <h3>Hast du eine Videoidee?</h3>
-        <p class="muted">
-          Du hast Ideen oder Themen, die ich in einem Video aufgreifen könnte? Schick mir deine Vorschläge! Ich freue mich,
-          spannende Themen aus der Community aufzugreifen.
+        <h4 class="label" data-sc-in>Warum REW?</h4>
+        <dl class="rew-list" data-sc-in data-sc-stagger="60">
+          {
+            rewReasons.map((r) => (
+              <div>
+                <dt>{r.title}</dt>
+                <dd>{r.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <div class="print">
+      <div class="stack" data-sc-in data-sc-stagger="60">
+        <h3 class="headline">3D-Druck für Car-HiFi</h3>
+        <p class="body">
+          Neben meiner Tätigkeit als Soundjuror nutze ich den <strong>3D-Druck</strong>, um maßgeschneiderte Lösungen für
+          Car-HiFi-Systeme zu entwickeln:
+        </p>
+        <ul class="body print-list">
+          <li><strong>Individuelle Adapter für Türlautsprecher</strong> für optimalen Halt und Klang.</li>
+          <li><strong>Gehäuse für Mittel- und Hochtöner</strong>, die Funktionalität und Ästhetik vereinen.</li>
+        </ul>
+        <p class="body">
+          Mit meinem <strong>Bambulabs P1S-Drucker</strong> arbeite ich ausschließlich mit <strong>ASA</strong> und{' '}
+          <strong>ABS</strong>, um langlebige und robuste Ergebnisse zu erzielen.
         </p>
       </div>
-      <a class="btn btn--solid" href="#kontaktformular" data-topic="Videoidee" data-magnetic>Videoidee einreichen <span class="arrow">→</span></a>
+    </div>
+  </div>
+
+  <div class="rail-wrap">
+    <p class="sc-wrap label rail-label">Meine 3D-Druck-Projekte</p>
+    <div class="rail" data-rail tabindex="0" aria-label="3D-Druck-Projekte, seitlich scrollbar">
+      {
+        shots.map((s) => (
+          <figure class="shot">
+            <button
+              type="button"
+              data-lightbox
+              data-full={s.full}
+              data-cursor-text="Zoom"
+              aria-label={`Bild vergrößern: ${s.alt}`}
+            >
+              <span class="shot-tilt" data-sc-tilt="5">
+                <Image src={s.src} alt={s.alt} widths={[480, 800]} sizes="(max-width: 760px) 78vw, 30vw" format="webp" loading="lazy" />
+              </span>
+            </button>
+            <figcaption>{s.alt}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+    <div class="sc-wrap rail-hint" aria-hidden="true">
+      <span class="rail-swipe">Wischen</span>
+      <span class="rail-bar"><i data-rail-bar></i></span>
+    </div>
+  </div>
+
+  <div class="sc-wrap">
+    <div class="idea" data-sc-in>
+      <h3 class="headline">Hast du eine Videoidee?</h3>
+      <p class="body">
+        Du hast Ideen oder Themen, die ich in einem Video aufgreifen könnte? Schick mir deine Vorschläge! Ich freue mich,
+        spannende Themen aus der Community aufzugreifen.
+      </p>
+      <a class="pill" href="#kontaktformular" data-topic="Videoidee">Videoidee einreichen</a>
     </div>
 
     <p class="notice">
-      <span class="mono">Hinweis</span>
+      <strong>Hinweis</strong>
       <span>
         Bitte beachte, dass ich meine Aktivitäten ausschließlich in meiner <strong>Freizeit</strong> betreibe. Ich bin nicht
         telefonisch erreichbar, verkaufe keine Komponenten und biete keine Einbaudienstleistungen an.
@@ -165,9 +144,9 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
     </p>
   </div>
 
-  <dialog class="lightbox" data-lb>
+  <dialog class="lightbox" data-lb aria-label="Bildansicht">
     <img data-lb-img alt="" />
-    <p class="mono lb-cap" data-lb-cap></p>
+    <p class="lb-cap" data-lb-cap></p>
     <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Schließen">✕</button>
     <button type="button" class="lb-btn lb-prev" data-lb-prev aria-label="Vorheriges Bild">←</button>
     <button type="button" class="lb-btn lb-next" data-lb-next aria-label="Nächstes Bild">→</button>
@@ -175,298 +154,135 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
 </section>
 
 <style>
-  .bio {
+  .about {
+    padding-block: var(--sc-section) var(--sc-section);
+  }
+
+  .about-intro {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    align-items: start;
+    gap: var(--sc-9);
+    align-items: center;
   }
 
   .portrait {
-    position: sticky;
-    top: 7rem;
-  }
-
-  .portrait-img {
-    position: relative;
-    aspect-ratio: 4 / 5;
+    margin: 0;
     overflow: hidden;
-    border-radius: 24px;
-    background: var(--signal);
+    border-radius: var(--sc-r-lg);
+    background: var(--sc-surface);
   }
 
-  .portrait-img img {
+  .portrait :global(img) {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1;
     object-fit: cover;
-    object-position: 50% 30%;
-    filter: grayscale(1) contrast(1.15) brightness(0.95);
-    mix-blend-mode: multiply;
-    transform: scale(1.04);
-    transition:
-      filter 0.8s,
-      mix-blend-mode 0.8s,
-      transform 1.2s var(--ease-out);
   }
 
-  .portrait:hover .portrait-img img {
-    filter: none;
-    mix-blend-mode: normal;
-    transform: scale(1);
-  }
-
-  .badge {
-    position: absolute;
-    right: -2rem;
-    bottom: -2rem;
-    width: clamp(8rem, 13vw, 11rem);
-    animation: spin 18s linear infinite;
-  }
-
-  .badge circle {
-    fill: var(--bg);
-    stroke: var(--line-2);
-  }
-
-  .badge text {
-    fill: var(--text);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .badge-wave {
-    transform-origin: 100px 100px;
-    animation: spin 18s linear infinite reverse;
-  }
-
-  .badge-wave path {
-    fill: none;
-    stroke: var(--signal);
-    stroke-width: 3;
-    stroke-linecap: round;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  .bio-text {
-    display: grid;
-    gap: 1.75rem;
-  }
-
-  .bio-claim {
-    font-size: clamp(1.75rem, 3.2vw, 3rem);
-    font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-  }
-
-  .bio-body {
-    color: var(--muted);
-    font-size: 1.1rem;
-  }
-
-  .sub-label {
-    margin-top: 1.5rem;
-    color: var(--signal);
-    font-weight: 500;
-    line-height: 1.4;
+  .about-text > * + * {
+    margin-top: var(--sc-5);
   }
 
   .expertise {
-    display: grid;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    margin-top: var(--sc-10);
   }
 
-  .expertise li {
-    display: grid;
-    gap: 0.6rem;
-    padding-block: 1.5rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .expertise h4 {
-    font-size: 1.5rem;
-    line-height: 1.1;
-  }
-
-  .expertise p {
-    color: var(--muted);
-  }
-
-  /* REW */
-  .rew {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2rem, 6vw, 6rem);
-    margin-top: clamp(6rem, 12vw, 10rem);
-  }
-
-  .rew-title {
-    display: flex;
-    align-self: start;
-    position: sticky;
-    top: 7rem;
-    font-size: clamp(6rem, 18vw, 16rem);
-    font-weight: 800;
-    font-stretch: 75%;
-    line-height: 0.8;
-    letter-spacing: 0.01em;
-    color: var(--bg-3);
-  }
-
-  .rew-title span {
-    display: inline-block;
-    animation: rew-pulse 3.2s var(--ease-in-out) infinite;
-  }
-
-  .rew-title span:nth-child(2) { animation-delay: 0.2s; }
-  .rew-title span:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes rew-pulse {
-    0%, 70%, 100% { color: var(--bg-3); transform: none; }
-    35% { color: var(--signal); transform: translateY(-4%); }
-  }
-
-  .rew-content {
-    display: grid;
-    gap: 1.5rem;
-    align-content: start;
-  }
-
-  .rew-content > h3 {
-    font-size: clamp(2.25rem, 4.5vw, 4rem);
-    font-stretch: 80%;
-    text-transform: uppercase;
-  }
-
-  .rew-content > p {
-    color: var(--muted);
-    font-size: 1.1rem;
-  }
-
-  .rew-content a {
-    color: var(--signal);
-    text-underline-offset: 4px;
-  }
-
+  .expertise dl,
   .rew-list {
-    display: grid;
-    gap: 0;
-    margin: 0;
+    margin: var(--sc-5) 0 0;
   }
 
-  .rew-list div {
+  .expertise dl > div {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 1rem;
-    padding-block: 1.1rem;
-    border-top: 1px solid var(--line);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: var(--sc-3) var(--sc-8);
+    padding-block: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline);
+  }
+
+  .expertise dt {
+    font-size: var(--sc-t-xl);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .expertise dd,
+  .rew-list dd {
+    margin: 0;
+    color: var(--sc-ink-soft);
+  }
+
+  .expertise dd :global(strong) {
+    color: var(--sc-ink);
+  }
+
+  .rew,
+  .print {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--sc-7) var(--sc-9);
+    margin-top: var(--sc-10);
+  }
+
+  .rew a {
+    color: var(--sc-ink);
+  }
+
+  .rew-list > div {
+    padding-block: var(--sc-4);
+    border-top: 1px solid var(--sc-hairline);
   }
 
   .rew-list dt {
-    font-weight: 650;
+    font-weight: 600;
   }
 
-  .rew-list dd {
-    margin: 0;
-    color: var(--muted);
+  .print .stack {
+    grid-column: 1 / -1;
+    max-width: var(--sc-measure);
   }
 
-  /* 3D-Druck */
-  .print {
-    margin-top: clamp(6rem, 12vw, 10rem);
+  .print-list {
+    padding-left: 1.1rem;
   }
 
-  .print-head {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2rem, 6vw, 6rem);
-    align-items: start;
+  .print-list li::marker {
+    color: var(--sc-accent);
   }
 
-  .print-head h3 {
-    font-size: clamp(2.75rem, 7vw, 6.5rem);
-    font-stretch: 75%;
-    text-transform: uppercase;
-    line-height: 0.85;
+  .print-list li + li {
+    margin-top: var(--sc-2);
   }
 
-  .print-text {
-    display: grid;
-    gap: 1.25rem;
-    color: var(--muted);
-    font-size: 1.1rem;
+  .rail-wrap {
+    margin-top: var(--sc-7);
   }
 
-  .print-text ul {
-    display: grid;
-    gap: 0.5rem;
-    margin: 0;
-    padding-left: 1.2rem;
+  .rail-label {
+    margin-bottom: var(--sc-4);
   }
 
-  .print-text li::marker {
-    color: var(--signal);
-  }
-
-  .chips {
+  .rail {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .chips span {
-    padding: 0.45rem 0.8rem;
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
-    color: var(--text);
-  }
-
-  /* Horizontale Galerie */
-  .hgal {
-    position: relative;
-    margin-top: clamp(3rem, 6vw, 5rem);
-  }
-
-  .hgal-sticky {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
-  }
-
-  .hgal-label {
-    color: var(--muted);
-  }
-
-  .hgal-track {
-    display: flex;
-    gap: clamp(1rem, 2vw, 2rem);
-    padding-inline: var(--gutter);
+    gap: var(--sc-5);
+    padding: var(--sc-2) var(--sc-gutter) var(--sc-4);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sc-gutter);
     scrollbar-width: none;
-    padding-bottom: 0.5rem;
+    overscroll-behavior-x: contain;
   }
 
-  .hgal-track::-webkit-scrollbar {
+  .rail::-webkit-scrollbar {
     display: none;
   }
 
   .shot {
     flex: 0 0 auto;
-    width: min(80vw, 34rem);
+    width: clamp(15rem, 30vw, 26rem);
     margin: 0;
-    scroll-snap-align: center;
-  }
-
-  .shot:nth-child(even) {
-    margin-top: clamp(0rem, 6vh, 4rem);
+    scroll-snap-align: start;
   }
 
   .shot button {
@@ -474,108 +290,68 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
     width: 100%;
     padding: 0;
     border: 0;
-    border-radius: 18px;
-    overflow: hidden;
-    background: var(--bg-3);
+    border-radius: var(--sc-r-lg);
+    background: none;
     cursor: zoom-in;
   }
 
-  .shot img {
+  .shot-tilt {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--sc-r-lg);
+    box-shadow: var(--sc-e2);
+  }
+
+  .shot :global(img) {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    transition: transform 1s var(--ease-out);
-  }
-
-  .shot button:hover img {
-    transform: scale(1.05);
   }
 
   .shot figcaption {
-    margin-top: 0.75rem;
-    color: var(--muted);
+    margin-top: var(--sc-3);
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
   }
 
-  /* Wisch-Hinweis, nur ohne Pinning (Handy, reduzierte Bewegung) */
-  .hgal-hint {
+  .rail-hint {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    color: var(--muted);
-    font-size: 0.65rem;
+    gap: var(--sc-4);
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-xs);
   }
 
-  .hgal-swipe i {
-    display: inline-block;
-    font-style: normal;
-    color: var(--signal);
-    animation: swipe-nudge 1.6s var(--ease-in-out) infinite;
-  }
-
-  @keyframes swipe-nudge {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(6px); }
-  }
-
-  .hgal-bar {
+  .rail-bar {
     flex: 1;
+    max-width: 16rem;
     height: 2px;
-    background: var(--line-2);
+    background: var(--sc-hairline-strong);
     overflow: hidden;
   }
 
-  .hgal-bar i {
+  .rail-bar i {
     display: block;
     height: 100%;
-    background: var(--signal);
+    background: var(--sc-accent);
     transform-origin: left;
-    transform: scaleX(0.125);
-    transition: transform 0.2s linear;
+    transform: scaleX(0.2);
   }
 
-  .hgal.is-pinned .hgal-hint {
-    display: none;
+  @media (hover: hover) and (pointer: fine) and (min-width: 1100px) {
+    .rail-swipe {
+      display: none;
+    }
   }
 
-  /* Pinning nur auf großen Screens, per JS aktiviert */
-  .hgal.is-pinned .hgal-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    align-content: center;
-    overflow: hidden;
-  }
-
-  .hgal.is-pinned .hgal-track {
-    justify-self: start;
-    width: max-content;
-    overflow: visible;
-    will-change: transform;
-  }
-
-  /* Idee-CTA */
   .idea {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: clamp(5rem, 10vw, 8rem);
-    padding-top: 2rem;
-    border-top: 1px solid var(--line-2);
-  }
-
-  .idea > div {
     display: grid;
-    gap: 1rem;
-    max-width: 44rem;
-  }
-
-  .idea h3 {
-    font-size: clamp(2.25rem, 5vw, 4.5rem);
-    font-stretch: 80%;
-    text-transform: uppercase;
+    justify-items: start;
+    gap: var(--sc-4);
+    max-width: 46rem;
+    margin-top: var(--sc-10);
+    margin-bottom: var(--sc-8);
   }
 
   /* Lightbox */
@@ -587,94 +363,78 @@ const badge = 'Soundjuror ✦ Ex-Vorstand AYA Deutschland ✦ REW ✦ 3D-Druck �
     margin: 0;
     padding: clamp(1rem, 4vw, 4rem);
     border: 0;
-    background: rgba(9, 9, 10, 0.94);
-    color: var(--text);
+    background: rgba(10, 10, 11, 0.95);
+    color: #f5f5f7;
   }
 
   .lightbox[open] {
     display: grid;
     place-items: center;
     align-content: center;
-    gap: 1rem;
-    animation: lb-in 0.5s var(--ease-out);
+    gap: var(--sc-4);
   }
 
   .lightbox::backdrop {
     background: transparent;
   }
 
-  @keyframes lb-in {
-    from { opacity: 0; }
-  }
-
   .lightbox img {
     max-width: 100%;
     max-height: calc(100dvh - 8rem);
-    border-radius: 14px;
+    border-radius: var(--sc-r-md);
     object-fit: contain;
   }
 
   .lb-cap {
-    color: var(--muted);
+    margin: 0;
+    color: #a1a1a8;
+    font-size: var(--sc-t-sm);
   }
 
   .lb-btn {
     position: fixed;
     display: grid;
     place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
-    border: 1px solid var(--line-2);
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
     border-radius: 50%;
-    background: var(--bg-2);
-    color: var(--text);
-    font-size: 1.1rem;
+    background: rgba(245, 245, 247, 0.12);
+    color: #f5f5f7;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
   }
 
   .lb-btn:hover {
-    background: var(--signal);
-    color: #0b0b0b;
+    background: rgba(245, 245, 247, 0.22);
   }
 
-  .lb-close { top: 1.25rem; right: 1.25rem; }
-  .lb-prev { left: 1.25rem; top: 50%; transform: translateY(-50%); }
-  .lb-next { right: 1.25rem; top: 50%; transform: translateY(-50%); }
+  .lb-close { top: 1rem; right: 1rem; }
+  .lb-prev { left: 1rem; top: 50%; translate: 0 -50%; }
+  .lb-next { right: 1rem; top: 50%; translate: 0 -50%; }
 
-  @media (max-width: 900px) {
-    .bio,
+  @media (max-width: 960px) {
+    .about-intro,
     .rew,
-    .print-head {
+    .print,
+    .expertise dl > div {
       grid-template-columns: 1fr;
     }
 
-    .portrait,
-    .rew-title {
-      position: relative;
-      top: 0;
+    .about-intro {
+      gap: var(--sc-6);
     }
 
     .portrait {
       max-width: 26rem;
     }
-
-    .badge {
-      right: -1rem;
-    }
   }
 
   @media (max-width: 560px) {
-    .rew-list div {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-    }
-
     .lb-prev,
     .lb-next {
       top: auto;
-      bottom: 1.25rem;
-      transform: none;
+      bottom: 1rem;
+      translate: none;
     }
   }
 </style>

@@ -30,22 +30,24 @@ Vercel deploys automatically: `master` goes to production, every PR branch gets 
   - `impressum.astro` — legal notice
   - `404.astro` — „Kein Signal“ not-found page (Vercel serves `dist/404.html`)
   - `datenschutz.astro` — privacy policy (lists every external service the site talks to: Vercel, Cloudflare, all-inkl for `yt.tsojka.com`, YouTube thumbnails via `i.ytimg.com`, Formspree). Update it whenever a new external service, script, font source or storage key is added.
-- **Layout:** `src/layouts/Base.astro` — HTML shell, meta/SEO tags, Header, Footer, custom cursor; loads `src/styles/global.css` and `src/scripts/core.ts`.
+- **Layout:** `src/layouts/Base.astro` — HTML shell, meta/SEO tags, Header, Footer, custom cursor (stays, owner's decision); loads the scrollcraft engine CSS, `src/styles/global.css`, the engine JS and `src/scripts/core.ts`.
+- **Design system: scroll-craft** (github.com/nateherkai/scroll-craft). Brief, journey, score and verification live in `scrollcraft/builds/tsojka/BRIEF.md`; `scrollcraft/FINGERPRINTS.md` is the build registry. The engine is vendored UNCHANGED: `public/scrollcraft/scrollcraft.js` and `src/vendor/scrollcraft/scrollcraft.css` (MIT). Never edit them; theme via tokens in `global.css` and write page-specific behaviour in page code driven by `--sc-p`. Acts are declared with `data-sc-act` (pin/pan/flow), cues with `data-sc-cue`, flow reveals with `data-sc-in`. Grounds switch per chapter with `.ground--black/--graphite/--light/--white` (hard cuts, no drift).
 - **Content/data:** `src/data/site.ts` holds all texts and lists (site meta, chapter nav, pillars, labor tests, workshop topics, expertise, gallery, apps, …). Edit copy here rather than in components.
 - **Components** (`src/components/`): one file per chapter, with scoped `<style>` blocks. `ChapterHead.astro` renders the shared chapter heading.
 - **Client scripts** (`src/scripts/`):
-  - `core.ts` — Lenis smooth scroll, scroll reveals (`data-reveal`, `data-split`, `data-scrub`), magnetic buttons
-  - `eq.ts` — hero background: REW-style measurement chart, the mouse pointer acts as a parametric EQ band
-  - `scope.ts` — oscilloscope in the labor chapter, switches display per test based on scroll position
-  - `gallery.ts` — horizontally pinned 3D-print gallery plus lightbox
+  - `core.ts` — mounts the scrollcraft engine (re-layout on height changes), mobile menu, active nav link, back-to-top button. Native scrolling, no Lenis.
+  - `eq.ts` + `eq-model.ts` — hero: REW-style chart on two canvases around the cut-out portrait (`src/assets/hero/thomas.png`); the pointer sets a parametric EQ band, published as `window.__tsaEq` / `eq:change`
+  - `protocol.ts` — the lab's measurement sheet (signature move): draws four SVG plots, the frequency response is the visitor's EQ setting; drawing progress is CSS from `--sc-p`
+  - `gallery.ts` — swipeable 3D-print rail with progress bar, plus lightbox
   - `videos.ts` — fetches `https://yt.tsojka.com/youtube_playlist.json` in the browser and renders video cards
 - **Styles:** `src/styles/global.css` defines design tokens on `:root` (`--bg`, `--text`, `--muted`, `--signal` orange accent, `--gutter`, `--max`, easing curves, font stacks) plus shared utilities (`.wrap`, `.btn`, `.mono`, …). `src/styles/videos.css` is shared by the video chapter and the archive page. The site is dark-only.
-- **Fonts:** self-hosted via `@fontsource-variable` (Bricolage Grotesque for display, JetBrains Mono for mono labels).
+- **Fonts:** self-hosted via `@fontsource-variable` (Geist, Geist Mono).
 - **Images:** `src/assets/` (profile photo, `3dprint/` gallery) are processed by `astro:assets`; `public/` holds files copied as-is (favicon, logo SVG).
 
 ## Key Patterns
 
-- Navigation is anchor-based: chapter IDs in `site.ts` (`videos`, `labor`, `workshops`, `about`, `apps`, `kontakt`) must match the section `id`s in the components.
+- Navigation is anchor-based: chapter IDs in `site.ts` (`videos`, `labor`, `about`, `workshops`, `apps`; plus `kontakt`) must match the section `id`s in the components. Chapter order is the owner's: Videos, Testlabor, Über mich, Workshops, Apps.
+- Scroll-craft hard rules apply: no section numbers or counters, no scroll cue, at most one eyebrow per three sections, no em/en dashes in visible text, no glow, no invented measurement values (the lab plots other than the visitor's EQ are labelled „Schema“).
 - Old Hugo URLs (`/about`, `/testlabor`, `/workshops`, `/kontakt`, `/apps`) redirect to the matching one-pager anchors via `redirects` in `astro.config.mjs`.
 - Buttons that lead to the contact form use `href="#kontaktformular"` plus `data-topic="…"`; `Contact.astro` preselects the matching topic radio. The value must match one of the `topics` in `Contact.astro`.
 - `site.email` (`youtube@tsojka.com`) is the only contact address on the site, including Impressum and Datenschutz. Always reference `site.email`, never hardcode an address.

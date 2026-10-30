@@ -7,16 +7,13 @@ import { site } from '../data/site';
   title="Datenschutz"
   description="Datenschutzerklärung von tsojka.com: welche Daten beim Besuch der Seite und bei der Nutzung des Kontaktformulars verarbeitet werden."
 >
-  <article class="legal wrap">
-    <p class="mono chapter-tag">
-      <span>Rechtliches</span><span class="line"></span>
-    </p>
-    <h1 class="chapter-title">Datenschutz</h1>
-    <p class="mono muted">Datenschutzerklärung nach Art. 13 DSGVO · Stand: Oktober 2026</p>
+  <article class="legal ground ground--white"><div class="sc-wrap legal-inner">
+    <h1 class="statement">Datenschutz</h1>
+    <p class="lead">Datenschutzerklärung nach Art. 13 DSGVO · Stand: Oktober 2026</p>
 
     <div class="legal-grid">
       <section>
-        <h2 class="mono">Verantwortlicher</h2>
+        <h2 class="label">Verantwortlicher</h2>
         <address>
           Thomas Sojka<br />
           Cuxhavener Str. 36<br />
@@ -25,7 +22,7 @@ import { site } from '../data/site';
         </address>
       </section>
       <section>
-        <h2 class="mono">Kurz gesagt</h2>
+        <h2 class="label">Kurz gesagt</h2>
         <ul class="facts">
           <li>Keine Cookies</li>
           <li>Kein Tracking, keine Analyse- oder Werbedienste</li>
@@ -105,11 +102,11 @@ import { site } from '../data/site';
         benötigt werden und keine gesetzlichen Aufbewahrungspflichten bestehen.
       </p>
 
-      <h2>6. Lokaler Speicher im Browser</h2>
+      <h2>6. Cookies und lokaler Speicher</h2>
       <p>
-        Die Seite setzt keine Cookies. Damit die kurze Startanimation nur einmal pro Besuch erscheint, wird im
-        Sitzungsspeicher Ihres Browsers (sessionStorage) der Eintrag <code>tsa-boot</code> abgelegt. Er enthält keine
-        personenbezogenen Daten, wird nicht an mich oder Dritte übertragen und beim Schließen des Tabs automatisch gelöscht.
+        Die Seite setzt keine Cookies und legt auch sonst nichts im Speicher Ihres Browsers ab. Eine Einstellung, die Sie im
+        Kopfbereich am EQ vornehmen, wird nur für die Darstellung im Testlabor auf derselben Seite verwendet, nicht gespeichert
+        und nicht übertragen.
       </p>
 
       <h2>7. Links zu anderen Websites</h2>
@@ -152,14 +149,14 @@ import { site } from '../data/site';
         jeweils hier veröffentlichte Fassung.
       </p>
     </div>
-  </article>
+  </div></article>
 </Base>
 
 <style>
-  .legal {
+  .legal-inner {
     display: grid;
     gap: 1.5rem;
-    padding-block: 9rem 6rem;
+    padding-block: var(--sc-9) var(--sc-section);
   }
 
   .legal-grid {
@@ -174,13 +171,13 @@ import { site } from '../data/site';
     gap: 1rem;
     align-content: start;
     padding: 1.5rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--sc-hairline);
     border-radius: 18px;
-    background: var(--bg-2);
+    background: var(--sc-surface);
   }
 
   .legal-grid h2 {
-    color: var(--signal);
+    color: var(--sc-accent);
     font-weight: 500;
     line-height: 1.4;
   }
@@ -208,7 +205,7 @@ import { site } from '../data/site';
   }
 
   .legal a {
-    color: var(--signal);
+    color: var(--sc-accent);
   }
 
   .legal-text {
@@ -225,7 +222,7 @@ import { site } from '../data/site';
 
   .legal-text p,
   .legal-text li {
-    color: var(--muted);
+    color: var(--sc-ink-soft);
   }
 
   .legal-text ul {
@@ -236,20 +233,20 @@ import { site } from '../data/site';
   }
 
   .legal-text li::marker {
-    color: var(--signal);
+    color: var(--sc-accent);
   }
 
   .legal-text code {
-    font-family: var(--font-mono);
+    font-family: var(--sc-font-mono);
     font-size: 0.85em;
-    color: var(--text);
+    color: var(--sc-ink);
   }
 
   .links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1.5rem;
-    font-family: var(--font-mono);
+    font-family: var(--sc-font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;

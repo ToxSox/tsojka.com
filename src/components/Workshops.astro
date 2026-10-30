@@ -1,7 +1,5 @@
 ---
-import ChapterHead from './ChapterHead.astro';
-import Marquee from './Marquee.astro';
-import { audiences, workshopTopics } from '../data/site';
+import { audiences, pillars, workshopTopics } from '../data/site';
 
 const icons: Record<string, string> = {
   bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
@@ -9,294 +7,270 @@ const icons: Record<string, string> = {
   link: 'M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1',
   layers: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
 };
+// Ein Thema nach dem anderen: das erste grüßt, die Fenster schließen nahtlos an,
+// das letzte hält bis kurz vor 1, damit der Schalter beim Lösen nicht leer ist.
+const cues = ['0 0.26 0 0.1', '0.26 0.5 0.1 0.1', '0.5 0.74 0.1 0.1', '0.74 1 0.1 0.01'];
+const bounds = [0.26, 0.5, 0.74];
 ---
 
-<section class="chapter workshops" id="workshops">
-  <div class="wrap">
-    <ChapterHead ch="03" label="Workshops & Trainings" lines={['Wissen,', 'das *klingt*.']}>
-      <p>
-        Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware – das richtige Know-how bei der
+<section id="workshops" class="ground ground--light ws-open">
+  <div class="sc-wrap">
+    <header class="chapter-open" data-sc-in data-sc-stagger="70">
+      <h2 class="statement">Workshops und <em>Trainings.</em></h2>
+      <p class="lead">{pillars.workshops}</p>
+      <p class="body">
+        Premium Car-HiFi ist deutlich mehr als nur der simple Einbau von teurer Hardware: Das richtige Know-how bei der
         Installation und Abstimmung entscheidet am Ende über das perfekte Klangerlebnis im Fahrzeug. Ich biete{' '}
         <strong>praxisnahe und maßgeschneiderte Workshops</strong> an, in denen ich meine jahrelange Erfahrung als Soundjuror
         und Akustik-Experte direkt an dich weitergebe.
       </p>
-    </ChapterHead>
+    </header>
+  </div>
+</section>
 
-    <div class="topics-head" data-reveal>
-      <h3>Was wir thematisieren können</h3>
-      <p class="muted">
-        Von den absoluten Car-Audio Grundlagen bis hin zum Expertenwissen im Bereich Sound-Tuning – die Schulungsinhalte
-        richten sich komplett nach dem Wissensstand der Teilnehmer. Hier ein Auszug aus möglichen Themenbereichen:
-      </p>
-    </div>
+<!-- Akt 6 · Können. pin: Themenschalter, ein Thema nach dem anderen. -->
+<section class="ground ground--light ws-switch" data-sc-act="pin" data-sc-span="2.4" data-switch data-bounds={bounds.join(' ')} aria-label="Was wir thematisieren können">
+  <div data-sc-stage class="ws-stage">
+    <div class="sc-wrap ws-grid">
+      <div class="ws-index">
+        <h3 class="title">Was wir thematisieren können</h3>
+        <p class="body ws-index-intro">
+          Von den absoluten Car-Audio Grundlagen bis hin zum Expertenwissen im Bereich Sound-Tuning: Die Schulungsinhalte
+          richten sich komplett nach dem Wissensstand der Teilnehmer. Hier ein Auszug aus möglichen Themenbereichen:
+        </p>
+        <ol class="ws-list">
+          {workshopTopics.map((t, i) => <li data-switch-item={i}>{t.title}</li>)}
+        </ol>
+      </div>
 
-    <div class="topics">
-      {
-        workshopTopics.map((t, i) => (
-          <article class="topic" data-spotlight data-reveal style={`--d:${i}`}>
-            <div class="topic-top">
-              <span class="topic-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d={icons[t.icon]} />
-                </svg>
-              </span>
-              <span class="mono">W.{String(i + 1).padStart(2, '0')}</span>
-            </div>
-            <h4>{t.title}</h4>
-            <p set:html={t.html} />
-          </article>
-        ))
-      }
+      <div class="ws-detail">
+        {
+          workshopTopics.map((t, i) => (
+            <article class="ws-topic" data-sc-cue={cues[i]}>
+              <svg class="ws-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d={icons[t.icon]} />
+              </svg>
+              <h4 class="headline">{t.title}</h4>
+              <p class="lead" set:html={t.html} />
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="ws-marquee">
-    <Marquee items={['Für Händler & Profis', 'Für private Enthusiasten', 'Individuell angepasst', 'Praxisnah']} reverse />
-  </div>
-
-  <div class="wrap">
-    <h3 class="mono aud-q" data-reveal>Für wen sind die Workshops geeignet?</h3>
-    <p class="aud-intro" data-reveal>
-      Egal, mit welchem Vorwissen du startest, die Workshops lassen sich individuell auf die Bedürfnisse anpassen.
-    </p>
-    <div class="audiences">
+<section class="ground ground--light ws-more" aria-label="Für wen und Anfrage">
+  <div class="sc-wrap">
+    <div class="aud" data-sc-in data-sc-stagger="70">
+      <h3 class="title">Für wen sind die Workshops geeignet?</h3>
+      <p class="body">Egal, mit welchem Vorwissen du startest, die Workshops lassen sich individuell auf die Bedürfnisse anpassen.</p>
+    </div>
+    <div class="aud-grid" data-sc-in data-sc-stagger="80">
       {
-        audiences.map((a, i) => (
-          <div class="aud" data-reveal style={`--d:${i}`}>
-            <span class="mono signal">Zielgruppe {String.fromCharCode(65 + i)}</span>
-            <h4>{a.title}</h4>
-            <p>{a.text}</p>
+        audiences.map((a) => (
+          <div class="aud-item">
+            <h4 class="headline">{a.title}</h4>
+            <p class="body">{a.text}</p>
           </div>
         ))
       }
     </div>
 
-    <div class="ws-cta" data-reveal="scale">
-      <h3>Lass uns dein nächstes Training planen!</h3>
-      <p class="muted">
+    <div class="ws-cta" data-sc-in>
+      <h3 class="headline">Lass uns dein nächstes Training planen!</h3>
+      <p class="body">
         Schreib mir einfach eine unverbindliche Nachricht mit deinen konkreten inhaltlichen Wünschen und wir schnüren
         gemeinsam das passende Schulungspaket.
       </p>
-      <a class="btn btn--solid" href="#kontaktformular" data-topic="Workshop" data-magnetic>Jetzt Workshop anfragen <span class="arrow">→</span></a>
+      <a class="pill" href="#kontaktformular" data-topic="Workshop">Workshop anfragen</a>
     </div>
   </div>
 </section>
 
 <style>
-  .workshops {
-    overflow-x: clip;
+  .ws-open .chapter-open {
+    padding-bottom: var(--sc-4);
   }
 
-  .topics-head {
+  .ws-stage {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: 1rem clamp(2rem, 5vw, 5rem);
-    margin-bottom: 2.5rem;
+    align-items: center;
+    padding-top: var(--nav-h);
   }
 
-  .topics-head h3 {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    line-height: 1;
-  }
-
-  .topics {
+  .ws-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--sc-9);
+    align-items: center;
   }
 
-  .topic {
-    --mx: 50%;
-    --my: 0%;
-    position: relative;
+  .ws-index-intro {
+    margin-top: var(--sc-3);
+  }
+
+  .ws-list {
     display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 1.25rem;
-    min-height: 22rem;
-    padding: 1.5rem;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: var(--bg-2);
-    overflow: hidden;
-    transition:
-      border-color 0.4s,
-      transform 0.6s var(--ease-out);
+    gap: 0;
+    margin: var(--sc-6) 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
   }
 
-  .topic::before {
+  .ws-list li {
+    padding-block: var(--sc-3);
+    border-top: 1px solid var(--sc-hairline);
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-lg);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    transition: color var(--sc-d-base) var(--sc-ease-out);
+  }
+
+  .ws-list li.is-active {
+    color: var(--sc-ink);
+  }
+
+  .ws-list li.is-active::before {
     content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255, 90, 31, 0.16), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-  }
-
-  .topic:hover {
-    border-color: rgba(255, 90, 31, 0.5);
-    transform: translateY(-6px);
-  }
-
-  .topic:hover::before {
-    opacity: 1;
-  }
-
-  .topic-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    color: var(--dim);
-  }
-
-  .topic-icon {
-    display: grid;
-    place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.6rem;
     border-radius: 50%;
-    border: 1px solid var(--line-2);
-    transition:
-      background 0.4s,
-      border-color 0.4s,
-      transform 0.6s var(--ease-out);
+    background: var(--sc-accent);
+    vertical-align: 0.15em;
   }
 
-  .topic-icon svg {
-    width: 1.4rem;
+  .ws-detail {
+    display: grid;
+  }
+
+  .ws-topic {
+    grid-area: 1 / 1;
+    display: grid;
+    align-content: start;
+    gap: var(--sc-5);
+    padding: var(--sc-7);
+    border-radius: var(--sc-r-lg);
+    background: var(--sc-surface);
+    box-shadow: var(--sc-edge), var(--sc-e2);
+  }
+
+  .ws-topic .lead :global(strong) {
+    color: var(--sc-ink);
+  }
+
+  .ws-icon {
+    width: 2.75rem;
     fill: none;
-    stroke: var(--signal);
-    stroke-width: 1.6;
+    stroke: var(--sc-accent);
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: stroke 0.4s;
   }
 
-  .topic:hover .topic-icon {
-    background: var(--signal);
-    border-color: var(--signal);
-    transform: rotate(-12deg) scale(1.08);
+  .ws-more {
+    padding-block: var(--sc-8) var(--sc-section);
   }
 
-  .topic:hover .topic-icon svg {
-    stroke: #0b0b0b;
+  .aud > * + * {
+    margin-top: var(--sc-3);
   }
 
-  .topic h4 {
-    align-self: end;
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .topic p {
-    color: var(--muted);
-    font-size: 0.98rem;
-  }
-
-  .ws-marquee {
-    margin-block: clamp(4rem, 8vw, 7rem);
-    transform: rotate(-2deg);
-  }
-
-  .aud-q {
-    margin-bottom: 1rem;
-    color: var(--signal);
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  .aud-intro {
-    max-width: 40rem;
-    margin-bottom: 2.5rem;
-    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.75rem);
-    line-height: 1.3;
-  }
-
-  .audiences {
+  .aud-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(2rem, 5vw, 5rem);
+    gap: var(--sc-6) var(--sc-9);
+    margin-top: var(--sc-6);
   }
 
-  .aud {
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line-2);
+  .aud-item {
+    padding-top: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline-strong);
   }
 
-  .aud h4 {
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-stretch: 80%;
-    text-transform: uppercase;
-  }
-
-  .aud p {
-    color: var(--muted);
+  .aud-item .body {
+    margin-top: var(--sc-3);
   }
 
   .ws-cta {
     display: grid;
-    justify-items: center;
-    gap: 1.5rem;
-    margin-top: clamp(5rem, 10vw, 8rem);
-    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
-    border-radius: 28px;
-    background:
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 80px),
-      var(--signal);
-    color: #0b0b0b;
-    text-align: center;
+    justify-items: start;
+    gap: var(--sc-4);
+    max-width: 46rem;
+    margin-top: var(--sc-10);
   }
 
-  .ws-cta h3 {
-    max-width: 18ch;
-    font-size: clamp(2.25rem, 6vw, 5rem);
-    font-stretch: 75%;
-    text-transform: uppercase;
-  }
-
-  .ws-cta p {
-    max-width: 40rem;
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  .ws-cta .btn--solid {
-    background: #0b0b0b;
-    border-color: #0b0b0b;
-    color: var(--text);
-  }
-
-  .ws-cta .btn--solid::before {
-    background: var(--text);
-  }
-
-  .ws-cta .btn--solid:hover {
-    color: #0b0b0b;
-  }
-
-  @media (max-width: 1080px) {
-    .topics {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  @media (max-width: 960px) {
+    .ws-stage {
+      align-items: start;
+      padding-top: calc(var(--nav-h) + var(--sc-5));
     }
-  }
 
-  @media (max-width: 760px) {
-    .topics-head,
-    .audiences {
+    .ws-grid {
       grid-template-columns: 1fr;
+      gap: var(--sc-5);
     }
-  }
 
-  @media (max-width: 560px) {
-    .topics {
+    .ws-index-intro {
+      display: none;
+    }
+
+    .ws-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sc-2);
+      margin-top: var(--sc-4);
+    }
+
+    .ws-list li {
+      padding: 0.35rem 0.75rem;
+      border: 0;
+      border-radius: var(--sc-r-pill);
+      box-shadow: inset 0 0 0 1px var(--sc-hairline-strong);
+      font-size: var(--sc-t-sm);
+    }
+
+    .ws-list li.is-active::before {
+      display: none;
+    }
+
+    .ws-list li.is-active {
+      background: var(--sc-ink);
+      color: var(--sc-canvas);
+      box-shadow: none;
+    }
+
+    .ws-topic {
+      padding: var(--sc-5);
+    }
+
+    .aud-grid {
       grid-template-columns: 1fr;
-    }
-
-    .topic {
-      min-height: 0;
     }
   }
 </style>
+
+<script>
+  // Hebt im Index das Thema hervor, das gerade rechts zu sehen ist
+  const act = document.querySelector<HTMLElement>('[data-switch]');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('[data-switch-item]'));
+  if (act && items.length) {
+    // Fortschritt selbst aus der Lage berechnen (gleiche Formel wie die Engine für
+    // gepinnte Akte), damit die Markierung nie einen Frame hinter der Karte liegt
+    const update = () => {
+      const r = act.getBoundingClientRect();
+      const travel = Math.max(r.height - window.innerHeight, 1);
+      const p = Math.min(1, Math.max(0, -r.top / travel));
+      const bounds = (act.dataset.bounds ?? '').split(' ').map(Number);
+      const i = bounds.filter((b) => p >= b).length;
+      items.forEach((el, j) => el.classList.toggle('is-active', j === i));
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

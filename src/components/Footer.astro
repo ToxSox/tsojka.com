@@ -1,106 +1,120 @@
 ---
-import { site } from '../data/site';
+import { chapters, site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="ftr">
-  <div class="wrap">
-    <div class="ftr-top">
-      <p class="ftr-claim">
-        Aus der Community,<br /><span class="signal">für die Community.</span>
-      </p>
-      <div class="ftr-links mono">
+<footer class="ftr ground ground--black">
+  <div class="sc-wrap">
+    <div class="ftr-cols">
+      <div>
+        <p class="ftr-claim">Aus der Community, <span class="accent">für die Community.</span></p>
+      </div>
+      <nav class="ftr-col" aria-label="Kapitel">
+        <p class="label">Kapitel</p>
+        {chapters.map((c) => <a href={`/#${c.id}`}>{c.label}</a>)}
+      </nav>
+      <nav class="ftr-col" aria-label="Mehr">
+        <p class="label">Mehr</p>
+        <a href="/videos">Video-Archiv</a>
         <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube ↗</a>
         <a href={`mailto:${site.email}`}>{site.email}</a>
-        <a href="/videos">Video-Archiv</a>
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
-        <a href="#main" data-top>Nach oben ↑</a>
-      </div>
+      </nav>
     </div>
 
     <a class="ftr-giant" href="/" aria-label="Zur Startseite">
       {'TSOJKA'.split('').map((c, i) => <span style={`--i:${i}`}>{c}</span>)}
     </a>
 
-    <div class="ftr-bottom mono">
-      <span>© {year} {site.title} · {site.author}</span>
-      <span>Built with Astro · 20 Hz – 20 kHz</span>
-    </div>
+    <p class="ftr-bottom">© {year} {site.title} · {site.author}</p>
   </div>
 </footer>
 
 <style>
   .ftr {
-    position: relative;
-    padding-top: clamp(4rem, 10vw, 8rem);
-    border-top: 1px solid var(--line);
-    overflow: hidden;
+    padding-top: var(--sc-9);
+    border-top: 1px solid var(--sc-hairline);
   }
 
-  .ftr-top {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2rem;
+  .ftr-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+    gap: var(--sc-7) var(--sc-6);
   }
 
   .ftr-claim {
-    font-size: clamp(1.75rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 18ch;
+    font-size: var(--sc-t-xl);
+    font-weight: 650;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
 
-  .ftr-links {
+  .ftr-col {
     display: grid;
-    gap: 0.6rem;
+    gap: var(--sc-2);
     align-content: start;
-    color: var(--muted);
+    font-size: var(--sc-t-sm);
   }
 
-  .ftr-links a {
+  .ftr-col .label {
+    margin-bottom: var(--sc-2);
+  }
+
+  .ftr-col a {
+    color: var(--sc-ink-soft);
     text-decoration: none;
-    transition: color 0.3s;
+    overflow-wrap: anywhere;
   }
 
-  .ftr-links a:hover {
-    color: var(--signal);
+  .ftr-col a:hover {
+    color: var(--sc-ink);
+    text-decoration: underline;
   }
 
   .ftr-giant {
     display: flex;
     justify-content: space-between;
-    margin-top: clamp(3rem, 8vw, 6rem);
-    font-size: clamp(4rem, 23.5vw, 21rem);
-    font-weight: 800;
-    font-stretch: 75%;
-    line-height: 0.78;
-    letter-spacing: -0.04em;
+    margin-top: var(--sc-9);
+    font-size: clamp(4rem, 22vw, 20rem);
+    font-weight: 750;
+    line-height: 0.76;
+    letter-spacing: -0.05em;
+    color: #1c1c1f;
     text-decoration: none;
-    color: var(--bg-3);
   }
 
   .ftr-giant span {
     display: inline-block;
     transition:
-      color 0.5s var(--ease-out),
-      transform 0.7s var(--ease-out);
+      color 0.5s var(--sc-ease-out),
+      transform 0.6s var(--sc-ease-out);
     transition-delay: calc(var(--i) * 40ms);
   }
 
-  .ftr-giant:hover span {
-    color: var(--signal);
-    transform: translateY(-6%);
+  @media (hover: hover) and (pointer: fine) {
+    .ftr-giant:hover span {
+      color: var(--sc-accent);
+      transform: translateY(-5%);
+    }
   }
 
   .ftr-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem 2rem;
-    padding-block: 1.5rem 2rem;
-    color: var(--dim);
-    font-size: 0.65rem;
+    margin: 0;
+    padding-block: var(--sc-5) var(--sc-6);
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-xs);
+  }
+
+  @media (max-width: 760px) {
+    .ftr-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ftr-cols > div:first-child {
+      grid-column: 1 / -1;
+    }
   }
 </style>

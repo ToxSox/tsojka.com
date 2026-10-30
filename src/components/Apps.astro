@@ -1,326 +1,154 @@
 ---
-import ChapterHead from './ChapterHead.astro';
 import { apps } from '../data/site';
 ---
 
-<section class="chapter apps" id="apps">
-  <div class="wrap">
-    <ChapterHead ch="05" label="Apps & Tools" lines={['Software aus', '*eigener* Entwicklung']}>
-      <p>
-        Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenschaft von mir. Hier findest du die Apps
-        und Web-Tools, die von mir umgesetzt wurden und werden – <strong>vom Car-Audio-Werkzeug bis zur Alltags-App</strong>.
-        Alle Projekte entstehen mit viel Liebe zum Detail und werden stetig weiterentwickelt.
-      </p>
-    </ChapterHead>
-
-    <div class="rack" data-reveal="scale">
-      <div class="rack-rail" aria-hidden="true">
-        {Array.from({ length: apps.length * 2 }).map(() => <i />)}
+<!-- Akt 7 · Spielraum. pan: seitlich liest sich als Auswahl, nicht als Rangfolge. -->
+<section id="apps" class="ground ground--black apps" data-sc-act="pan" data-sc-span="3.2">
+  <div data-sc-stage class="apps-stage">
+    <div class="apps-rail" data-sc-pan="0.04">
+      <div class="apps-lead">
+        <h2 class="statement">Apps und <em>Tools.</em></h2>
+        <p class="lead"><strong>Software aus eigener Entwicklung, vom Car-Audio-Werkzeug bis zur Alltags-App.</strong></p>
+        <p class="body">
+          Neben Car-HiFi und 3D-Druck ist die Software-Entwicklung eine weitere Leidenschaft von mir. Hier findest du die Apps
+          und Web-Tools, die von mir umgesetzt wurden und werden. Alle Projekte entstehen mit viel Liebe zum Detail und werden
+          stetig weiterentwickelt.
+        </p>
       </div>
-      <ul class="units">
-        {
-          apps.map((a, i) => {
-            const Tag = a.url ? 'a' : 'div';
-            return (
-              <li data-reveal="left" style={`--d:${i}`}>
-                <Tag
-                  class:list={['unit', `is-${a.status}`]}
-                  {...(a.url ? { href: a.url, target: '_blank', rel: 'noopener noreferrer', 'data-cursor-text': 'Öffnen' } : {})}
-                >
-                  <span class="screw" aria-hidden="true" />
-                  <span class="unit-id mono">U{String(i + 1).padStart(2, '0')}</span>
-                  <span class="unit-display">
-                    <span class="unit-name">{a.name}</span>
-                    <span class="unit-tags mono">
-                      {a.tags.map((t) => (
-                        <span>{t}</span>
-                      ))}
-                    </span>
-                  </span>
-                  <span class="unit-text">{a.text}</span>
-                  <span class="unit-status mono">
-                    <i class="led" />
-                    {a.status === 'live' ? a.cta : 'In Entwicklung'}
-                    {a.url && <span class="unit-arrow">↗</span>}
-                  </span>
-                  <span class="screw" aria-hidden="true" />
-                </Tag>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <div class="rack-rail" aria-hidden="true">
-        {Array.from({ length: apps.length * 2 }).map(() => <i />)}
+
+      {
+        apps.map((a) => (
+          <article class:list={['app', `app--${a.status}`]}>
+            <header class="app-head">
+              <h3 class="title">{a.name}</h3>
+              <p class="app-meta">
+                <span class="led" aria-hidden="true" />
+                <span>{a.status === 'live' ? 'Verfügbar' : 'In Entwicklung'}</span>
+                <span class="app-tags">{a.tags.join(' · ')}</span>
+              </p>
+            </header>
+            <p class="app-text">{a.text}</p>
+            {a.url ? (
+              <a class="more" href={a.url} target="_blank" rel="noopener noreferrer" data-cursor-text="Öffnen">
+                {a.cta}
+              </a>
+            ) : (
+              <p class="app-later">Noch nicht öffentlich verfügbar</p>
+            )}
+          </article>
+        ))
+      }
+
+      <div class="apps-end">
+        <h3 class="headline">Feedback oder Ideen zu einer App?</h3>
+        <p class="body">Schreib mir einfach über den Kontaktbereich. Ich freue mich über jede Rückmeldung und jeden Feature-Wunsch.</p>
+        <a class="pill" href="#kontaktformular" data-topic="App-Feedback">Feedback geben</a>
       </div>
-    </div>
-
-    <p class="rack-legend mono" data-reveal>
-      <span><i class="led led--live"></i> Verfügbar</span>
-      <span><i class="led led--dev"></i> In Entwicklung · noch nicht öffentlich verfügbar</span>
-    </p>
-
-    <div class="apps-cta" data-reveal>
-      <h3>Feedback oder Ideen zu einer App?</h3>
-      <p class="muted">
-        Schreib mir einfach über den Kontaktbereich – ich freue mich über jede Rückmeldung und jeden Feature-Wunsch.
-      </p>
-      <a class="btn" href="#kontaktformular" data-topic="App-Feedback" data-magnetic>Kontakt aufnehmen <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
 <style>
-  .rack {
-    display: grid;
-    grid-template-columns: 1.75rem minmax(0, 1fr) 1.75rem;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid var(--line-2);
-    border-radius: 18px;
-    background: linear-gradient(180deg, #151517, #0e0e10);
+  .apps-stage {
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-h);
   }
 
-  .rack-rail {
+  .apps-rail {
+    gap: var(--sc-5);
+    align-items: stretch;
+    padding-inline: var(--sc-gutter);
+  }
+
+  .apps-lead,
+  .apps-end {
+    flex: 0 0 auto;
+    display: grid;
+    align-content: center;
+    gap: var(--sc-4);
+    width: min(30rem, 82vw);
+    padding-right: var(--sc-6);
+  }
+
+  .apps-end {
+    width: min(24rem, 82vw);
+    padding-left: var(--sc-6);
+    padding-right: 0;
+    justify-items: start;
+  }
+
+  .app {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding-block: 0.5rem;
-    border-radius: 8px;
-    background: #0a0a0b;
+    gap: var(--sc-4);
+    width: min(22rem, 78vw);
+    min-height: min(30rem, 66vh);
+    padding: var(--sc-6);
+    border-radius: var(--sc-r-lg);
+    background: var(--sc-surface);
+    box-shadow: var(--sc-edge), var(--sc-e2);
   }
 
-  .rack-rail i {
-    width: 8px;
-    height: 12px;
-    border-radius: 2px;
-    background: #1f1f22;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
-  }
-
-  .units {
+  .app-head {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--sc-2);
+  }
+
+  .app-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.6rem;
     margin: 0;
-    padding: 0;
-    list-style: none;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-xs);
   }
 
-  .unit {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 3rem minmax(12rem, 0.8fr) minmax(0, 1.6fr) 11rem auto;
-    gap: 1.25rem;
-    align-items: center;
-    padding: 1.1rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 40%),
-      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.012) 0 2px, transparent 2px 4px),
-      #19191c;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      0 2px 0 rgba(0, 0, 0, 0.6);
-    text-decoration: none;
-    transition:
-      transform 0.5s var(--ease-out),
-      border-color 0.4s,
-      background 0.4s;
-  }
-
-  a.unit:hover {
-    transform: translateX(10px);
-    border-color: rgba(255, 90, 31, 0.5);
-  }
-
-  .screw {
-    width: 12px;
-    height: 12px;
+  .led {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background:
-      linear-gradient(45deg, transparent 45%, #0b0b0b 45% 55%, transparent 55%),
-      radial-gradient(circle at 35% 35%, #4a4a4f, #222225);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
-    transition: transform 0.8s var(--ease-out);
-  }
-
-  a.unit:hover .screw {
-    transform: rotate(180deg);
-  }
-
-  .unit-id {
-    color: var(--dim);
-  }
-
-  .unit-display {
-    display: grid;
-    gap: 0.4rem;
-    padding: 0.7rem 0.9rem;
-    border-radius: 6px;
-    background: #070708;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
-  }
-
-  .unit-name {
-    font-family: var(--font-mono);
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--signal);
-    text-shadow: 0 0 10px rgba(255, 90, 31, 0.55);
-    overflow-wrap: anywhere;
-  }
-
-  .is-dev .unit-name {
-    color: var(--led-dev);
-    text-shadow: 0 0 10px rgba(255, 176, 32, 0.45);
-  }
-
-  .unit-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    font-size: 0.6rem;
-    color: var(--muted);
-  }
-
-  .unit-tags span + span::before {
-    content: '/ ';
-    color: var(--dim);
-  }
-
-  .unit-text {
-    color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.5;
-  }
-
-  .unit-status {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--text);
-    font-size: 0.68rem;
-  }
-
-  .is-dev .unit-status {
-    color: var(--muted);
-  }
-
-  .unit-arrow {
-    margin-left: auto;
-    color: var(--signal);
-    transition: transform 0.4s var(--ease-out);
-  }
-
-  a.unit:hover .unit-arrow {
-    transform: translate(3px, -3px);
-  }
-
-  .led,
-  :global(.led) {
-    display: inline-block;
-    flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .is-live .led,
-  .led--live {
     background: var(--led-live);
-    box-shadow: 0 0 8px var(--led-live);
   }
 
-  .is-dev .led,
-  .led--dev {
+  .app--dev .led {
     background: var(--led-dev);
-    box-shadow: 0 0 8px var(--led-dev);
-    animation: dev-blink 1.4s steps(1) infinite;
   }
 
-  a.unit:hover .led {
-    animation: live-flicker 0.25s steps(2) infinite;
+  .app-tags {
+    font-family: var(--sc-font-mono);
   }
 
-  @keyframes dev-blink {
-    50% { opacity: 0.2; }
+  .app-text {
+    margin: 0;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
+    line-height: 1.6;
   }
 
-  @keyframes live-flicker {
-    50% { opacity: 0.4; }
+  .app .more,
+  .app-later {
+    margin-top: auto;
   }
 
-  .rack-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 2rem;
-    margin-top: 1.25rem;
-    color: var(--muted);
-    font-size: 0.65rem;
+  .app-later {
+    margin-bottom: 0;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
   }
 
-  .rack-legend span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .apps-cta {
-    display: grid;
-    justify-items: start;
-    gap: 1.25rem;
-    max-width: 40rem;
-    margin-top: clamp(4rem, 8vw, 6rem);
-  }
-
-  .apps-cta h3 {
-    font-size: clamp(1.75rem, 3.5vw, 3rem);
-    line-height: 1;
-  }
-
-  @media (max-width: 1080px) {
-    .unit {
-      grid-template-columns: auto 2.5rem minmax(0, 1fr) auto;
-      grid-template-areas:
-        'sa id disp sb'
-        '. text text .'
-        '. status status .';
-      row-gap: 1rem;
+  @media (max-width: 860px) {
+    .app {
+      min-height: 0;
+      padding: var(--sc-5);
     }
-
-    .unit > .screw:first-child { grid-area: sa; }
-    .unit > .screw:last-child { grid-area: sb; }
-    .unit-id { grid-area: id; }
-    .unit-display { grid-area: disp; }
-    .unit-text { grid-area: text; }
-    .unit-status { grid-area: status; }
   }
 
-  @media (max-width: 560px) {
-    .rack {
-      grid-template-columns: minmax(0, 1fr);
-      padding: 0.35rem;
-    }
-
-    .rack-rail,
-    .unit-id {
-      display: none;
-    }
-
-    .unit {
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      grid-template-areas:
-        'sa disp sb'
-        'text text text'
-        'status status status';
-      gap: 0.85rem 0.75rem;
-      padding: 0.85rem;
-    }
-
-    a.unit:hover {
-      transform: none;
+  @media (max-height: 700px) {
+    .app-text {
+      font-size: var(--sc-t-xs);
     }
   }
 </style>

@@ -9,50 +9,30 @@ export const site = {
   videoFeed: 'https://yt.tsojka.com/youtube_playlist.json',
 };
 
-/** Kapitel des One-Pagers – Reihenfolge = Signalweg. */
+/** Kapitel der Startseite in der Reihenfolge des Inhabers (BRIEF.md §1). */
 export const chapters = [
-  { id: 'videos', label: 'Videos', ch: '01' },
-  { id: 'labor', label: 'Testlabor', ch: '02' },
-  { id: 'workshops', label: 'Workshops', ch: '03' },
-  { id: 'about', label: 'Über mich', ch: '04' },
-  { id: 'apps', label: 'Apps & Tools', ch: '05' },
-  { id: 'kontakt', label: 'Kontakt', ch: '06' },
+  { id: 'videos', label: 'Videos' },
+  { id: 'labor', label: 'Testlabor' },
+  { id: 'about', label: 'Über mich' },
+  { id: 'workshops', label: 'Workshops' },
+  { id: 'apps', label: 'Apps' },
 ] as const;
 
-export const marquee = [
-  'DSP-Tuning',
-  'REW',
-  'THD+N',
-  'LiFePO4',
-  'LTO',
-  'Na-Ion',
-  'Alubutyl',
-  'OEM-Integration',
-  'MOST-Bus',
-  'Laufzeitkorrektur',
-  'Frequenzgang',
-  'Dämpfungsfaktor',
-  '3D-Druck',
-  'AYA',
-];
+/** Die drei Kurztexte aus „Was dich hier erwartet“, jetzt als Unterzeile je Kapitel. */
+export const pillars = {
+  labor:
+    'Unabhängige Leistungstests und Frequenzgang-Analysen von Endstufen und DSPs in meinem spezialisierten Labor.',
+  workshops:
+    'Lerne in praxisnahen Seminaren alles über moderne Stromversorgung (LiFePO4), fachgerechte Dämmung (Alubutyl) und OEM-Integration.',
+  videos:
+    'Profitiere von meinem Wissen aus hunderten Einbauten, aufbereitet in leicht verständlichen Video-Anleitungen.',
+};
 
-export const pillars = [
-  {
-    title: 'Messtechnische Analysen',
-    text: 'Unabhängige Leistungstests und Frequenzgang-Analysen von Endstufen und DSPs in meinem spezialisierten Labor.',
-    href: '#labor',
-  },
-  {
-    title: 'Workshops & Trainings',
-    text: 'Lerne in praxisnahen Seminaren alles über moderne Stromversorgung (LiFePO4), fachgerechte Dämmung (Alubutyl) und OEM-Integration.',
-    href: '#workshops',
-  },
-  {
-    title: 'YouTube Tutorials',
-    text: 'Profitiere von meinem Wissen aus hunderten Einbauten – aufbereitet in leicht verständlichen Video-Anleitungen.',
-    href: '#videos',
-  },
-];
+export const intro = {
+  hub: 'Auf tsojka.com dreht sich alles um die Faszination des perfekten Klangs im Auto. Egal, ob du Einsteiger bist und dein erstes Soundsystem aufrüsten möchtest, Hilfe beim komplexen Einmessen deines digitalen Signalprozessors (DSP) mittels REW suchst oder dich für unabhängige Elektronik-Tests im Messlabor interessierst: Hier bist du richtig.',
+  journey: 'Begleite mich auf meiner Reise für besseren Sound, direkt aus der Community, für die Community.',
+  goal: 'Den langweiligen Werksklang deines Fahrzeugs in eine rollende Konzerthalle zu verwandeln. Lass uns gemeinsam das volle Potenzial deines Audiosystems entfesseln!',
+};
 
 export const videoFormats = [
   {
@@ -82,7 +62,7 @@ export const labTests = [
   {
     key: 'thd',
     title: 'Verzerrungen und Rauschen (THD+N)',
-    text: 'Total Harmonic Distortion + Noise – Wie sauber spielt der Verstärker am Limit wirklich?',
+    text: 'Total Harmonic Distortion + Noise: Wie sauber spielt der Verstärker am Limit wirklich?',
   },
   {
     key: 'damping',
@@ -180,7 +160,7 @@ export const apps: App[] = [
   {
     name: 'TuneHelper',
     tags: ['iOS', 'Android'],
-    text: 'Messsignale in Instrumentenqualität fürs Car-Audio-DSP-Tuning: 14 Generatoren von Rosa Rauschen über Log- und Sub-Sweeps bis zu Impulsen und Multitone, dazu Stereo-Korrelationsmodi und ein Time-Alignment-Regler mit ±20 ms. Alles wird in Echtzeit synthetisiert und per Bluetooth, USB-C oder Klinke ins Auto gestreamt – der Stepped-Sine läuft für freihändiges Messen mit REW alle 32 ISO-Mittenfrequenzen selbstständig ab.',
+    text: 'Messsignale in Instrumentenqualität fürs Car-Audio-DSP-Tuning: 14 Generatoren von Rosa Rauschen über Log- und Sub-Sweeps bis zu Impulsen und Multitone, dazu Stereo-Korrelationsmodi und ein Time-Alignment-Regler mit ±20 ms. Alles wird in Echtzeit synthetisiert und per Bluetooth, USB-C oder Klinke ins Auto gestreamt. Der Stepped-Sine läuft für freihändiges Messen mit REW alle 32 ISO-Mittenfrequenzen selbstständig ab.',
     url: 'https://tunehelper.apps.tsojka.com',
     cta: 'Zur Website',
     status: 'live',
@@ -196,7 +176,7 @@ export const apps: App[] = [
   {
     name: 'Autoakte',
     tags: ['iOS'],
-    text: 'Deine Fahrzeuge digital im Griff: Die iOS-App erinnert an HU und Kfz-Steuer, verwaltet Dokumente wie den Fahrzeugschein und führt Wartungshistorie, Tankbuch und Kostenauswertung. Ohne Datenerhebung, mit iCloud-Sync – kostenlos für bis zu zwei Autos.',
+    text: 'Deine Fahrzeuge digital im Griff: Die iOS-App erinnert an HU und Kfz-Steuer, verwaltet Dokumente wie den Fahrzeugschein und führt Wartungshistorie, Tankbuch und Kostenauswertung. Ohne Datenerhebung, mit iCloud-Sync, kostenlos für bis zu zwei Autos.',
     url: 'https://autoakte.apps.tsojka.com',
     cta: 'Zur Website',
     status: 'live',
@@ -204,7 +184,7 @@ export const apps: App[] = [
   {
     name: 'ich-wuensch-mir-das.de',
     tags: ['Web-App'],
-    text: 'Die Premium-Wunschliste für alle Anlässe: Erstelle digitale Wunschlisten und teile sie mit Familie und Freunden. Gemeinschaftsgeschenke mit automatischer Kostenaufteilung, Amazon-Import und Echtzeit-Reservierungen gegen Doppelkäufe – Überraschungswünsche inklusive.',
+    text: 'Die Premium-Wunschliste für alle Anlässe: Erstelle digitale Wunschlisten und teile sie mit Familie und Freunden. Gemeinschaftsgeschenke mit automatischer Kostenaufteilung, Amazon-Import und Echtzeit-Reservierungen gegen Doppelkäufe, Überraschungswünsche inklusive.',
     url: 'https://ich-wuensch-mir-das.de/',
     cta: 'Zur Web-App',
     status: 'live',
@@ -220,7 +200,7 @@ export const apps: App[] = [
   {
     name: 'CarQuiz',
     tags: ['Web-App'],
-    text: 'CarQuiz – das Quiz-Spiel rund ums Auto: Teste dein Wissen direkt im Browser und fordere Freunde und Familie heraus.',
+    text: 'CarQuiz, das Quiz-Spiel rund ums Auto: Teste dein Wissen direkt im Browser und fordere Freunde und Familie heraus.',
     url: 'https://app.carquiz.de',
     cta: 'Zum Spiel',
     status: 'live',
@@ -234,7 +214,7 @@ export const apps: App[] = [
   {
     name: 'Drandenker',
     tags: ['iOS', 'Android'],
-    text: 'Kein Geburtstag geht mehr unter: Aus den Geburtstagen in deinem Adressbuch – auf Wunsch auch aus dem Kalender – werden Erinnerungen, die sich über den Tag steigern. Mit drei Intensitätsstufen, eigenem Zeitfenster, Nachhol-Erinnerung am Folgetag und Gratulieren per WhatsApp, Anruf oder SMS. Alles bleibt lokal auf dem Gerät – ohne Konto, ohne Server.',
+    text: 'Kein Geburtstag geht mehr unter: Aus den Geburtstagen in deinem Adressbuch (auf Wunsch auch aus dem Kalender) werden Erinnerungen, die sich über den Tag steigern. Mit drei Intensitätsstufen, eigenem Zeitfenster, Nachhol-Erinnerung am Folgetag und Gratulieren per WhatsApp, Anruf oder SMS. Alles bleibt lokal auf dem Gerät, ohne Konto, ohne Server.',
     status: 'dev',
   },
 ];

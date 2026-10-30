@@ -1,303 +1,251 @@
 ---
-import ChapterHead from './ChapterHead.astro';
-import { site } from '../data/site';
+import { intro, site } from '../data/site';
 
-const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feedback'];
+// Werte müssen zu den data-topic-Buttons der Kapitel passen (CLAUDE.md)
+const topics = [
+  { value: 'Kooperation', hint: 'Geschäftliche Zusammenarbeit' },
+  { value: 'Testanfrage', hint: 'Deine Elektronik im Labor' },
+  { value: 'Workshop', hint: 'Training für dich oder dein Team' },
+  { value: 'Videoidee', hint: 'Ein Thema für den Kanal' },
+  { value: 'App-Feedback', hint: 'Rückmeldung zu einer App' },
+];
 ---
 
-<section class="chapter contact" id="kontakt">
-  <div class="wrap">
-    <ChapterHead ch="06" label="Kontakt" lines={['Lass uns', '*reden*.']}>
-      <p>
-        Dein direkter Draht für <strong>Car-HiFi Kooperationen, Hardware-Testanfragen oder neue Videoideen</strong>. Egal, ob du
-        eine spannende geschäftliche Zusammenarbeit planst, einen bestimmten Verstärker in meinem Labor durchmessen lassen
-        möchtest oder einfach eine geniale Idee für mein nächstes YouTube-Tutorial hast – nutze das Kontaktformular oder
-        schreib mir direkt eine E-Mail.
+<!-- Akt 8 · Entschluss. Das Ende ist ein Eingabefeld und bleibt stehen. -->
+<section id="kontakt" class="ground ground--white contact">
+  <div class="sc-wrap">
+    <header class="chapter-open" data-sc-in data-sc-stagger="70">
+      <h2 class="statement">Lass uns <em>reden.</em></h2>
+      <p class="lead"><strong>Das Ziel?</strong> {intro.goal}</p>
+      <p class="body">
+        Dein direkter Draht für Car-HiFi Kooperationen, Hardware-Testanfragen oder neue Videoideen. Egal, ob du eine spannende
+        geschäftliche Zusammenarbeit planst, einen bestimmten Verstärker in meinem Labor durchmessen lassen möchtest oder einfach
+        eine geniale Idee für mein nächstes YouTube-Tutorial hast: Nutze das Kontaktformular oder schreib mir direkt eine E-Mail.
       </p>
-    </ChapterHead>
+    </header>
 
-    <div class="contact-grid">
-      <aside class="contact-side">
-        <p class="mono muted" data-reveal>E-Mail-Adresse</p>
-        <a class="mail" href={`mailto:${site.email}`} data-reveal data-cursor-text="Mail">
-          {site.email}
-        </a>
-
-        <div class="notice" data-reveal>
-          <span class="mono">Wichtiger Hinweis</span>
-          <span>
-            Ich bin nicht telefonisch erreichbar und biete keinen Verkauf von Komponenten, keinen Einbauservice und keine
-            individuelle technische Beratung an. Bitte wende dich mit solchen Anfragen direkt an einen Händler oder eine
-            Fachwerkstatt.
-          </span>
-        </div>
-      </aside>
-
-      <form class="form" id="kontaktformular" action={site.formAction} method="POST" data-form data-reveal="scale">
-        <div class="form-head mono">
-          <span><i class="led"></i> Kontaktformular</span>
-          <span data-form-state>Bereit</span>
-        </div>
-
-        <fieldset class="topics">
-          <legend class="mono">Worum geht's?</legend>
+    <form class="form" id="kontaktformular" action={site.formAction} method="POST" data-form>
+      <fieldset class="topics">
+        <legend class="title">Worum geht's?</legend>
+        <div class="topic-grid">
           {
             topics.map((t, i) => (
-              <label>
-                <input type="radio" name="thema" value={t} checked={i === 0} />
-                <span>{t}</span>
+              <label class="topic">
+                <input type="radio" name="thema" value={t.value} checked={i === 0} />
+                <span class="topic-tile">
+                  <span class="topic-name">{t.value}</span>
+                  <span class="topic-hint">{t.hint}</span>
+                </span>
               </label>
             ))
           }
-        </fieldset>
+        </div>
+      </fieldset>
 
+      <div class="fields">
         <div class="field">
-          <input type="text" id="name" name="name" required placeholder=" " autocomplete="name" />
           <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
         </div>
         <div class="field">
-          <input type="email" id="email" name="_replyto" required placeholder=" " autocomplete="email" />
           <label for="email">E-Mail</label>
+          <input type="email" id="email" name="_replyto" required autocomplete="email" />
         </div>
-        <div class="field">
-          <input type="text" id="subject" name="subject" required placeholder=" " />
+        <div class="field field--wide">
           <label for="subject">Betreff</label>
+          <input type="text" id="subject" name="subject" required />
         </div>
-        <div class="field">
-          <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+        <div class="field field--wide">
           <label for="message">Nachricht</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
         </div>
+      </div>
 
-        <p class="privacy-note">
-          Deine Angaben werden über den Dienst Formspree an mich übermittelt und nur zur Beantwortung deiner Anfrage genutzt.
-          Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
-        </p>
+      <p class="privacy-note">
+        Deine Angaben werden über den Dienst Formspree an mich übermittelt und nur zur Beantwortung deiner Anfrage genutzt.
+        Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
+      </p>
 
-        <button class="btn btn--solid send" type="submit">
-          <span data-send-label>Nachricht senden</span> <span class="arrow">→</span>
-        </button>
+      <div class="form-actions">
+        <button class="pill send" type="submit"><span data-send-label>Nachricht senden</span></button>
+        <span class="form-state" data-form-state aria-live="polite"></span>
+      </div>
 
-        <div class="sent" data-sent aria-live="polite">
-          <svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 h20 l6 -14 l8 28 l8 -28 l8 28 l6 -14 h60" /></svg>
-          <p class="sent-title">Nachricht ist raus.</p>
-          <p class="muted">Danke! Ich melde mich, sobald ich Zeit finde.</p>
-        </div>
-      </form>
+      <div class="sent" data-sent aria-live="polite">
+        <svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 h20 l6 -14 l8 28 l8 -28 l8 28 l6 -14 h60" /></svg>
+        <p class="headline">Nachricht ist raus.</p>
+        <p class="body">Danke! Ich melde mich, sobald ich Zeit finde.</p>
+      </div>
+    </form>
+
+    <div class="contact-foot">
+      <div>
+        <p class="label">E-Mail</p>
+        <a class="mail" href={`mailto:${site.email}`} data-cursor-text="Mail">{site.email}</a>
+      </div>
+      <p class="notice">
+        <strong>Wichtiger Hinweis</strong>
+        <span>
+          Ich bin nicht telefonisch erreichbar und biete keinen Verkauf von Komponenten, keinen Einbauservice und keine
+          individuelle technische Beratung an. Bitte wende dich mit solchen Anfragen direkt an einen Händler oder eine
+          Fachwerkstatt.
+        </span>
+      </p>
     </div>
   </div>
 </section>
 
 <style>
-  .contact-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    align-items: start;
+  .contact {
+    padding-bottom: var(--sc-section);
   }
 
-  .contact-side {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .mail {
-    font-size: clamp(1.6rem, 3.6vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-    background: linear-gradient(var(--signal), var(--signal)) 0 100% / 0% 2px no-repeat;
-    transition:
-      background-size 0.6s var(--ease-out),
-      color 0.3s;
-    padding-bottom: 0.2rem;
-    justify-self: start;
-  }
-
-  .mail:hover {
-    color: var(--signal);
-    background-size: 100% 2px;
-  }
-
-  .contact-side .notice {
-    margin-top: 2rem;
+  .contact .chapter-open > * {
+    max-width: 46rem;
   }
 
   .form {
     position: relative;
     display: grid;
-    gap: 1.25rem;
-    padding: clamp(1.25rem, 3vw, 2.25rem);
-    border: 1px solid var(--line-2);
-    border-radius: 24px;
-    background: var(--bg-2);
-    overflow: hidden;
-  }
-
-  .form-head {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.65rem;
-  }
-
-  .form-head .led {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 0.4rem;
-    border-radius: 50%;
-    background: var(--led-live);
-    box-shadow: 0 0 8px var(--led-live);
-  }
-
-  .form.is-sending .form-head .led {
-    background: var(--led-dev);
-    box-shadow: 0 0 8px var(--led-dev);
-    animation: blink 0.3s steps(1) infinite;
-  }
-
-  @keyframes blink {
-    50% { opacity: 0; }
+    gap: var(--sc-6);
   }
 
   .topics {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     margin: 0;
     padding: 0;
     border: 0;
   }
 
   .topics legend {
-    margin-bottom: 0.75rem;
-    color: var(--muted);
-    font-size: 0.65rem;
+    margin-bottom: var(--sc-4);
   }
 
-  .topics label {
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--sc-3);
+  }
+
+  .topic {
     position: relative;
     cursor: pointer;
   }
 
-  .topics input {
+  .topic input {
     position: absolute;
     opacity: 0;
+    pointer-events: none;
   }
 
-  .topics span {
-    display: inline-block;
-    padding: 0.5rem 0.9rem;
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
-    font-size: 0.9rem;
+  .topic-tile {
+    display: grid;
+    gap: var(--sc-2);
+    height: 100%;
+    padding: var(--sc-5) var(--sc-4);
+    border-radius: var(--sc-r-md);
+    background: var(--sc-surface);
+    box-shadow: inset 0 0 0 1px var(--sc-hairline);
     transition:
-      background 0.3s,
-      color 0.3s,
-      border-color 0.3s;
+      box-shadow var(--sc-d-fast) var(--sc-ease-out),
+      background-color var(--sc-d-fast) var(--sc-ease-out);
   }
 
-  .topics label:hover span {
-    border-color: var(--signal);
+  .topic-name {
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
-  .topics input:checked + span {
-    background: var(--signal);
-    border-color: var(--signal);
-    color: #0b0b0b;
+  .topic-hint {
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
+    line-height: 1.35;
   }
 
-  .topics span.is-flash {
-    animation: chip-flash 1.6s var(--ease-out) 0.9s;
+  @media (hover: hover) and (pointer: fine) {
+    .topic:hover .topic-tile {
+      box-shadow: inset 0 0 0 1px var(--sc-hairline-strong);
+    }
   }
 
-  @keyframes chip-flash {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0); }
-    30% { box-shadow: 0 0 0 8px rgba(255, 90, 31, 0.35); }
+  .topic input:checked + .topic-tile {
+    background: var(--sc-canvas);
+    box-shadow: inset 0 0 0 2px var(--sc-accent);
   }
 
-  .topics input:focus-visible + span {
-    outline: 2px solid var(--signal);
-    outline-offset: 2px;
+  .topic input:focus-visible + .topic-tile {
+    outline: 2px solid var(--sc-accent);
+    outline-offset: 3px;
+  }
+
+  .topic-tile.is-flash {
+    animation: tile-flash 1.4s var(--sc-ease-out) 0.6s;
+  }
+
+  @keyframes tile-flash {
+    0%, 100% { transform: none; }
+    25% { transform: scale(1.03); }
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sc-5);
   }
 
   .field {
-    position: relative;
+    display: grid;
+    gap: var(--sc-2);
+  }
+
+  .field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-size: var(--sc-t-sm);
+    font-weight: 500;
   }
 
   .field input,
   .field textarea {
     width: 100%;
-    padding: 1.5rem 0 0.6rem;
+    padding: 0.8rem 1rem;
     border: 0;
-    border-bottom: 1px solid var(--line-2);
-    background: transparent;
-    color: var(--text);
+    border-radius: var(--sc-r-md);
+    background: var(--sc-surface);
+    box-shadow: inset 0 0 0 1px var(--sc-hairline-strong);
+    color: var(--sc-ink);
     font: inherit;
-    font-size: 1.1rem;
     resize: vertical;
-    transition: border-color 0.3s;
+    transition: box-shadow var(--sc-d-fast) var(--sc-ease-out);
   }
 
   .field input:focus,
   .field textarea:focus {
     outline: none;
-    border-color: var(--signal);
-  }
-
-  .field label {
-    position: absolute;
-    left: 0;
-    top: 1.5rem;
-    color: var(--muted);
-    pointer-events: none;
-    transform-origin: left top;
-    transition:
-      transform 0.4s var(--ease-out),
-      color 0.3s;
-  }
-
-  .field input:focus + label,
-  .field input:not(:placeholder-shown) + label,
-  .field textarea:focus + label,
-  .field textarea:not(:placeholder-shown) + label {
-    transform: translateY(-1.4rem) scale(0.72);
-    color: var(--signal);
-  }
-
-  .field::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: var(--signal);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s var(--ease-out);
-  }
-
-  .field:focus-within::after {
-    transform: scaleX(1);
+    box-shadow: inset 0 0 0 2px var(--sc-accent);
   }
 
   .privacy-note {
-    color: var(--muted);
-    font-size: 0.85rem;
+    margin: 0;
+    max-width: 46rem;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
   }
 
   .privacy-note a {
-    color: var(--signal);
+    color: var(--sc-ink);
   }
 
-  .send {
-    justify-self: start;
-    margin-top: 0.5rem;
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sc-4);
+  }
+
+  .form-state {
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
   }
 
   .sent {
@@ -306,54 +254,85 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
     display: grid;
     place-content: center;
     justify-items: center;
-    gap: 1rem;
-    padding: 2rem;
-    background: var(--bg-2);
+    gap: var(--sc-4);
+    border-radius: var(--sc-r-lg);
+    background: var(--sc-canvas);
     text-align: center;
     opacity: 0;
     visibility: hidden;
     transition:
-      opacity 0.6s var(--ease-out),
-      visibility 0s 0.6s;
+      opacity 0.4s var(--sc-ease-out),
+      visibility 0s 0.4s;
   }
 
   .form.is-sent .sent {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.6s var(--ease-out);
+    transition: opacity 0.4s var(--sc-ease-out);
   }
 
   .sent svg {
-    width: 10rem;
+    width: 9rem;
     fill: none;
-    stroke: var(--signal);
+    stroke: var(--sc-accent);
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 220;
     stroke-dashoffset: 220;
-    filter: drop-shadow(0 0 8px rgba(255, 90, 31, 0.7));
   }
 
   .form.is-sent .sent svg {
-    animation: draw 1.4s var(--ease-out) 0.2s forwards;
+    animation: draw 1.2s var(--sc-ease-out) 0.15s forwards;
   }
 
   @keyframes draw {
     to { stroke-dashoffset: 0; }
   }
 
-  .sent-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    font-stretch: 80%;
-    text-transform: uppercase;
-    line-height: 1;
+  .contact-foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: var(--sc-6) var(--sc-9);
+    align-items: start;
+    margin-top: var(--sc-9);
   }
 
-  @media (max-width: 900px) {
-    .contact-grid {
+  .mail {
+    display: inline-block;
+    margin-top: var(--sc-2);
+    color: var(--sc-ink);
+    font-size: var(--sc-t-xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .mail:hover {
+    color: var(--sc-accent);
+    text-decoration: underline;
+  }
+
+  .contact-foot .notice {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  @media (max-width: 960px) {
+    .topic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fields,
+    .contact-foot {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topic-tile.is-flash {
+      animation: none;
     }
   }
 </style>
@@ -373,10 +352,10 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
     const radio = form.querySelector<HTMLInputElement>(`input[name="thema"][value="${topic}"]`);
     if (!radio) return;
     radio.checked = true;
-    const chip = radio.nextElementSibling;
-    chip?.classList.remove('is-flash');
-    void (chip as HTMLElement | null)?.offsetWidth;
-    chip?.classList.add('is-flash');
+    const tile = radio.nextElementSibling;
+    tile?.classList.remove('is-flash');
+    void (tile as HTMLElement | null)?.offsetWidth;
+    tile?.classList.add('is-flash');
   });
 
   form?.addEventListener('submit', async (e) => {
@@ -403,7 +382,7 @@ const topics = ['Kooperation', 'Testanfrage', 'Workshop', 'Videoidee', 'App-Feed
       form.reset();
     } catch {
       form.classList.remove('is-sending');
-      if (state) state.textContent = 'Fehler';
+      if (state) state.textContent = 'Fehler beim Senden';
       if (label) label.textContent = 'Erneut versuchen';
       alert(`Das hat leider nicht geklappt. Schreib mir gern direkt an ${site.email}.`);
     }

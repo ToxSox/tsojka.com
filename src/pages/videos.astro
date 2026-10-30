@@ -8,18 +8,13 @@ import '../styles/videos.css';
   title="Video-Archiv"
   description="Alle Car-HiFi Videos & Tutorials von TSojka Audio: Produktreviews, Labor-Tests, REW-Tutorials, Wettbewerbsberichte und Tipps."
 >
-  <section class="archive wrap">
-    <header class="chapter-head">
-      <p class="chapter-tag mono">
-        <span>Archiv</span><span>/</span><span>YouTube</span><span class="line"></span>
-      </p>
-      <h1 class="chapter-title" data-split aria-label="Alle Videos">
-        <span class="split-line" aria-hidden="true"><span style="--i:0">Alle</span></span>
-        <span class="split-line" aria-hidden="true"><span style="--i:1"><em>Videos</em></span></span>
-      </h1>
-      <p class="lede">
+  <section class="archive ground ground--graphite">
+    <div class="sc-wrap">
+    <header class="chapter-open">
+      <h1 class="statement">Alle <em>Videos.</em></h1>
+      <p class="lead">
         Wissen, Inspiration und Unterhaltung für Car-HiFi-Fans: Produktreviews, Schritt-für-Schritt-Tutorials,
-        Wettbewerbsberichte und nützliche Tipps – direkt von meinem{' '}
+        Wettbewerbsberichte und nützliche Tipps, direkt von meinem{' '}
         <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube-Kanal</a>.
       </p>
     </header>
@@ -29,35 +24,37 @@ import '../styles/videos.css';
         <span class="sr-only">Videos durchsuchen</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
         <input type="search" placeholder="Suchen: REW, LTO, Kenwood, Dämmung …" data-search autocomplete="off" />
-        <span class="mono count" data-count>—</span>
+        <span class="count" data-count></span>
       </label>
-      <div class="years mono" data-years role="group" aria-label="Nach Jahr filtern"></div>
+      <div class="years" data-years role="group" aria-label="Nach Jahr filtern"></div>
     </div>
 
     <div class="vgrid" data-archive aria-live="polite">
       {Array.from({ length: 6 }).map(() => <div class="vskeleton" />)}
     </div>
     <div class="sentinel" data-sentinel></div>
-    <p class="empty muted" data-empty hidden>Keine Videos gefunden. Versuch einen anderen Suchbegriff.</p>
+    <p class="empty body" data-empty hidden>Keine Videos gefunden. Versuch einen anderen Suchbegriff.</p>
+    </div>
   </section>
 </Base>
 
 <style>
   .archive {
-    padding-block: 9rem 6rem;
+    min-height: 100vh;
+    padding-bottom: var(--sc-section);
   }
 
   .toolbar {
     position: sticky;
-    top: 5.25rem;
+    top: calc(var(--nav-h) + 0.75rem);
     z-index: 5;
     display: grid;
     gap: 1rem;
     margin-bottom: 2.5rem;
     padding: 1rem;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: rgba(17, 17, 19, 0.85);
+    border: 1px solid var(--sc-hairline);
+    border-radius: var(--sc-r-lg);
+    background: rgba(29, 29, 32, 0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
@@ -72,7 +69,7 @@ import '../styles/videos.css';
     width: 1.25rem;
     flex-shrink: 0;
     fill: none;
-    stroke: var(--signal);
+    stroke: var(--sc-accent);
     stroke-width: 2;
     stroke-linecap: round;
   }
@@ -83,7 +80,7 @@ import '../styles/videos.css';
     padding: 0.5rem 0;
     border: 0;
     background: transparent;
-    color: var(--text);
+    color: var(--sc-ink);
     font: inherit;
     font-size: clamp(1.1rem, 2vw, 1.5rem);
   }
@@ -92,8 +89,12 @@ import '../styles/videos.css';
     outline: none;
   }
 
+  .toolbar:focus-within {
+    box-shadow: inset 0 0 0 2px var(--sc-accent);
+  }
+
   .count {
-    color: var(--muted);
+    color: var(--sc-ink-soft);
     white-space: nowrap;
   }
 
@@ -111,10 +112,10 @@ import '../styles/videos.css';
   .years :global(button) {
     flex-shrink: 0;
     padding: 0.4rem 0.8rem;
-    border: 1px solid var(--line-2);
+    border: 1px solid var(--sc-hairline-strong);
     border-radius: 999px;
     background: transparent;
-    color: var(--muted);
+    color: var(--sc-ink-soft);
     font: inherit;
     cursor: pointer;
     transition:
@@ -124,13 +125,13 @@ import '../styles/videos.css';
   }
 
   .years :global(button:hover) {
-    border-color: var(--signal);
-    color: var(--text);
+    border-color: var(--sc-accent);
+    color: var(--sc-ink);
   }
 
   .years :global(button[aria-pressed='true']) {
-    background: var(--signal);
-    border-color: var(--signal);
+    background: var(--sc-accent);
+    border-color: var(--sc-accent);
     color: #0b0b0b;
   }
 
@@ -216,7 +217,7 @@ import '../styles/videos.css';
       apply();
     })
     .catch(() => {
-      grid.innerHTML = '<p class="muted">Videos konnten gerade nicht geladen werden – schau direkt auf YouTube vorbei.</p>';
+      grid.innerHTML = '<p class="body">Videos konnten gerade nicht geladen werden. Schau direkt auf YouTube vorbei.</p>';
       countEl.textContent = '';
     });
 </script>

@@ -4,9 +4,9 @@ import { chapters } from '../data/site';
 ---
 
 <Base title="Kein Signal" description="Diese Seite gibt es nicht (mehr).">
-  <section class="nf wrap">
+  <section class="nf ground ground--black"><div class="sc-wrap nf-inner">
     <div class="nf-scope" aria-hidden="true">
-      <div class="nf-head mono">
+      <div class="nf-head">
         <span><i></i> Messung</span>
         <span>Fehler 404</span>
         <span>CH A</span>
@@ -15,41 +15,41 @@ import { chapters } from '../data/site';
         <path class="nf-noise" d="M0 60 L400 60" />
         <path class="nf-blip" d="M0 60 L170 60 L180 40 L190 82 L200 50 L210 66 L220 60 L400 60" />
       </svg>
-      <div class="nf-head mono"><span>Pegel −∞ dB</span><span>Kein Eingangssignal</span></div>
+      <div class="nf-head"><span>Pegel −∞ dB</span><span>Kein Eingangssignal</span></div>
     </div>
 
-    <p class="chapter-tag mono"><span>404</span><span>/</span><span>Seite nicht gefunden</span><span class="line"></span></p>
-    <h1 class="chapter-title">Kein <em>Signal</em>.</h1>
-    <p class="lede">
+    <p class="label">Fehler 404 · Seite nicht gefunden</p>
+    <h1 class="statement">Kein <em>Signal.</em></h1>
+    <p class="lead">
       Unter dieser Adresse kommt nichts an. Vielleicht hat sich der Link geändert, oder die Seite gab es nie. Hier geht's weiter:
     </p>
 
     <nav class="nf-links" aria-label="Weiter zu">
-      <a class="btn btn--solid" href="/" data-magnetic>Zur Startseite <span class="arrow">→</span></a>
-      <a class="btn" href="/videos" data-magnetic>Video-Archiv</a>
+      <a class="pill" href="/">Zur Startseite</a>
+      <a class="more" href="/videos">Video-Archiv</a>
     </nav>
 
-    <ul class="nf-chapters mono">
+    <ul class="nf-chapters">
       {
         chapters.map((c) => (
           <li>
             <a href={`/#${c.id}`}>
-              <span class="signal">CH.{c.ch}</span> {c.label}
+              {c.label}
             </a>
           </li>
         ))
       }
     </ul>
-  </section>
+  </div></section>
 </Base>
 
 <style>
-  .nf {
+  .nf-inner {
     display: grid;
-    gap: 1.75rem;
-    min-height: 100svh;
+    gap: 1.5rem;
+    min-height: calc(100svh - var(--nav-h));
     align-content: center;
-    padding-block: 8rem 5rem;
+    padding-block: var(--sc-8);
   }
 
   .nf-scope {
@@ -57,21 +57,22 @@ import { chapters } from '../data/site';
     gap: 0.75rem;
     max-width: 34rem;
     padding: 1rem;
-    border: 1px solid var(--line-2);
+    border: 1px solid var(--sc-hairline-strong);
     border-radius: 18px;
-    background: var(--bg-2);
+    background: var(--sc-surface);
   }
 
   .nf-head {
+    font-family: var(--sc-font-mono);
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    color: var(--muted);
+    color: var(--sc-ink-soft);
     font-size: 0.65rem;
   }
 
   .nf-head span:nth-child(2) {
-    color: var(--signal);
+    color: var(--sc-accent);
   }
 
   .nf-head i {
@@ -81,7 +82,6 @@ import { chapters } from '../data/site';
     margin-right: 0.35rem;
     border-radius: 50%;
     background: var(--led-dev);
-    box-shadow: 0 0 8px var(--led-dev);
     animation: nf-blink 1.2s steps(1) infinite;
   }
 
@@ -97,10 +97,9 @@ import { chapters } from '../data/site';
 
   .nf-scope path {
     fill: none;
-    stroke: var(--signal);
+    stroke: var(--sc-accent);
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
-    filter: drop-shadow(0 0 6px rgba(255, 90, 31, 0.8));
   }
 
   .nf-noise {
@@ -135,9 +134,9 @@ import { chapters } from '../data/site';
     gap: 0.5rem 1.5rem;
     margin: 1rem 0 0;
     padding: 1.25rem 0 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--sc-hairline);
     list-style: none;
-    color: var(--muted);
+    color: var(--sc-ink-soft);
   }
 
   .nf-chapters a {
@@ -146,6 +145,6 @@ import { chapters } from '../data/site';
   }
 
   .nf-chapters a:hover {
-    color: var(--text);
+    color: var(--sc-ink);
   }
 </style>

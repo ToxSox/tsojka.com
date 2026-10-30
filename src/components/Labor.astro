@@ -1,339 +1,399 @@
 ---
-import ChapterHead from './ChapterHead.astro';
-import { labGear, labTests } from '../data/site';
+import { labGear, labTests, pillars } from '../data/site';
 
-const icons: Record<string, string> = {
-  power: 'M2 30 h8 v-8 h6 v-6 h6 v-10 h6 v-4 h6',
-  thd: 'M4 30 V4 M12 30 V18 M20 30 V23 M28 30 V26 M36 30 V28',
-  damping: 'M2 17 C6 -6 9 -6 12 17 S17 34 21 17 S25 8 28 17 S32 22 34 17 L40 17',
-  response: 'M2 30 C6 14 8 12 12 12 L30 12 C34 12 36 16 40 28',
-};
+const plots = [
+  { key: 'power', title: 'Leistung', note: 'Schema', from: 0.19, to: 0.35 },
+  { key: 'thd', title: 'THD+N', note: 'Schema', from: 0.37, to: 0.53 },
+  { key: 'damping', title: 'Dämpfungsfaktor', note: 'Schema', from: 0.55, to: 0.71 },
+  { key: 'response', title: 'Frequenzgang', note: 'deine EQ-Kurve', from: 0.73, to: 0.87 },
+];
+// Cue-Fenster je Test: aneinander anschließend, kurze Rampen, damit nie zwei
+// Texte halb übereinander stehen. Überschrift und Protokoll bleiben als Grund.
+const cues = ['0.18 0.36 0.12 0.12', '0.36 0.54 0.12 0.12', '0.54 0.72 0.12 0.12', '0.72 0.88 0.12 0.12'];
 ---
 
-<section class="chapter labor" id="labor">
-  <div class="wrap">
-    <ChapterHead ch="02" label="Testlabor" lines={['Das *unabhängige*', 'Testlabor']}>
-      <p>
-        Vertraust du blind den Datenblättern der Hersteller? In meinem eigens eingerichteten, spezialisierten Car-HiFi
-        Messlabor kannst du deine Verstärker und Audio-Komponenten auf Herz und Nieren, komplett unabhängig, testen lassen.{' '}
-        <strong>Präzise messtechnische Analysen für Endstufen, DSPs und Autoradios</strong> – schwarz auf weiß, harte Fakten.
-      </p>
-    </ChapterHead>
+<!-- Akt 3 · Zweifel. Bewusste Stille vor dem Peak (BRIEF.md §7). -->
+<section class="ground ground--black silence" data-sc-act="flow" aria-label="Frage">
+  <p class="silence-line" data-sc-in>Vertraust du blind den Datenblättern der Hersteller?</p>
+</section>
 
-    <div class="lab-grid">
-      <div class="scope-wrap">
-        <div class="scope" data-reveal="scale">
-          <div class="scope-head mono">
-            <span><i class="rec"></i> Messung</span>
-            <span data-scope-mode>Leistung</span>
-            <span>CH A</span>
+<!-- Akt 4 · Beweis (Peak). pin, größte Spanne. Das Protokoll druckt sich über --sc-p. -->
+<section id="labor" class="ground ground--white labor" data-sc-act="pin" data-sc-span="4.8" data-protocol>
+  <div data-sc-stage class="lab-stage">
+    <div class="sc-wrap lab-grid">
+      <div class="lab-copy">
+        <p class="label">Testlabor</p>
+        <h2 class="headline">Das unabhängige Testlabor.</h2>
+
+        <div class="lab-slot">
+          <div class="lab-step" data-sc-cue="0 0.18 0 0.15">
+            <p class="lead">
+              Präzise messtechnische Analysen für Endstufen, DSPs und Autoradios. Ich liefere dir schwarz auf weiß{' '}
+              <strong>harte Fakten</strong>.
+            </p>
+            <p class="body">{pillars.labor}</p>
           </div>
-          <canvas data-scope aria-hidden="true"></canvas>
-          <div class="scope-foot mono">
-            <span data-scope-a>Last 4 Ω</span>
-            <span data-scope-b>Sinus 1 kHz</span>
+          {
+            labTests.map((t, i) => (
+              <div class="lab-step" data-sc-cue={cues[i]}>
+                <p class="title">{t.title}</p>
+                <p class="body">{t.text}</p>
+              </div>
+            ))
+          }
+          <div class="lab-step" data-sc-cue="0.88 1 0.12 0.02">
+            <p class="title">Protokoll vollständig.</p>
+            <p class="body">
+              Die Kurve rechts unten ist deine eigene Einstellung aus dem Kopfbereich. Du willst wissen, wie deine Endstufe
+              abschneidet?
+            </p>
+            <a class="pill" href="#kontaktformular" data-topic="Testanfrage">Test anfragen</a>
           </div>
         </div>
       </div>
 
-      <ol class="tests">
-        {
-          labTests.map((t, i) => (
-            <li class="test" data-test={t.key} data-reveal>
-              <svg class="test-icon" viewBox="0 0 42 34" aria-hidden="true">
-                <path d={icons[t.key]} />
-              </svg>
-              <span class="mono test-n">T.{String(i + 1).padStart(2, '0')}</span>
-              <h3>{t.title}</h3>
-              <p>{t.text}</p>
-            </li>
-          ))
-        }
-      </ol>
+      <figure class="sheet" aria-label="Messprotokoll">
+        <figcaption class="sheet-head">
+          <span class="sheet-title">Messprotokoll</span>
+          <span class="sheet-eq" data-proto-eq>EQ-Band: 1,00 kHz · +0,0 dB · Q 1,41</span>
+          <span class="sheet-src" data-proto-src>Demo-Band aus dem Kopfbereich</span>
+        </figcaption>
+        <div class="plots">
+          {
+            plots.map((pl) => (
+              <div class="plot" style={`--from:${pl.from};--len:${pl.to - pl.from}`} data-plot={pl.key}>
+                <p class="plot-head">
+                  <span>{pl.title}</span>
+                  <span class="plot-note">{pl.note}</span>
+                </p>
+                <svg viewBox="0 0 200 110" preserveAspectRatio="none" aria-hidden="true">
+                  <g class="plot-grid">
+                    {[22, 44, 66, 88].map((y) => (
+                      <line x1="0" x2="200" y1={y} y2={y} />
+                    ))}
+                    {[40, 80, 120, 160].map((x) => (
+                      <line y1="0" y2="110" x1={x} x2={x} />
+                    ))}
+                  </g>
+                  <path class="plot-ref" data-ref d="" />
+                  <path class="plot-trace" data-trace d="" pathLength="1" />
+                </svg>
+              </div>
+            ))
+          }
+        </div>
+        <p class="sheet-foot"><span class="stamp">Gemessen, nicht geraten.</span></p>
+      </figure>
     </div>
+  </div>
+</section>
 
-    <div class="gear">
-      <h3 class="gear-title" data-reveal>Moderne Labor-Ausstattung</h3>
-      <p class="muted gear-intro" data-reveal>
-        Um belastbare und reproduzierbare Ergebnisse zu liefern, arbeite ich mit professionellem Test-Equipment:
+<section class="ground ground--white lab-more" aria-label="Ausstattung und Anfrage">
+  <div class="sc-wrap lab-more-grid">
+    <div class="stack" data-sc-in data-sc-stagger="60">
+      <h3 class="headline">Moderne Labor-Ausstattung</h3>
+      <p class="body">
+        In meinem eigens eingerichteten, spezialisierten Car-HiFi Messlabor kannst du deine Verstärker und
+        Audio-Komponenten auf Herz und Nieren, komplett unabhängig, testen lassen. Um belastbare und reproduzierbare
+        Ergebnisse zu liefern, arbeite ich mit professionellem Test-Equipment:
       </p>
-      <ul>
-        {
-          labGear.map((g, i) => (
-            <li data-reveal style={`--d:${i}`}>
-              <span class="mono">EQ.{String(i + 1).padStart(2, '0')}</span>
-              <span>{g}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
+    <ul class="gear" data-sc-in data-sc-stagger="60">
+      {labGear.map((g) => <li>{g}</li>)}
+    </ul>
+  </div>
 
-    <div class="request" data-reveal="scale" data-spotlight>
-      <div>
-        <p class="mono signal">Elektronik-Test anfragen</p>
-        <h3>Teste deine Elektronik</h3>
-        <p class="muted">
-          Du hast ein spannendes Stück Car-Audio Hardware gekauft und möchtest wissen, wie es technisch wirklich abschneidet?
-          Schick mir unverbindlich eine Nachricht. Bei interessanten Endstufen oder Vorverstärkern stelle ich die detaillierten
-          Ergebnisse und Messdiagramme auch gerne in einem ausführlichen Video-Review auf meinem YouTube-Kanal vor!
-        </p>
-      </div>
-      <a class="btn btn--solid" href="#kontaktformular" data-topic="Testanfrage" data-magnetic>Test anfragen <span class="arrow">→</span></a>
+  <div class="sc-wrap">
+    <div class="request" data-sc-in>
+      <h3 class="title">Elektronik-Test anfragen</h3>
+      <p class="body">
+        Du hast ein spannendes Stück Car-Audio Hardware gekauft und möchtest wissen, wie es technisch wirklich abschneidet?
+        Schick mir unverbindlich eine Nachricht. Bei interessanten Endstufen oder Vorverstärkern stelle ich die detaillierten
+        Ergebnisse und Messdiagramme auch gerne in einem ausführlichen Video-Review auf meinem YouTube-Kanal vor!
+      </p>
+      <a class="pill" href="#kontaktformular" data-topic="Testanfrage">Test anfragen</a>
     </div>
 
     <p class="notice">
-      <span class="mono">Hinweis</span>
+      <strong>Hinweis</strong>
       <span>Dieses Labor betreibe ich ausschließlich in meiner <strong>Freizeit</strong>. Ich biete keine Reparatur- oder Serviceleistungen an.</span>
     </p>
   </div>
 </section>
 
 <style>
+  .silence {
+    display: grid;
+    place-items: center;
+    min-height: 92vh;
+    min-height: 92svh;
+    padding: var(--sc-9) var(--sc-gutter);
+  }
+
+  .silence-line {
+    margin: 0;
+    max-width: 22ch;
+    font-size: clamp(1.6rem, 1.1rem + 2.2vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-align: center;
+    text-wrap: balance;
+    color: var(--sc-ink-soft);
+  }
+
+  .lab-stage {
+    display: grid;
+    align-items: center;
+    padding-top: var(--nav-h);
+  }
+
   .lab-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--sc-9);
+    align-items: center;
+  }
+
+  .lab-copy .headline {
+    margin-top: var(--sc-3);
+  }
+
+  .lab-slot {
+    display: grid;
+    margin-top: var(--sc-6);
+  }
+
+  .lab-step {
+    grid-area: 1 / 1;
+    display: grid;
+    align-content: start;
+    gap: var(--sc-4);
+  }
+
+  .lab-step .pill {
+    justify-self: start;
+    margin-top: var(--sc-2);
+  }
+
+  .sheet {
+    margin: 0;
+    padding: var(--sc-5);
+    border-radius: var(--sc-r-lg);
+    background: var(--sc-surface);
+    box-shadow: var(--sc-edge), var(--sc-e2);
+  }
+
+  .sheet-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25rem var(--sc-4);
+    padding-bottom: var(--sc-4);
+    border-bottom: 1px solid var(--sc-hairline);
+    font-family: var(--sc-font-mono);
+    font-size: 0.72rem;
+    color: var(--sc-ink-soft);
+  }
+
+  .sheet-title {
+    color: var(--sc-ink);
+    font-family: var(--sc-font-text);
+    font-size: var(--sc-t-base);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .sheet-eq {
+    color: var(--sc-accent);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .sheet-src {
+    grid-column: 1 / -1;
+  }
+
+  .plots {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sc-4);
+    padding-block: var(--sc-4);
+  }
+
+  .plot {
+    --draw: clamp(0, (var(--sc-p, 0) - var(--from)) / var(--len), 1);
+    display: grid;
+    gap: var(--sc-2);
+  }
+
+  .plot-head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sc-3);
+    margin: 0;
+    font-size: var(--sc-t-sm);
+    font-weight: 600;
+  }
+
+  .plot-note {
+    color: var(--sc-ink-soft);
+    font-family: var(--sc-font-mono);
+    font-size: 0.68rem;
+    font-weight: 400;
+  }
+
+  .plot svg {
+    width: 100%;
+    aspect-ratio: 200 / 110;
+    border-radius: var(--sc-r-sm);
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--sc-hairline);
+  }
+
+  .plot-grid line {
+    stroke: rgba(29, 29, 31, 0.07);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* Kein non-scaling-stroke bei gestrichelten/gezeichneten Pfaden: Firefox rechnet
+     pathLength dann anders und bricht die Kurve vor dem Ende ab. Die Plots skalieren
+     im festen Seitenverhältnis, Strichstärken bleiben also gleichmäßig. */
+  .plot-ref {
+    fill: none;
+    stroke: rgba(29, 29, 31, 0.35);
+    stroke-width: 0.8;
+    stroke-dasharray: 2.5 3;
+    opacity: calc(0.25 + var(--draw) * 0.75);
+  }
+
+  .plot-trace {
+    fill: none;
+    stroke: var(--sc-accent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - var(--draw));
+  }
+
+  .sheet-foot {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding-top: var(--sc-4);
+    border-top: 1px solid var(--sc-hairline);
+  }
+
+  .stamp {
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--sc-r-sm);
+    box-shadow: inset 0 0 0 1.5px var(--sc-accent);
+    color: var(--sc-accent);
+    font-family: var(--sc-font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: clamp(0, (var(--sc-p, 0) - 0.87) / 0.04, 1);
+  }
+
+  .lab-more {
+    padding-block: var(--sc-8) var(--sc-section);
+  }
+
+  .lab-more-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--sc-6) var(--sc-9);
     align-items: start;
   }
 
-  .scope-wrap {
-    position: sticky;
-    top: 6rem;
-  }
-
-  .scope {
-    display: grid;
-    gap: 0.75rem;
-    padding: 1rem;
-    border: 1px solid var(--line-2);
-    border-radius: 22px;
-    background:
-      radial-gradient(ellipse at 50% 40%, rgba(255, 90, 31, 0.07), transparent 70%),
-      var(--bg-2);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 40px 80px -40px rgba(0, 0, 0, 0.8);
-  }
-
-  .scope-head,
-  .scope-foot {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-inline: 0.25rem;
-    color: var(--muted);
-    font-size: 0.65rem;
-  }
-
-  .scope-head span:nth-child(2) {
-    color: var(--signal);
-  }
-
-  .rec {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin-right: 0.35rem;
-    border-radius: 50%;
-    background: var(--signal);
-    box-shadow: 0 0 8px var(--signal);
-    animation: blink 1.2s steps(1) infinite;
-  }
-
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-
-  .scope canvas {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 12px;
-    background: #0b0b0c;
-  }
-
-  .tests {
-    display: grid;
-    gap: clamp(2rem, 8vh, 5rem);
-    margin: 0;
-    padding: 0 0 10vh;
-    list-style: none;
-  }
-
-  .test {
-    position: relative;
-    display: grid;
-    gap: 0.75rem;
-    padding: 1.75rem 0 0;
-    border-top: 1px solid var(--line);
-    transition: border-color 0.5s;
-  }
-
-  .test::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--signal);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.9s var(--ease-out);
-  }
-
-  .test.is-active::before {
-    transform: scaleX(1);
-  }
-
-  .test-icon {
-    width: 3rem;
-    fill: none;
-    stroke: var(--dim);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 140;
-    stroke-dashoffset: 140;
-    transition:
-      stroke-dashoffset 1.6s var(--ease-out),
-      stroke 0.5s;
-  }
-
-  .test.is-in .test-icon {
-    stroke-dashoffset: 0;
-  }
-
-  .test.is-active .test-icon {
-    stroke: var(--signal);
-  }
-
-  .test-n {
-    color: var(--dim);
-  }
-
-  .test h3 {
-    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-    font-weight: 700;
-    line-height: 1;
-    color: var(--muted);
-    transition: color 0.5s;
-  }
-
-  .test.is-active h3 {
-    color: var(--text);
-  }
-
-  .test p {
-    color: var(--muted);
-  }
-
   .gear {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    grid-template-rows: auto 1fr;
-    gap: 1.5rem clamp(2rem, 5vw, 5rem);
-    margin-top: clamp(5rem, 10vw, 8rem);
-  }
-
-  .gear-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-stretch: 80%;
-    text-transform: uppercase;
-  }
-
-  .gear-intro {
-    grid-column: 1;
-    align-self: start;
-  }
-
-  .gear ul {
-    grid-column: 2;
-    grid-row: 1 / span 2;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .gear li {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: 1rem;
-    padding-block: 1.1rem;
-    border-bottom: 1px solid var(--line);
-    font-size: 1.1rem;
+    padding-block: var(--sc-4);
+    border-bottom: 1px solid var(--sc-hairline);
+    font-size: var(--sc-t-lg);
+    letter-spacing: -0.012em;
   }
 
   .gear li:first-child {
-    border-top: 1px solid var(--line);
-  }
-
-  .gear li .mono {
-    color: var(--signal);
-    padding-top: 0.3rem;
+    border-top: 1px solid var(--sc-hairline);
   }
 
   .request {
-    --mx: 50%;
-    --my: 50%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: clamp(4rem, 8vw, 6rem);
-    padding: clamp(1.75rem, 4vw, 3.5rem);
-    border: 1px solid var(--line-2);
-    border-radius: 24px;
-    background:
-      radial-gradient(500px circle at var(--mx) var(--my), rgba(255, 90, 31, 0.12), transparent 60%),
-      var(--bg-2);
-  }
-
-  .request > div {
     display: grid;
-    gap: 1rem;
-    max-width: 44rem;
+    justify-items: start;
+    gap: var(--sc-4);
+    max-width: 46rem;
+    margin-top: var(--sc-10);
+    margin-bottom: var(--sc-8);
   }
 
-  .request h3 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-stretch: 80%;
-    text-transform: uppercase;
-  }
+  @media (max-width: 960px) {
+    .lab-stage {
+      align-items: start;
+      padding-top: calc(var(--nav-h) + var(--sc-4));
+    }
 
-  @media (max-width: 900px) {
-    .lab-grid,
-    .gear {
+    .lab-grid {
+      grid-template-columns: 1fr;
+      gap: var(--sc-5);
+    }
+
+    .lab-copy {
+      order: 2;
+    }
+
+    /* Kopf auf dem Handy nur für Screenreader: der Platz gehört dem Protokoll */
+    .lab-copy .label,
+    .lab-copy .headline {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    .lab-slot {
+      margin-top: 0;
+    }
+
+    .sheet {
+      order: 1;
+      padding: var(--sc-4);
+    }
+
+    .plots {
+      gap: var(--sc-3);
+    }
+
+    /* Schmale Kacheln: Vermerk („Schema“) in eigener Zeile statt neben dem Titel */
+    .plot-head {
+      flex-direction: column;
+      gap: 0;
+      font-size: var(--sc-t-xs);
+    }
+
+    .lab-more-grid {
       grid-template-columns: 1fr;
     }
+  }
 
-    .scope-wrap {
-      top: 4.5rem;
-      z-index: 2;
-    }
-
-    .scope {
-      padding: 0.6rem;
-      background: var(--bg-2);
-    }
-
-    .scope canvas {
-      aspect-ratio: 16 / 7;
-    }
-
-    .tests {
-      padding-bottom: 0;
-    }
-
-    .gear ul {
-      grid-column: 1;
-      grid-row: auto;
+  @media (max-width: 960px) and (max-height: 720px) {
+    .sheet-src,
+    .sheet-foot {
+      display: none;
     }
   }
 </style>
 
 <script>
-  import { initScope } from '../scripts/scope';
-  initScope();
+  import { initProtocol } from '../scripts/protocol';
+  initProtocol();
 </script>

@@ -12,7 +12,7 @@
   text-decoration: none;
   opacity: 0;
   transform: translateY(30px);
-  animation: vcard-in 0.9s var(--ease-out) forwards;
+  animation: vcard-in 0.9s var(--sc-ease-out) forwards;
   animation-delay: calc(var(--d, 0) * 70ms);
 }
 
@@ -29,7 +29,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 14px;
-  background: var(--bg-3);
+  background: var(--sc-surface);
 }
 
 .vcard-media img {
@@ -38,7 +38,7 @@
   object-fit: cover;
   filter: saturate(0.85) brightness(0.9);
   transition:
-    transform 0.9s var(--ease-out),
+    transform 0.9s var(--sc-ease-out),
     filter 0.6s;
 }
 
@@ -46,7 +46,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--sc-hairline);
   border-radius: inherit;
   transition: border-color 0.4s;
 }
@@ -58,7 +58,7 @@
 }
 
 .vcard:hover .vcard-media::after {
-  border-color: var(--signal);
+  border-color: var(--sc-accent);
 }
 
 .vcard-play {
@@ -73,11 +73,11 @@
   background: rgba(9, 9, 10, 0.7);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  color: var(--text);
+  color: var(--sc-ink);
   transition:
     background 0.4s,
     color 0.4s,
-    transform 0.6s var(--ease-out);
+    transform 0.6s var(--sc-ease-out);
 }
 
 .vcard-play svg {
@@ -86,7 +86,7 @@
 }
 
 .vcard:hover .vcard-play {
-  background: var(--signal);
+  background: var(--sc-accent);
   color: #0b0b0b;
   transform: scale(1.12);
 }
@@ -107,7 +107,7 @@
 .vcard-new {
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  background: var(--signal);
+  background: var(--sc-accent);
   color: #0b0b0b;
 }
 
@@ -123,7 +123,7 @@
 }
 
 .vcard:hover .vcard-title {
-  color: var(--signal);
+  color: var(--sc-accent);
 }
 
 .vcard--featured {
@@ -162,7 +162,7 @@
 .vskeleton {
   aspect-ratio: 16 / 9;
   border-radius: 14px;
-  background: linear-gradient(100deg, var(--bg-2) 30%, var(--bg-3) 50%, var(--bg-2) 70%);
+  background: linear-gradient(100deg, var(--sc-surface) 30%, var(--sc-surface) 50%, var(--sc-surface) 70%);
   background-size: 300% 100%;
   animation: shimmer 1.6s linear infinite;
 }

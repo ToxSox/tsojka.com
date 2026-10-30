@@ -4,16 +4,13 @@ import { site } from '../data/site';
 ---
 
 <Base title="Impressum" description="Impressum und rechtliche Angaben gemäß § 5 DDG von Thomas Sojka (tsojka.com).">
-  <article class="legal wrap">
-    <p class="mono chapter-tag">
-      <span>Rechtliches</span><span class="line"></span>
-    </p>
-    <h1 class="chapter-title">Impressum</h1>
-    <p class="mono muted">Rechtliche Angaben gemäß § 5 DDG</p>
+  <article class="legal ground ground--white"><div class="sc-wrap legal-inner">
+    <h1 class="statement">Impressum</h1>
+    <p class="lead">Rechtliche Angaben gemäß § 5 DDG</p>
 
     <div class="legal-grid">
       <section>
-        <h2 class="mono">Angaben gemäß § 5 DDG</h2>
+        <h2 class="label">Angaben gemäß § 5 DDG</h2>
         <address>
           Thomas Sojka<br />
           Cuxhavener Str. 36<br />
@@ -21,7 +18,7 @@ import { site } from '../data/site';
         </address>
       </section>
       <section>
-        <h2 class="mono">Kontakt</h2>
+        <h2 class="label">Kontakt</h2>
         <p>
           Telefon: 015158546178<br />
           E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -30,7 +27,7 @@ import { site } from '../data/site';
     </div>
 
     <div class="legal-text">
-      <p class="mono muted">Quelle: http://www.e-recht24.de</p>
+      <p class="label">Quelle: http://www.e-recht24.de</p>
       <h2>Haftungsausschluss (Disclaimer)</h2>
 
       <h3>Haftung für Inhalte</h3>
@@ -65,18 +62,18 @@ import { site } from '../data/site';
         entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
       </p>
 
-      <p class="mono muted">Quellverweis: eRecht24, eRecht24</p>
+      <p class="label">Quellverweis: eRecht24, eRecht24</p>
 
       <p>Informationen zur Verarbeitung personenbezogener Daten stehen in der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
     </div>
-  </article>
+  </div></article>
 </Base>
 
 <style>
-  .legal {
+  .legal-inner {
     display: grid;
     gap: 1.5rem;
-    padding-block: 9rem 6rem;
+    padding-block: var(--sc-9) var(--sc-section);
   }
 
   .legal-grid {
@@ -91,13 +88,13 @@ import { site } from '../data/site';
     gap: 1rem;
     align-content: start;
     padding: 1.5rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--sc-hairline);
     border-radius: 18px;
-    background: var(--bg-2);
+    background: var(--sc-surface);
   }
 
   .legal-grid h2 {
-    color: var(--signal);
+    color: var(--sc-accent);
     font-weight: 500;
     line-height: 1.4;
   }
@@ -112,7 +109,7 @@ import { site } from '../data/site';
   }
 
   .legal a {
-    color: var(--signal);
+    color: var(--sc-accent);
   }
 
   .legal-text {
@@ -133,7 +130,7 @@ import { site } from '../data/site';
   }
 
   .legal-text p:not(.mono) {
-    color: var(--muted);
+    color: var(--sc-ink-soft);
   }
 
   @media (max-width: 640px) {

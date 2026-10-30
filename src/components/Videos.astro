@@ -1,116 +1,167 @@
 ---
-import ChapterHead from './ChapterHead.astro';
-import { site, videoFormats } from '../data/site';
+import { intro, pillars, site, videoFormats } from '../data/site';
 import '../styles/videos.css';
 ---
 
-<section class="chapter videos" id="videos">
-  <div class="wrap">
-    <ChapterHead ch="01" label="Videos & Tutorials" lines={['Car-HiFi', 'auf *YouTube*']}>
-      <p>
-        Auf meinem ständig wachsenden <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube-Kanal</a> teile
-        ich mein geballtes Wissen rund um <strong>Car-HiFi, Raumakustik und Elektrotechnik im KFZ</strong>. Egal, ob du
-        Einsteiger bist oder als erfahrener Sound-Tüftler das letzte Quäntchen Klang aus deinem DSP holen willst – hier
-        findest du hochwertige Inhalte.
-      </p>
-    </ChapterHead>
+<!-- Akt 2 · Fülle. reveal: das neueste Video wird aufgedeckt (BRIEF.md §8). -->
+<section id="videos" class="ground ground--graphite videos" data-sc-act="flow">
+  <div class="sc-wrap">
+    <header class="chapter-open chapter-open--center" data-sc-in data-sc-stagger="70">
+      <h2 class="statement">Car-HiFi auf <em>YouTube.</em></h2>
+      <p class="lead">{pillars.videos}</p>
+    </header>
 
-    <div class="vgrid" data-latest aria-live="polite">
-      <div class="vskeleton" style="grid-column: 1 / -1; aspect-ratio: 21 / 9"></div>
-      <div class="vskeleton"></div>
-      <div class="vskeleton"></div>
-      <div class="vskeleton"></div>
+    <div class="featured" data-sc-reveal="up" data-sc-reveal-at="0.12 0.42">
+      <div class="vgrid" data-featured aria-live="polite">
+        <div class="vskeleton vskeleton--wide"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ground ground--graphite videos-more" aria-label="Mehr Videos">
+  <div class="sc-wrap">
+    <div class="hub" data-sc-in data-sc-stagger="70">
+      <p class="hub-text">{intro.hub}</p>
+      <div class="hub-side">
+        <p class="body">
+          Auf meinem ständig wachsenden <a href={site.youtube} target="_blank" rel="noopener noreferrer">YouTube-Kanal</a>{' '}
+          teile ich mein geballtes Wissen rund um Car-HiFi, Raumakustik und Elektrotechnik im KFZ. Egal, ob du Einsteiger bist
+          oder als erfahrener Sound-Tüftler das letzte Quäntchen Klang aus deinem DSP holen willst: Hier findest du hochwertige
+          Inhalte.
+        </p>
+        <p class="body">{intro.journey}</p>
+        <div class="hub-actions">
+          <a class="pill" href="/videos">Alle <span data-video-count>Videos</span> im Archiv</a>
+          <a class="more" href={site.youtube} target="_blank" rel="noopener noreferrer">Kanal abonnieren</a>
+        </div>
+      </div>
     </div>
 
-    <div class="videos-actions" data-reveal>
-      <a class="btn btn--solid" href="/videos" data-magnetic>
-        Zum Video-Archiv <span class="mono" data-video-count></span><span class="arrow">→</span>
-      </a>
-      <a class="btn" href={site.youtube} target="_blank" rel="noopener noreferrer" data-magnetic>Kanal abonnieren ↗</a>
+    <h3 class="title latest-title" data-sc-in>Neu auf dem Kanal</h3>
+    <div class="vgrid latest" data-latest aria-live="polite">
+      {Array.from({ length: 3 }).map(() => <div class="vskeleton" />)}
     </div>
 
     <div class="formats">
-      <p class="mono muted formats-title" data-reveal>Beliebte Videoformate & Themen</p>
-      <ol>
+      <h3 class="title" data-sc-in>Beliebte Videoformate und Themen</h3>
+      <dl class="formats-list" data-sc-in data-sc-stagger="60">
         {
-          videoFormats.map((f, i) => (
-            <li data-reveal style={`--d:${i}`}>
-              <span class="mono signal">F.{String(i + 1).padStart(2, '0')}</span>
-              <h3>{f.title}</h3>
-              <p>{f.text}</p>
-            </li>
+          videoFormats.map((f) => (
+            <div>
+              <dt>{f.title}</dt>
+              <dd>{f.text}</dd>
+            </div>
           ))
         }
-      </ol>
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .videos-actions {
+  .videos {
+    padding-bottom: var(--sc-8);
+  }
+
+  .featured {
+    margin-inline: auto;
+    max-width: 68rem;
+  }
+
+  .featured :global(.vgrid) {
+    grid-template-columns: 1fr;
+  }
+
+  .vskeleton--wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .videos-more {
+    padding-block: var(--sc-8) var(--sc-section);
+  }
+
+  .hub {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--sc-7) var(--sc-9);
+    align-items: start;
+  }
+
+  .hub-text {
+    margin: 0;
+    font-size: clamp(1.35rem, 1.05rem + 1.2vw, 2.1rem);
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    text-wrap: pretty;
+  }
+
+  .hub-side > * + * {
+    margin-top: var(--sc-4);
+  }
+
+  .hub-side a:not(.pill):not(.more) {
+    color: var(--sc-ink);
+  }
+
+  .hub-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
+    align-items: center;
+    gap: var(--sc-5);
+    padding-top: var(--sc-3);
   }
 
-  .videos-actions .mono:empty {
-    display: none;
+  .latest-title {
+    margin-top: var(--sc-10);
+    margin-bottom: var(--sc-5);
   }
 
-  .videos-actions .btn .mono {
-    padding: 0.15rem 0.45rem;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.15);
-    font-size: 0.65rem;
+  .latest {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .formats {
-    margin-top: clamp(5rem, 10vw, 8rem);
+    margin-top: var(--sc-10);
   }
 
-  .formats-title {
-    margin-bottom: 1.5rem;
-  }
-
-  .formats ol {
+  .formats-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    overflow: hidden;
+    gap: var(--sc-6) var(--sc-8);
+    margin: var(--sc-5) 0 0;
   }
 
-  .formats li {
-    display: grid;
-    gap: 1rem;
-    align-content: start;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--bg);
-    transition: background 0.4s;
+  .formats-list > div {
+    padding-top: var(--sc-4);
+    border-top: 1px solid var(--sc-hairline);
   }
 
-  .formats li:hover {
-    background: var(--bg-2);
+  .formats-list dt {
+    font-weight: 600;
+    font-size: var(--sc-t-lg);
+    letter-spacing: -0.015em;
   }
 
-  .formats h3 {
-    font-size: clamp(1.4rem, 2.2vw, 2rem);
-    font-weight: 700;
-    line-height: 1.05;
+  .formats-list dd {
+    margin: var(--sc-2) 0 0;
+    color: var(--sc-ink-soft);
   }
 
-  .formats p {
-    color: var(--muted);
+  @media (max-width: 960px) {
+    .hub,
+    .formats-list {
+      grid-template-columns: 1fr;
+    }
+
+    .latest {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  @media (max-width: 760px) {
-    .formats ol {
+  @media (max-width: 600px) {
+    .latest {
       grid-template-columns: 1fr;
     }
   }
@@ -119,23 +170,20 @@ import '../styles/videos.css';
 <script>
   import { loadVideos, videoCard } from '../scripts/videos';
 
-  const grid = document.querySelector<HTMLElement>('[data-latest]');
+  const featured = document.querySelector<HTMLElement>('[data-featured]');
+  const latest = document.querySelector<HTMLElement>('[data-latest]');
   const count = document.querySelector<HTMLElement>('[data-video-count]');
 
-  // Sofort laden (nicht erst beim Vorbeiscrollen): sonst wächst die Seite oberhalb,
-  // während man per Navigation zu einem späteren Kapitel springt, und das Ziel verrutscht.
-  if (grid) {
-    loadVideos()
-      .then((videos) => {
-        grid.innerHTML = videos
-          .slice(0, 7)
-          .map((v, i) => videoCard(v, i, i === 0))
-          .join('');
-        if (count) count.textContent = String(videos.length);
-      })
-      .catch(() => {
-        grid.innerHTML =
-          '<p class="muted">Videos konnten gerade nicht geladen werden – schau direkt auf YouTube vorbei.</p>';
-      });
-  }
+  // Sofort laden, damit die Seite nicht während eines Sprungs per Navigation wächst
+  loadVideos()
+    .then((videos) => {
+      if (featured && videos[0]) featured.innerHTML = videoCard(videos[0], 0, true);
+      if (latest) latest.innerHTML = videos.slice(1, 7).map((v, i) => videoCard(v, i)).join('');
+      if (count) count.textContent = `${videos.length} Videos`;
+    })
+    .catch(() => {
+      const msg = '<p class="body">Videos konnten gerade nicht geladen werden. Schau direkt auf YouTube vorbei.</p>';
+      if (featured) featured.innerHTML = msg;
+      if (latest) latest.innerHTML = '';
+    });
 </script>
